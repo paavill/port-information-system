@@ -1,4 +1,4 @@
-package RonzhinChistyakov09;
+package ru.rsreu.RonzhinChistyakov09;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

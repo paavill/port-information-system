@@ -5,7 +5,7 @@
   <servlet>
     <display-name>testServ</display-name>
     <servlet-name>Test</servlet-name>
-    <servlet-class>RonzhinChistyakov09.Test</servlet-class>
+    <servlet-class>ru.rsreu.RonzhinChistyakov09.Test</servlet-class>
  </servlet>
  <servlet-mapping>
     <servlet-name>Test</servlet-name>
