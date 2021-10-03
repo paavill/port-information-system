@@ -35,12 +35,6 @@ public class OracleDataBaseDAOFactory extends DAOFactory {
 		String user = Resourcer.getString("database.oracle.config.user");
 		String password = Resourcer.getString("database.oracle.config.password");
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
 			this.connection = DriverManager.getConnection(url, user, password);
 		} catch (SQLException e) {
 			throw new SQLException(
