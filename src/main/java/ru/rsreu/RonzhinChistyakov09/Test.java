@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ru.rsreu.RonzhinChistyakov09.datalayer.DAOFactory;
+import ru.rsreu.RonzhinChistyakov09.datalayer.DBType;
+
 /**
  * Servlet implementation class Test
  */
