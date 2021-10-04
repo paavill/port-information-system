@@ -1,6 +1,7 @@
 package ru.rsreu.RonzhinChistyakov09.datalayer.oracledb;
 
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,8 +36,9 @@ public class OracleDataBaseDAOFactory extends DAOFactory {
 		String user = Resourcer.getString("database.oracle.config.user");
 		String password = Resourcer.getString("database.oracle.config.password");
 		try {
+			Class.forName("oracle.jdbc.OracleDriver").newInstance();
 			this.connection = DriverManager.getConnection(url, user, password);
-		} catch (SQLException e) {
+		} catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			throw new SQLException(
 					String.format(Resourcer.getString("database.oracle.connected.fail"), e.getMessage()));
 		}
