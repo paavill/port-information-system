@@ -1,10 +1,10 @@
-.autoriz{
+.login{
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.autoriz .mainView{
+.login .mainView{
     width: 283px;
     height: 200px;
     

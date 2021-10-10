@@ -1,10 +1,12 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <title>Port</title>
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/autoriz.css">
+    <link rel="stylesheet" href="css/authorization.css">
     <script src="js/main.js"></script>
 </head>
 <body>
@@ -14,7 +16,7 @@
         </div>
     </header>
 
-    <div class="main autoriz">
+    <div class="main login">
         <div class="mainView">
             <h2>Авторизация</h2>
             <div>
