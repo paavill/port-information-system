@@ -1,6 +1,7 @@
 package ru.rsreu.RonzhinChistyakov09.datalayer.oracledb;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,13 +23,13 @@ public class OracleUserDao implements UserDao {
 	public OracleUserDao(Connection connection) {
 		this.connection = connection;
 	}
-	
+
 	@Override
-	public Collection<User> getAllUsers() throws DataRequestException{
+	public Collection<User> getAllUsers() throws DataRequestException {
 		Collection<User> result = new ArrayList<User>();
 		String query = Resourcer.getString("requests.sql.get.users.allUsers");
-		try(Statement statement = this.connection.createStatement()) {
-			try(ResultSet resultSet = statement.executeQuery(query)){
+		try (Statement statement = this.connection.createStatement()) {
+			try (ResultSet resultSet = statement.executeQuery(query)) {
 				while (resultSet.next()) {
 					User user = getUserFromResultSet(resultSet);
 					result.add(user);
@@ -39,16 +40,17 @@ public class OracleUserDao implements UserDao {
 		}
 		return result;
 	}
-	
+
 	private User getUserFromResultSet(ResultSet resultSet) throws SQLException {
 		UserData data = getUserDataFromResultSet(resultSet);
 		int id = resultSet.getInt(Resourcer.getString("database.users.id"));
 		String login = resultSet.getString(Resourcer.getString("database.users.login"));
 		String password = resultSet.getString(Resourcer.getString("database.users.password"));
-		UserStatus status = UserStatus.valueOf(resultSet.getString(Resourcer.getString("database.users.status")).trim());
+		UserStatus status = UserStatus
+				.valueOf(resultSet.getString(Resourcer.getString("database.users.status")).trim());
 		return new User(id, data, login, password, status);
 	}
-	
+
 	private UserData getUserDataFromResultSet(ResultSet resultSet) throws SQLException {
 		int id = resultSet.getInt(Resourcer.getString("database.userData.id"));
 		UserRole role = getUserRoleFromResultSet(resultSet);
@@ -57,10 +59,47 @@ public class OracleUserDao implements UserDao {
 		int age = resultSet.getInt(Resourcer.getString("database.userData.age"));
 		return new UserData(id, role, passport, fullName, age);
 	}
-	
+
 	private UserRole getUserRoleFromResultSet(ResultSet resultSet) throws SQLException {
 //		UserRole role = UserRole.getById(resultSet.getInt("user_role_id"));
 		UserRole role = UserRole.valueOf(resultSet.getString(Resourcer.getString("database.userRole.title")).trim());
 		return role;
+	}
+
+	@Override
+	public void createUser(User user) throws DataRequestException {
+		String createUserDataQuery = Resourcer.getString("requests.sql.create.userData");
+		try (PreparedStatement createDataPreparedStatement = connection.prepareStatement(createUserDataQuery)) {
+			UserData data = user.getData();
+			setUserDataParametresOnPreparedStatement(data, createDataPreparedStatement);
+			createDataPreparedStatement.executeQuery();
+			String createUserQuery = Resourcer.getString("requests.sql.create.user");
+			try (PreparedStatement createUserPreparedStatement = connection.prepareStatement(createUserQuery)) {
+				setUserParametresOnPreparedStatement(user, createUserPreparedStatement);
+				createUserPreparedStatement.executeQuery();
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new DataRequestException(Resourcer.getString("exceptions.sql.request"));
+		}
+	}
+
+	private void setUserDataParametresOnPreparedStatement(UserData data, PreparedStatement preparedStatement)
+			throws SQLException {
+		preparedStatement.setInt(1, data.getId());
+		preparedStatement.setInt(2, data.getRole().ordinal());
+		preparedStatement.setString(3, data.getPassportNumber());
+		preparedStatement.setString(4, data.getFullName());
+		preparedStatement.setInt(5, data.getAge());
+	}
+
+	private void setUserParametresOnPreparedStatement(User user, PreparedStatement preparedStatement)
+			throws SQLException {
+		preparedStatement.setInt(1, user.getId());
+		UserData data = user.getData();
+		preparedStatement.setInt(2, data.getId());
+		preparedStatement.setString(3, user.getLogin());
+		preparedStatement.setString(4, user.getPassword());
+		preparedStatement.setString(5, user.getStatus().toString());
 	}
 }

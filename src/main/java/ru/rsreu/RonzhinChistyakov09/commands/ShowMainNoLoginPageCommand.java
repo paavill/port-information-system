@@ -14,6 +14,9 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
 import ru.rsreu.RonzhinChistyakov09.datalayer.UserDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DBType;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.User;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.UserData;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.UserRole;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.UserStatus;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
 public class ShowMainNoLoginPageCommand implements ICommand {
@@ -40,9 +43,10 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		UserDao userDao = factory.getUserDao();
 		String result = "";
 		try {
-			UserDao userDao = factory.getUserDao();
+			userDao.createUser(new User(5, new UserData(5, UserRole.ADMINISTRATOR, "a2", "b2", 12), "test", "test2", UserStatus.AUTHORIZED));
 			Collection<User> users = userDao.getAllUsers();
 			for(User user: users) {
 				System.out.println(user.getData().getRole());
