@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<head lang="RU">
+<head lang="US">
     <meta charset="UTF-8">
     <title>Порт</title>
     <link rel="stylesheet" href="css/header.css">

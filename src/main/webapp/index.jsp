@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
-<head lang="RU">
+<head lang="US">
     <meta charset="UTF-8">
     <title>Порт</title>
 </head>

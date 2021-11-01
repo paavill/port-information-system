@@ -1,6 +1,7 @@
 package ru.rsreu.RonzhinChistyakov09;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,6 +21,7 @@ public class FrontController extends HttpServlet {
 	}
 
 	public void init() throws ServletException {
+		Locale.setDefault(Locale.US);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

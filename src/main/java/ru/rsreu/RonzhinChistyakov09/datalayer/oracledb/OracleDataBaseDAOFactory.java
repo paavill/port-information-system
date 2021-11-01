@@ -1,14 +1,12 @@
 package ru.rsreu.RonzhinChistyakov09.datalayer.oracledb;
 
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import com.prutzkow.resourcer.Resourcer;
 
+import ru.rsreu.Chistyakov0818.exceptions.StorageException;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DAOFactory;
 
 public class OracleDataBaseDAOFactory extends DAOFactory {
@@ -44,9 +42,19 @@ public class OracleDataBaseDAOFactory extends DAOFactory {
 		}
 	}
 	
+	public OracleUsersDao getUsersDao() {
+		return new OracleUsersDao(this.connection);
+	}
+	
 	@Override
 	public void close() throws Exception {
-		this.connection.close();
+		if (this.connection != null) {
+			try {
+				this.connection.close();
+			} catch (SQLException e) {
+				throw new StorageException(Resourcer.getString("exceptions.sql.disconnect"));
+			}
+		}
 	}
 	
 	
