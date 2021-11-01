@@ -7,21 +7,22 @@ import java.sql.SQLException;
 import com.prutzkow.resourcer.Resourcer;
 
 import ru.rsreu.Chistyakov0818.exceptions.StorageException;
-import ru.rsreu.RonzhinChistyakov09.datalayer.DAOFactory;
+import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
+import ru.rsreu.RonzhinChistyakov09.datalayer.UserDao;
 
-public class OracleDataBaseDAOFactory extends DAOFactory {
-	private static volatile OracleDataBaseDAOFactory instance;
+public class OracleDataBaseDaoFactory extends DaoFactory {
+	private static volatile OracleDataBaseDaoFactory instance;
 
 	private Connection connection;
 
-	private OracleDataBaseDAOFactory() {
+	private OracleDataBaseDaoFactory() {
 	}
 
-	public static OracleDataBaseDAOFactory getInstance() throws SQLException {
-		OracleDataBaseDAOFactory factory = instance;
+	public static OracleDataBaseDaoFactory getInstance() throws SQLException {
+		OracleDataBaseDaoFactory factory = instance;
 		if (instance == null) {
-			synchronized (OracleDataBaseDAOFactory.class) {
-				factory = new OracleDataBaseDAOFactory();
+			synchronized (OracleDataBaseDaoFactory.class) {
+				factory = new OracleDataBaseDaoFactory();
 				instance = factory;
 				factory.connected();
 			}
@@ -42,8 +43,9 @@ public class OracleDataBaseDAOFactory extends DAOFactory {
 		}
 	}
 	
-	public OracleUsersDao getUsersDao() {
-		return new OracleUsersDao(this.connection);
+	@Override
+	public UserDao getUserDao() {
+		return new OracleUserDao(this.connection);
 	}
 	
 	@Override
@@ -56,6 +58,4 @@ public class OracleDataBaseDAOFactory extends DAOFactory {
 			}
 		}
 	}
-	
-	
 }

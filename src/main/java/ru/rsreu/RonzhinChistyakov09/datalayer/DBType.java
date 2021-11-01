@@ -1,14 +1,14 @@
 package ru.rsreu.RonzhinChistyakov09.datalayer;
 
-import ru.rsreu.RonzhinChistyakov09.datalayer.oracledb.OracleDataBaseDAOFactory;
+import ru.rsreu.RonzhinChistyakov09.datalayer.oracledb.OracleDataBaseDaoFactory;
 
 public enum DBType {
 	ORACLE {
 		@Override
-		public DAOFactory getDAOFactory() throws Exception {
-			return OracleDataBaseDAOFactory.getInstance();
+		public DaoFactory getDAOFactory() throws Exception {
+			return OracleDataBaseDaoFactory.getInstance();
 		}
 	};
 
-	public abstract DAOFactory getDAOFactory() throws Exception;
+	public abstract DaoFactory getDAOFactory() throws Exception;
 }

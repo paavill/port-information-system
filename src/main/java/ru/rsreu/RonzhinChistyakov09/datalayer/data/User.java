@@ -1,57 +1,38 @@
 package ru.rsreu.RonzhinChistyakov09.datalayer.data;
 
 public class User {
-
-	/**
-	 * Unique individual user number.
-	 */
-	private final int userId;
-	/**
-	 * Unique individual port number in which
-	 * the user is working.
-	 */
-	private final int userPortId;
+	private int id;
+	private UserData data;
+	private String login;
+	private String password;
+	private UserStatus status;
 	
-	private final int userDataId;
-	
-	private final String userLogin;
-	
-	private final String userPassword;
-	
-	private final String userStatus;
-	
-	public User(int userId, int userPortId, int userDataId, String userLogin, String userPassword, String userStatus) {
+	public User(int id, UserData data, String login, String password, UserStatus status) {
 		super();
-		this.userId = userId;
-		this.userPortId = userPortId;
-		this.userDataId = userDataId;
-		this.userLogin = userLogin;
-		this.userPassword = userPassword;
-		this.userStatus = userStatus;
+		this.id = id;
+		this.data = data;
+		this.login = login;
+		this.password = password;
+		this.status = status;
 	}
 
-	public final int getUserId() {
-		return userId;
+	public int getId() {
+		return id;
 	}
 
-	public final int getUserPortId() {
-		return userPortId;
+	public UserData getData() {
+		return data;
 	}
 
-	public final int getUserDataId() {
-		return userDataId;
+	public String getLogin() {
+		return login;
 	}
 
-	public final String getUserLogin() {
-		return userLogin;
+	public String getPassword() {
+		return password;
 	}
 
-	public final String getUserPassword() {
-		return userPassword;
+	public UserStatus getStatus() {
+		return status;
 	}
-
-	public final String getUserStatus() {
-		return userStatus;
-	}
-	
 }

@@ -10,7 +10,8 @@ import com.prutzkow.resourcer.Resourcer;
 import ru.rsreu.RonzhinChistyakov09.CollectionToTableFormatter;
 import ru.rsreu.RonzhinChistyakov09.Port;
 import ru.rsreu.RonzhinChistyakov09.Tab;
-import ru.rsreu.RonzhinChistyakov09.datalayer.DAOFactory;
+import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
+import ru.rsreu.RonzhinChistyakov09.datalayer.UserDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DBType;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.User;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
@@ -32,16 +33,21 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 		page = Resourcer.getString("jsp.main.noLogin");
 		request.setAttribute("tabs", testTabData);
 		
-		DAOFactory factory = null;
+		DaoFactory factory = null;
 		try {
-			factory = DAOFactory.getInstance(DBType.ORACLE);
+			factory = DaoFactory.getInstance(DBType.ORACLE);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String result = "";
 		try {
-			Collection<User> users = factory.getUsersDao().getAllUsers();
+			UserDao userDao = factory.getUserDao();
+			Collection<User> users = userDao.getAllUsers();
+			for(User user: users) {
+				System.out.println(user.getData().getRole());
+				System.out.println(user.getStatus());
+			}
 			result += CollectionToTableFormatter.format(users);
 		} catch (DataRequestException | InstantiationException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
