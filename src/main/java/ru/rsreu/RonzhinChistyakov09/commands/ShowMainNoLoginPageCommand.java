@@ -24,18 +24,20 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 	@Override
 	public String execute(HttpServletRequest request) {
 		String page = null;
-		//тут будет использоваться dao
+	
 		Collection<Port> test = new ArrayList<Port>();
 		test.add(new Port("PortName", 1, 1, 1, 1));
 
 		Collection<Tab> testTabData = new ArrayList<Tab>();
-		testTabData.add(new Tab("TestNameFromFC1", test));
-		testTabData.add(new Tab("TestNameFromFC2", test));
-		testTabData.add(new Tab("TestNameFromFC3", test));
-
+		
+		testTabData.add(new Tab(Resourcer.getString("jsp.main.noLogin.aboutPortsInformationText"), test));
+		request.setAttribute("titleText", Resourcer.getString("jsp.main.noLogin.titleText"));
+		request.setAttribute("logoText", Resourcer.getString("jsp.main.noLogin.logoText"));
+		request.setAttribute("authorizationText", Resourcer.getString("jsp.main.noLogin.authorizationText"));
+		request.setAttribute("aboutSystemText", Resourcer.getString("jsp.main.noLogin.aboutSystemText"));
 		page = Resourcer.getString("jsp.main.noLogin");
 		request.setAttribute("tabs", testTabData);
-		
+	
 		DaoFactory factory = null;
 		try {
 			factory = DaoFactory.getInstance(DBType.ORACLE);
@@ -44,20 +46,16 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 			e.printStackTrace();
 		}
 		UserDao userDao = factory.getUserDao();
-		String result = "";
 		try {
-			userDao.createUser(new User(5, new UserData(5, UserRole.ADMINISTRATOR, "a2", "b2", 12), "test", "test2", UserStatus.AUTHORIZED));
 			Collection<User> users = userDao.getAllUsers();
 			for(User user: users) {
 				System.out.println(user.getData().getRole());
 				System.out.println(user.getStatus());
 			}
-			result += CollectionToTableFormatter.format(users);
-		} catch (DataRequestException | InstantiationException | IllegalAccessException e) {
+		} catch (DataRequestException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(result);
 		return page;
 	}
 

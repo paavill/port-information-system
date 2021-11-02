@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <head lang="US">
     <meta charset="UTF-8">
-    <title>Порт</title>
+    <title>${titleText}</title>
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/table.css">
@@ -14,25 +14,25 @@
 <body onload="setFirstActive()">
     <header>
         <div class="container">
-            <a href="index.html" class="logo">Порт</a>
+            <a href="index.html" class="logo">${logoText}</a>
             <nav>
                 <ul>
-                    <li><a href="FrontController?command=SHOW_LOGIN_PAGE">Авторизация</a></li>
-                    <li><a href="">О системе</a></li>
+                    <li><a href="FrontController?command=SHOW_LOGIN_PAGE">${authorizationText}</a></li>
+                    <li><a href="">${aboutSystemText}</a></li>
                 </ul>
             </nav>
         </div>
     </header>
         <div class="main">
             
-            <div class="tab container">
+            <div class="tabs container">
                 <c:forEach var="oneTab" items="${tabs}">
-                    <button class="tablinks" onclick="openCity(event, '${oneTab.name}')">${oneTab.name}</button>
+                    <button class="tablinks" onclick="openTab(event, '${oneTab.name}')">${oneTab.name}</button>
                 </c:forEach>
             </div>
 
             <c:forEach var="oneTab" items="${tabs}">
-                <section id="${oneTab.name}" class="container mainView tabcontent">
+                <section id="${oneTab.name}" class="container mainView">
                     
                     <c:forEach items="${oneTab.data}" var="d">    
                         <div class="info">

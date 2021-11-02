@@ -18,20 +18,22 @@
 
     <div class="main login">
         <div class="mainView">
-            <h2>Авторизация</h2>
+            <h3>Авторизация</h3>
             <div>
                 <div class="enter">
                     <h4>Логин:</h4>
-                    <input>
+                    <input type="text" placeholder="Enter some text">
                 </div>
                 <div class="enter">
                     <h4>Пароль:</h4>
-                    <input>
+                    <input type="password" placeholder="Enter some text">
                 </div>
-                <a href="index.html">Войти</a>
-                <a href="index.html">Отмена</a>
             </div>
-                <h6>Неправильный логин или пароль</h6>
+            <div class="buttons">
+                <a href="index.html">Войти</a>
+                <a href="FrontController?command=SHOW_MAIN_NO_LOGIN_PAGE">Отмена</a>
+            </div>
+                <h5>место для вывода сообщений об ошибках</h5>
         </div>
     </div>
 
