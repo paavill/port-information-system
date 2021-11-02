@@ -44,15 +44,15 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 			DaoFactory factory = DaoFactory.getInstance(DBType.ORACLE);
 			UserDao userDao = factory.getUserDao();
 			
-//			int usersCount = userDao.getUsersCount();
-//			System.out.println(usersCount);
-//			int newUserId = usersCount;
-//			userDao.createUser(new User(newUserId, new UserData(newUserId, UserRole.CAPTAIN, "test", "test", 12), "test", "test", UserStatus.AUTHORIZED));
+			int usersCount = userDao.getUsersCount();
+			System.out.println(usersCount);
+			int newUserId = usersCount;
+			userDao.createUser(new User(newUserId, new UserData(newUserId, UserRole.CAPTAIN, "test", "test", 12), "test", "test", UserStatus.AUTHORIZED));
 			Collection<User> users = userDao.getAllUsers();
 			result += CollectionToTableFormatter.format(users);
 //			List<User> usersList = new ArrayList<User>(users);
 			User searchUser = null;
-			int searchUserId = 3;
+			int searchUserId = usersCount;
 			for(User user: users) {
 				if(user.getId() == searchUserId) {
 					searchUser = user;
@@ -60,14 +60,16 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 			}
 			if (searchUser != null) {
 				searchUser.setStatus(UserStatus.UNAUTHORIZ);
-				searchUser.setLogin("N323ew login");
-				searchUser.setPassword("New323 login");
+				searchUser.setLogin("Update login");
+				searchUser.setPassword("Update password");
 				userDao.updateUser(searchUser);
 				UserData data = searchUser.getData();
 				data.setAge(99);
 				data.setRole(UserRole.DISPATCHER);
-				data.setFullName("New F323ull Name");
+				data.setFullName("Update full name");
 				userDao.updateUserData(data);
+				User user = userDao.getByLogin("Update login");
+				System.out.println(user.toString());
 			}
 			Collection<User> users2 = userDao.getAllUsers();
 			result += CollectionToTableFormatter.format(users2);

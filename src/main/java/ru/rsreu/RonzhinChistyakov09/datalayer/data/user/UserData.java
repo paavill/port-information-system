@@ -16,6 +16,12 @@ public class UserData {
 		this.age = age;
 	}
 	
+	@Override
+	public String toString() {
+		return "UserData [id=" + id + ", role=" + role + ", passportNumber=" + passportNumber + ", fullName=" + fullName
+				+ ", age=" + age + "]";
+	}
+
 	public void setRole(UserRole role) {
 		this.role = role;
 	}

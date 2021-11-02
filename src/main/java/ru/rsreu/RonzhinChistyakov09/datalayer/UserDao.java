@@ -9,6 +9,8 @@ import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 public interface UserDao {
 	abstract Collection<User> getAllUsers() throws DataRequestException;
 	
+	abstract User getByLogin(String login) throws DataRequestException;
+	
 	abstract void createUser(User user) throws DataRequestException;
 	
 	abstract int getUsersCount() throws DataRequestException;

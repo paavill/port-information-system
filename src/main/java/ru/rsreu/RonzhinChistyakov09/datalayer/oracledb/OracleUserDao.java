@@ -41,6 +41,24 @@ public class OracleUserDao implements UserDao {
 		}
 		return result;
 	}
+	
+	@Override
+	public User getByLogin(String login) throws DataRequestException {
+		User user = null;
+		String query = Resourcer.getString("requests.sql.get.user.byLogin");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			preparedStatement.setString(1, login);
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				while (resultSet.next()) {
+					return getUserFromResultSet(resultSet);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+		return user;
+	}
 
 	private User getUserFromResultSet(ResultSet resultSet) throws SQLException {
 		UserData data = getUserDataFromResultSet(resultSet);

@@ -47,4 +47,10 @@ public class User {
 	public void setStatus(UserStatus status) {
 		this.status = status;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", data=" + data.toString() + ", login=" + login + ", password=" + password + ", status="
+				+ status + "]";
+	}
 }
