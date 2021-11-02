@@ -8,6 +8,7 @@ import com.prutzkow.resourcer.Resourcer;
 
 import ru.rsreu.Chistyakov0818.exceptions.StorageException;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
+import ru.rsreu.RonzhinChistyakov09.datalayer.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.UserDao;
 
 public class OracleDataBaseDaoFactory extends DaoFactory {
@@ -46,6 +47,11 @@ public class OracleDataBaseDaoFactory extends DaoFactory {
 	@Override
 	public UserDao getUserDao() {
 		return new OracleUserDao(this.connection);
+	}
+	
+	@Override
+	public StatementDao getStatementDao() {
+		return new OracleStatementDao(this.connection);
 	}
 	
 	@Override

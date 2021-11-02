@@ -1,4 +1,4 @@
-package ru.rsreu.RonzhinChistyakov09.datalayer.data;
+package ru.rsreu.RonzhinChistyakov09.datalayer.data.user;
 
 public class User {
 	private int id;
@@ -16,6 +16,18 @@ public class User {
 		this.status = status;
 	}
 
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public UserStatus getStatus() {
+		return status;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -31,8 +43,14 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
+	
+	public void setStatus(UserStatus status) {
+		this.status = status;
+	}
 
-	public UserStatus getStatus() {
-		return status;
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", data=" + data.toString() + ", login=" + login + ", password=" + password + ", status="
+				+ status + "]";
 	}
 }

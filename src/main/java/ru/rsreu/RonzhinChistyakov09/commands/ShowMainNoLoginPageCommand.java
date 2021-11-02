@@ -1,7 +1,10 @@
 package ru.rsreu.RonzhinChistyakov09.commands;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,11 +15,11 @@ import ru.rsreu.RonzhinChistyakov09.Port;
 import ru.rsreu.RonzhinChistyakov09.Tab;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
 import ru.rsreu.RonzhinChistyakov09.datalayer.UserDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserData;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserRole;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserStatus;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DBType;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.User;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.UserData;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.UserRole;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.UserStatus;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
 public class ShowMainNoLoginPageCommand implements ICommand {
@@ -37,26 +40,44 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 		request.setAttribute("aboutSystemText", Resourcer.getString("jsp.main.noLogin.aboutSystemText"));
 		page = Resourcer.getString("jsp.main.noLogin");
 		request.setAttribute("tabs", testTabData);
-	
-		DaoFactory factory = null;
+		String result = "";
 		try {
-			factory = DaoFactory.getInstance(DBType.ORACLE);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		UserDao userDao = factory.getUserDao();
-		try {
+			DaoFactory factory = DaoFactory.getInstance(DBType.ORACLE);
+			UserDao userDao = factory.getUserDao();
+			
+			int usersCount = userDao.getUsersCount();
+			System.out.println(usersCount);
+			int newUserId = usersCount;
+			userDao.createUser(new User(newUserId, new UserData(newUserId, UserRole.CAPTAIN, "test", "test", 12), "test", "test", UserStatus.AUTHORIZED));
+
 			Collection<User> users = userDao.getAllUsers();
+			result += CollectionToTableFormatter.format(users);
+//			List<User> usersList = new ArrayList<User>(users);
+			User searchUser = null;
+			int searchUserId = usersCount;
 			for(User user: users) {
-				System.out.println(user.getData().getRole());
-				System.out.println(user.getStatus());
+				if(user.getId() == searchUserId) {
+					searchUser = user;
+				}
 			}
-		} catch (DataRequestException e) {
-			// TODO Auto-generated catch block
+			if (searchUser != null) {
+				searchUser.setStatus(UserStatus.UNAUTHORIZ);
+				searchUser.setLogin("Update login");
+				searchUser.setPassword("Update password");
+				userDao.updateUser(searchUser);
+				UserData data = searchUser.getData();
+				data.setAge(99);
+				data.setRole(UserRole.DISPATCHER);
+				data.setFullName("Update full name");
+				userDao.updateUserData(data);
+				User user = userDao.getByLogin("Update login");
+				System.out.println(user.toString());
+			}
+			Collection<User> users2 = userDao.getAllUsers();
+			result += CollectionToTableFormatter.format(users2);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return page;
 	}
-
 }

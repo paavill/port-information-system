@@ -1,4 +1,4 @@
-package ru.rsreu.RonzhinChistyakov09.datalayer.data;
+package ru.rsreu.RonzhinChistyakov09.datalayer.data.user;
 
 public class UserData {
 	private int id;
@@ -6,13 +6,35 @@ public class UserData {
 	private String passportNumber;
 	private String fullName;
 	private int age;
-	
+
 	public UserData(int id, UserRole role, String passportNumber, String fullName, int age) {
 		super();
 		this.id = id;
 		this.role = role;
 		this.passportNumber = passportNumber;
 		this.fullName = fullName;
+		this.age = age;
+	}
+	
+	@Override
+	public String toString() {
+		return "UserData [id=" + id + ", role=" + role + ", passportNumber=" + passportNumber + ", fullName=" + fullName
+				+ ", age=" + age + "]";
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
+
+	public void setPassportNumber(String passportNumber) {
+		this.passportNumber = passportNumber;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public void setAge(int age) {
 		this.age = age;
 	}
 

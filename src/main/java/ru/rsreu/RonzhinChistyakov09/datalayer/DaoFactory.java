@@ -6,4 +6,6 @@ public abstract class DaoFactory implements AutoCloseable {
 	}
 	
 	public abstract UserDao getUserDao();
+	
+	public abstract StatementDao getStatementDao();
 }
