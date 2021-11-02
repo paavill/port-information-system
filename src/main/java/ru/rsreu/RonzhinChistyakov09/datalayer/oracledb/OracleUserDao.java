@@ -36,7 +36,8 @@ public class OracleUserDao implements UserDao {
 				}
 			}
 		} catch (SQLException e) {
-			throw new DataRequestException(Resourcer.getString("exceptions.sql.request"));
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
 		return result;
 	}
@@ -79,8 +80,8 @@ public class OracleUserDao implements UserDao {
 				createUserPreparedStatement.executeQuery();
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			throw new DataRequestException(Resourcer.getString("exceptions.sql.request"));
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
 	}
 
@@ -101,5 +102,43 @@ public class OracleUserDao implements UserDao {
 		preparedStatement.setString(3, user.getLogin());
 		preparedStatement.setString(4, user.getPassword());
 		preparedStatement.setString(5, user.getStatus().toString());
+	}
+
+	@Override
+	public int getUsersCount() throws DataRequestException {
+		int usersCount = 0;
+		String query = Resourcer.getString("requests.sql.get.users.count");
+		try (Statement statement = this.connection.createStatement()) {
+			try (ResultSet resultSet = statement.executeQuery(query)) {
+				while (resultSet.next()) {
+					usersCount = resultSet.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+		return usersCount;
+	}
+
+	@Override
+	public void updateUser(User user) throws DataRequestException {
+		String query = Resourcer.getString("requests.sql.update.user");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			preparedStatement.setString(1, user.getLogin());
+			preparedStatement.setString(2, user.getPassword());
+			preparedStatement.setString(3, user.getStatus().toString());
+			preparedStatement.setInt(4, user.getId());
+			preparedStatement.executeQuery();
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+	}
+
+	@Override
+	public void updateUserData(UserData userData) throws DataRequestException {
+		// TODO Auto-generated method stub
+		
 	}
 }

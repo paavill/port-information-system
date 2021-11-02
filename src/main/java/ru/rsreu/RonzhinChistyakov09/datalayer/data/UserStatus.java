@@ -2,6 +2,6 @@ package ru.rsreu.RonzhinChistyakov09.datalayer.data;
 
 public enum UserStatus {
 	AUTHORIZED,
-	UNAUTHORIZED, 
+	UNAUTHORIZ, // исправить в базе длину атрибута 
 	BLOCKED,
 }

@@ -1,7 +1,10 @@
 package ru.rsreu.RonzhinChistyakov09.commands;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,26 +38,36 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 
 		page = Resourcer.getString("jsp.main.noLogin");
 		request.setAttribute("tabs", testTabData);
-		
-		DaoFactory factory = null;
-		try {
-			factory = DaoFactory.getInstance(DBType.ORACLE);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		UserDao userDao = factory.getUserDao();
+
 		String result = "";
 		try {
-//			userDao.createUser(new User(5, new UserData(5, UserRole.ADMINISTRATOR, "a2", "b2", 12), "test", "test2", UserStatus.AUTHORIZED));
+			DaoFactory factory = DaoFactory.getInstance(DBType.ORACLE);
+			UserDao userDao = factory.getUserDao();
+			
+//			int usersCount = userDao.getUsersCount();
+//			System.out.println(usersCount);
+//			int newUserId = usersCount;
+//			userDao.createUser(new User(newUserId, new UserData(newUserId, UserRole.CAPTAIN, "test", "test", 12), "test", "test", UserStatus.AUTHORIZED));
 			Collection<User> users = userDao.getAllUsers();
-			for(User user: users) {
-				System.out.println(user.getData().getRole());
-				System.out.println(user.getStatus());
-			}
 			result += CollectionToTableFormatter.format(users);
-		} catch (DataRequestException | InstantiationException | IllegalAccessException e) {
-			// TODO Auto-generated catch block
+//			List<User> usersList = new ArrayList<User>(users);
+			User searchUser = null;
+			int searchUserId = 1;
+			for(User user: users) {
+				if(user.getId() == searchUserId) {
+					searchUser = user;
+				}
+			}
+			if (searchUser != null) {
+
+				searchUser.setStatus(UserStatus.UNAUTHORIZ);
+				searchUser.setLogin("New login");
+				searchUser.setPassword("New login");
+				userDao.updateUser(searchUser);
+			}
+			Collection<User> users2 = userDao.getAllUsers();
+			result += CollectionToTableFormatter.format(users2);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		System.out.println(result);

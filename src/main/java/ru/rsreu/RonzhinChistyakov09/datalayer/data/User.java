@@ -16,6 +16,18 @@ public class User {
 		this.status = status;
 	}
 
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public UserStatus getStatus() {
+		return status;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -31,8 +43,8 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
-
-	public UserStatus getStatus() {
-		return status;
+	
+	public void setStatus(UserStatus status) {
+		this.status = status;
 	}
 }
