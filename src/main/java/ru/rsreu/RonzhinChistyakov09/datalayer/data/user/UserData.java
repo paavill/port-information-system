@@ -1,4 +1,4 @@
-package ru.rsreu.RonzhinChistyakov09.datalayer.data;
+package ru.rsreu.RonzhinChistyakov09.datalayer.data.user;
 
 public class UserData {
 	private int id;

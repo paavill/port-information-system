@@ -15,11 +15,11 @@ import ru.rsreu.RonzhinChistyakov09.Port;
 import ru.rsreu.RonzhinChistyakov09.Tab;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
 import ru.rsreu.RonzhinChistyakov09.datalayer.UserDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserData;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserRole;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserStatus;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DBType;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.User;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.UserData;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.UserRole;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.UserStatus;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
 public class ShowMainNoLoginPageCommand implements ICommand {
@@ -52,7 +52,7 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 			result += CollectionToTableFormatter.format(users);
 //			List<User> usersList = new ArrayList<User>(users);
 			User searchUser = null;
-			int searchUserId = 1;
+			int searchUserId = 5;
 			for(User user: users) {
 				if(user.getId() == searchUserId) {
 					searchUser = user;
@@ -73,5 +73,4 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 		System.out.println(result);
 		return page;
 	}
-
 }
