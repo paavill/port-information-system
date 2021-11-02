@@ -52,18 +52,22 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 			result += CollectionToTableFormatter.format(users);
 //			List<User> usersList = new ArrayList<User>(users);
 			User searchUser = null;
-			int searchUserId = 5;
+			int searchUserId = 3;
 			for(User user: users) {
 				if(user.getId() == searchUserId) {
 					searchUser = user;
 				}
 			}
 			if (searchUser != null) {
-
 				searchUser.setStatus(UserStatus.UNAUTHORIZ);
-				searchUser.setLogin("New login");
-				searchUser.setPassword("New login");
+				searchUser.setLogin("N323ew login");
+				searchUser.setPassword("New323 login");
 				userDao.updateUser(searchUser);
+				UserData data = searchUser.getData();
+				data.setAge(99);
+				data.setRole(UserRole.DISPATCHER);
+				data.setFullName("New F323ull Name");
+				userDao.updateUserData(data);
 			}
 			Collection<User> users2 = userDao.getAllUsers();
 			result += CollectionToTableFormatter.format(users2);

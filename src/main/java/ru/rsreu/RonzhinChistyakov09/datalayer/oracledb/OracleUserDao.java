@@ -125,20 +125,38 @@ public class OracleUserDao implements UserDao {
 	public void updateUser(User user) throws DataRequestException {
 		String query = Resourcer.getString("requests.sql.update.user");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-			preparedStatement.setString(1, user.getLogin());
-			preparedStatement.setString(2, user.getPassword());
-			preparedStatement.setString(3, user.getStatus().toString());
-			preparedStatement.setInt(4, user.getId());
+			setUserUpdateParametres(user, preparedStatement);
 			preparedStatement.executeQuery();
 		} catch (SQLException e) {
 			throw new DataRequestException(
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
 	}
+	
+	public void setUserUpdateParametres(User user, PreparedStatement preparedStatement) throws SQLException {
+		preparedStatement.setString(1, user.getLogin());
+		preparedStatement.setString(2, user.getPassword());
+		preparedStatement.setString(3, user.getStatus().toString());
+		preparedStatement.setInt(4, user.getId());
+	}
 
 	@Override
 	public void updateUserData(UserData userData) throws DataRequestException {
-		// TODO Auto-generated method stub
-		
+		String query = Resourcer.getString("requests.sql.update.userData");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			setUserDataUpdateParametres(userData, preparedStatement);
+			preparedStatement.executeQuery();
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+	}
+	
+	public void setUserDataUpdateParametres(UserData data, PreparedStatement preparedStatement) throws SQLException {
+		preparedStatement.setInt(1, data.getRole().ordinal());
+		preparedStatement.setString(2, data.getPassportNumber());
+		preparedStatement.setString(3, data.getFullName());
+		preparedStatement.setInt(4, data.getAge());
+		preparedStatement.setInt(5, data.getId());
 	}
 }
