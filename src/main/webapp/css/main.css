@@ -49,4 +49,6 @@ header{
     border: solid 9px transparent;
 
     overflow-y: auto;
+
+    display: none;
 }

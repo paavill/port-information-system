@@ -1,9 +1,9 @@
-function openCity(evt, Name) {
+function openTab(evt, Name) {
     // Declare all variables
     var i, tabcontent, tablinks;
 
     // Get all elements with class="tabcontent" and hide them
-    tabcontent = document.getElementsByClassName("tabcontent");
+    tabcontent = document.getElementsByClassName("mainView");
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
     }
@@ -22,6 +22,6 @@ function openCity(evt, Name) {
 function setFirstActive(){
     tablinks = document.getElementsByClassName("tablinks");
     tablinks[0].className += " active";
-    tabcontent = document.getElementsByClassName("tabcontent");
+    tabcontent = document.getElementsByClassName("mainView");
     tabcontent[0].style.display = "block";
 }

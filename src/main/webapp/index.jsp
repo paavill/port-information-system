@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <head lang="US">
     <meta charset="UTF-8">
-    <title>Порт</title>
+    <title>Port</title>
 </head>
     <body>
         <jsp:forward page="/FrontController">

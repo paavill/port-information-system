@@ -1,5 +1,5 @@
 /* Style the tab */
-.tab {
+.tabs {
     overflow-x: auto;
     border-left: solid 10px transparent;
     border-right: solid 10px transparent;
@@ -10,7 +10,7 @@
 }
 
 /* Style the buttons that are used to open the tab content */
-.tab button {
+.tabs button {
     background-color: inherit;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -23,20 +23,14 @@
     padding: 14px 16px;
 
     transition: 0.3s;
-
 }
 
 /* Change background color of buttons on hover */
-.tab button:hover {
+.tabs button:hover {
     background-color: #CCCCFF;
 }
 
 /* Create an active/current tablink class */
-.tab button.active {
+.tabs button.active {
     background-color: #E5E5E5;
-}
-
-/* Style the tab content */
-.tabcontent {
-    display: none;
 }
