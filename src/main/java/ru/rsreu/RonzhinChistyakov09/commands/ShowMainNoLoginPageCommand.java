@@ -46,7 +46,7 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 		UserDao userDao = factory.getUserDao();
 		String result = "";
 		try {
-			userDao.createUser(new User(5, new UserData(5, UserRole.ADMINISTRATOR, "a2", "b2", 12), "test", "test2", UserStatus.AUTHORIZED));
+//			userDao.createUser(new User(5, new UserData(5, UserRole.ADMINISTRATOR, "a2", "b2", 12), "test", "test2", UserStatus.AUTHORIZED));
 			Collection<User> users = userDao.getAllUsers();
 			for(User user: users) {
 				System.out.println(user.getData().getRole());
