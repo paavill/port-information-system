@@ -45,6 +45,8 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 			int pilotsCount = pilotDao.getPilotsCount();
 			int freePilotsCount = pilotDao.getFreePilotsCount();
 			port = new Port("PortName", piersCount, freePiersCount, pilotsCount, freePilotsCount);
+			Pier pier = new Pier(1, PierStatus.FILLED, 20);
+			pierDao.updatePier(pier);
 			piersData = pierDao.getAllPiers();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,6 +1,7 @@
 package ru.rsreu.RonzhinChistyakov09.datalayer.oracledb;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,6 +13,7 @@ import com.prutzkow.resourcer.Resourcer;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.pier.Pier;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.pier.PierStatus;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserData;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
@@ -22,7 +24,6 @@ public class OraclePierDao implements PierDao {
 	public OraclePierDao(Connection connection) {
 		this.connection = connection;
 	}
-	
 
 	@Override
 	public Collection<Pier> getAllPiers() throws DataRequestException {
@@ -78,5 +79,41 @@ public class OraclePierDao implements PierDao {
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
 		return freePiersCount;
+	}
+
+	@Override
+	public void createPier(Pier pier) throws DataRequestException {
+		String query = Resourcer.getString("requests.sql.create.pier");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			setPierParametresOnPreparedStatement(pier, preparedStatement);
+			preparedStatement.executeQuery();
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+	}
+
+	private void setPierParametresOnPreparedStatement(Pier pier, PreparedStatement preparedStatement) throws SQLException {
+		preparedStatement.setInt(1, pier.getId());
+		preparedStatement.setString(2, pier.getStatus().toString());
+		preparedStatement.setInt(3, pier.getCapacity());
+	}
+
+	@Override
+	public void updatePier(Pier pier) throws DataRequestException {
+		String query = Resourcer.getString("requests.sql.update.pier");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			setPierUpdateParametres(pier, preparedStatement);
+			preparedStatement.executeQuery();
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+	}
+	
+	private void setPierUpdateParametres(Pier pier, PreparedStatement preparedStatement) throws SQLException {
+		preparedStatement.setString(1, pier.getStatus().toString());
+		preparedStatement.setInt(2, pier.getCapacity());
+		preparedStatement.setInt(3, pier.getId());
 	}
 }

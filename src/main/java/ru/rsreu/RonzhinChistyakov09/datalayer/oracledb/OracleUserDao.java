@@ -151,7 +151,7 @@ public class OracleUserDao implements UserDao {
 		}
 	}
 	
-	public void setUserUpdateParametres(User user, PreparedStatement preparedStatement) throws SQLException {
+	private void setUserUpdateParametres(User user, PreparedStatement preparedStatement) throws SQLException {
 		preparedStatement.setString(1, user.getLogin());
 		preparedStatement.setString(2, user.getPassword());
 		preparedStatement.setString(3, user.getStatus().toString());

@@ -11,4 +11,8 @@ public interface PierDao {
 	abstract int getPiersCount() throws DataRequestException;
 	
 	abstract int getFreePiersCount() throws DataRequestException;
+	
+	abstract void createPier(Pier pier) throws DataRequestException;
+	
+	abstract void updatePier(Pier pier) throws DataRequestException;
 }

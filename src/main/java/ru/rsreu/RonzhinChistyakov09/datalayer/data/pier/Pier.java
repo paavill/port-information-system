@@ -20,6 +20,13 @@ public class Pier {
 		this.residualÑapacity = residualÑapacity;
 	}
 
+	public Pier(int id, PierStatus status, int capacity) {
+		super();
+		this.id = id;
+		this.status = status;
+		this.capacity = capacity;
+	}
+
 	public int getId() {
 		return id;
 	}
