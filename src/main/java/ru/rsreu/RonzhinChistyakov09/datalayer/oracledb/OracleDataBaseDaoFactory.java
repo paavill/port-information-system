@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import com.prutzkow.resourcer.Resourcer;
 
 import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PilotDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.StorageException;
@@ -53,7 +55,17 @@ public class OracleDataBaseDaoFactory extends DaoFactory {
 	public StatementDao getStatementDao() {
 		return new OracleStatementDao(this.connection);
 	}
-	
+
+	@Override
+	public PierDao getPierDao() {
+		return new OraclePierDao(this.connection);
+	}
+
+	@Override
+	public PilotDao getPilotDao() {
+		return new OraclePilotDao(this.connection);
+	}
+
 	@Override
 	public void close() throws Exception {
 		if (this.connection != null) {

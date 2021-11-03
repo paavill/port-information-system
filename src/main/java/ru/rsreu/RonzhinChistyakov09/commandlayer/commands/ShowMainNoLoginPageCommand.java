@@ -7,12 +7,20 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.prutzkow.resourcer.Resourcer;
 
+import ru.rsreu.RonzhinChistyakov09.CollectionToTableFormatter;
 import ru.rsreu.RonzhinChistyakov09.Port;
 import ru.rsreu.RonzhinChistyakov09.Tab;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseForward;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommandResult;
+import ru.rsreu.RonzhinChistyakov09.datalayer.DBType;
+import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.pier.Pier;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.pier.PierStatus;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PilotDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 
 public class ShowMainNoLoginPageCommand implements ICommand {
 
@@ -25,12 +33,21 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 		request.setAttribute("authorizationText", Resourcer.getString("jsp.main.noLogin.authorizationText"));
 		request.setAttribute("aboutSystemText", Resourcer.getString("jsp.main.noLogin.aboutSystemText"));
 		
-		/**
-		 * добавить в даошки  к пирсам и лоцманам
-		 * количество лоцманов, количество свободных лоцманов
-		 * количество пирсов, количество свободных присов
-		 */
-		Port port = new Port("PortName", 1, 1, 1, 1);
+		
+		Port port = null;
+		try {
+			DaoFactory factory = DaoFactory.getInstance(DBType.ORACLE);
+			PierDao pierDao = factory.getPierDao();
+			int piersCount = pierDao.getPiersCount();
+			int freePiersCount = pierDao.getFreePiersCount();
+			PilotDao pilotDao = factory.getPilotDao();
+			int pilotsCount = pilotDao.getPilotsCount();
+			int freePilotsCount = pilotDao.getFreePilotsCount();
+			port = new Port("PortName", piersCount, freePiersCount, pilotsCount, freePilotsCount);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		request.setAttribute("aboutPortInformationText", Resourcer.getString("jsp.main.noLogin.aboutPortInformationText"));
 		request.setAttribute("portData", port);
 		request.setAttribute("piarCountText", Resourcer.getString("jsp.main.noLogin.piarCountText"));
@@ -43,7 +60,8 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 		 */
 		Collection<Pier> piersData = new ArrayList<Pier>();
 		
-		piersData.add(new Pier(0, null, 1));
+		piersData.add(new Pier(0, null, 1, null));
+		piersData.add(new Pier(1, PierStatus.FILLED, 1, null));
 		request.setAttribute("aboutPiersInformationText", Resourcer.getString("jsp.main.noLogin.aboutPiersInformationText"));
 		request.setAttribute("piersData", piersData);
 		request.setAttribute("pierIdText", Resourcer.getString("jsp.main.noLogin.pierIdText"));
