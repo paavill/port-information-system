@@ -6,10 +6,10 @@ import java.sql.SQLException;
 
 import com.prutzkow.resourcer.Resourcer;
 
-import ru.rsreu.Chistyakov0818.exceptions.StorageException;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
-import ru.rsreu.RonzhinChistyakov09.datalayer.StatementDao;
-import ru.rsreu.RonzhinChistyakov09.datalayer.UserDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
+import ru.rsreu.RonzhinChistyakov09.exceptions.StorageException;
 
 public class OracleDataBaseDaoFactory extends DaoFactory {
 	private static volatile OracleDataBaseDaoFactory instance;

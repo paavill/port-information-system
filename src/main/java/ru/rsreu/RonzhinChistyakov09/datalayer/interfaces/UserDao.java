@@ -1,4 +1,4 @@
-package ru.rsreu.RonzhinChistyakov09.datalayer;
+package ru.rsreu.RonzhinChistyakov09.datalayer.interfaces;
 
 import java.util.Collection;
 

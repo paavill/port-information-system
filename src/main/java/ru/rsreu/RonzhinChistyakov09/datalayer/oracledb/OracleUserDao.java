@@ -10,11 +10,11 @@ import java.util.Collection;
 
 import com.prutzkow.resourcer.Resourcer;
 
-import ru.rsreu.RonzhinChistyakov09.datalayer.UserDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserData;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserRole;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserStatus;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
 public class OracleUserDao implements UserDao {

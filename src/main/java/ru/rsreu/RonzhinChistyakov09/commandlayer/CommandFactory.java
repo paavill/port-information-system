@@ -1,6 +1,9 @@
-package ru.rsreu.RonzhinChistyakov09.commands;
+package ru.rsreu.RonzhinChistyakov09.commandlayer;
 
 import javax.servlet.http.HttpServletRequest;
+
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.EmptyCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommand;
 
 public class CommandFactory {
 	public static ICommand getCommand(HttpServletRequest request) {

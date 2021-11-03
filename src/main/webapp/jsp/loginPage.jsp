@@ -30,10 +30,10 @@
                 </div>
             </div>
             <div class="buttons">
-                <a href="index.html">Войти</a>
+                <a href="FrontController?command=LOGIN">Войти</a>
                 <a href="FrontController?command=SHOW_MAIN_NO_LOGIN_PAGE">Отмена</a>
             </div>
-                <h5>место для вывода сообщений об ошибках</h5>
+                <h5>${errorMessage}</h5>
         </div>
     </div>
 
