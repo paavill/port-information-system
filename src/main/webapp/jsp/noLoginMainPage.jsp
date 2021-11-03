@@ -26,38 +26,50 @@
         <div class="main">
             
             <div class="tabs container">
-                <c:forEach var="oneTab" items="${tabs}">
-                    <button class="tablinks" onclick="openTab(event, '${oneTab.name}')">${oneTab.name}</button>
-                </c:forEach>
+                <button class="tablinks" onclick="openTab(event, '${aboutPortInformationText}')">${aboutPortInformationText}</button>
+                <button class="tablinks" onclick="openTab(event, '${aboutPiersInformationText}')">${aboutPiersInformationText}</button>
             </div>
 
-            <c:forEach var="oneTab" items="${tabs}">
-                <section id="${oneTab.name}" class="container mainView">
-                    
-                    <c:forEach items="${oneTab.data}" var="d">    
-                        <div class="info">
-                            <h3>${d.portName}</h3>
-                            <div>
-                                <h4>Общее кол-во пирсов:</h4>
-                                <var>${d.piarCount}</var>
-                            </div>
-                            <div>
-                                <h4>Кол-во свободных пирсов:</h4>
-                                <var>${d.freePiarCount}</var>
-                            </div>
-                            <div>
-                                <h4>Общее кол-во лоцманов:</h4>
-                                <var>${d.pilotCount}</var>
-                            </div>
-                            <div>
-                                <h4>Кол-во свободных лоцманов:</h4>
-                                <var>${d.freePilotCount}</var>
-                            </div>
-                        </div> 
-                    </c:forEach>
+            <section id="${aboutPortInformationText}" class="container mainView">
+                   
+                <div class="info">
+                    <h3>${portData.portName}</h3>
+                    <div>
+                        <h4>${piarCountText}</h4>
+                        <var>${portData.piarCount}</var>
+                    </div>
+                    <div>
+                        <h4>${freePiarCountText}</h4>
+                        <var>${portData.freePiarCount}</var>
+                    </div>
+                    <div>
+                        <h4>${pilotCountText}</h4>
+                        <var>${portData.pilotCount}</var>
+                    </div>
+                    <div>
+                        <h4>${freePilotCountText}</h4>
+                        <var>${portData.freePilotCount}</var>
+                    </div>
+                </div> 
 
-                </section>
-            </c:forEach>
+            </section>
+
+            <section id="${aboutPiersInformationText}" class="container mainView">
+                <c:forEach var="pierData" items="${piersData}">
+                    <div class="info">
+                        <h3>${pierIdText} ${pierData.id}</h3>
+                        <div>
+                            <h4>${pierStatusText}</h4>
+                            <var>${pierData.status}</var>
+                        </div>
+                        <div>
+                            <h4>${pierCapacityText}</h4>
+                            <var>${pierData.capacity}</var>
+                        </div>
+                    </div> 
+                </c:forEach>
+
+            </section>
             
         </div>
         

@@ -12,28 +12,28 @@
 <body>
     <header>
         <div class="container">
-            <a href="index.html" class="logo">Port</a>
+            <a href="index.html" class="logo">${logoText}</a>
         </div>
     </header>
 
     <div class="main login">
         <div class="mainView">
-            <h3>Авторизация</h3>
+            <h3>${authorizationText}</h3>
             <div>
                 <div class="enter">
-                    <h4>Логин:</h4>
-                    <input type="text" placeholder="Enter some text">
+                    <h4>${loginText}</h4>
+                    <input type="text" placeholder="${placeholderLoginText}">
                 </div>
                 <div class="enter">
-                    <h4>Пароль:</h4>
-                    <input type="password" placeholder="Enter some text">
+                    <h4>${passwordText}</h4>
+                    <input type="password" placeholder="${placeholderPasswordText}">
                 </div>
             </div>
             <div class="buttons">
-                <a href="FrontController?command=LOGIN">Войти</a>
-                <a href="FrontController?command=SHOW_MAIN_NO_LOGIN_PAGE">Отмена</a>
+                <a href="FrontController?command=LOGIN">${enterButtonText}</a>
+                <a href="FrontController?command=SHOW_MAIN_NO_LOGIN_PAGE">${cancelButtonText}</a>
             </div>
-                <h5>${errorMessage}</h5>
+                <h5>${errorText}</h5>
         </div>
     </div>
 

@@ -34,3 +34,7 @@
 .tabs button.active {
     background-color: #E5E5E5;
 }
+
+.tabs button.active:hover {
+    background-color: #d8d8d8;
+}

@@ -14,7 +14,7 @@ public class LoginCommand implements ICommand {
 	@Override
 	public ICommandResult execute(HttpServletRequest request) {
 		//Ћогика если абстрагироватьс€ возвращает true если залогинен и false если нет
-		boolean loginLogicResult = true;
+		boolean loginLogicResult = false;
 		ICommandResult result = null;
 		if(loginLogicResult) {
 			//здесь SHOW_MAIN_NO_LOGIN_PAGE пока что, Ќќ в зависимости от того, что произойдет в логике
