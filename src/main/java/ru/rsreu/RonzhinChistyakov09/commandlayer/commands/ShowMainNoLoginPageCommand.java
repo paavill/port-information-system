@@ -35,6 +35,7 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 		
 		
 		Port port = null;
+		Collection<Pier> piersData = new ArrayList<Pier>();
 		try {
 			DaoFactory factory = DaoFactory.getInstance(DBType.ORACLE);
 			PierDao pierDao = factory.getPierDao();
@@ -44,6 +45,7 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 			int pilotsCount = pilotDao.getPilotsCount();
 			int freePilotsCount = pilotDao.getFreePilotsCount();
 			port = new Port("PortName", piersCount, freePiersCount, pilotsCount, freePilotsCount);
+			piersData = pierDao.getAllPiers();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -54,14 +56,6 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 		request.setAttribute("freePiarCountText", Resourcer.getString("jsp.main.noLogin.freePiarCountText"));
 		request.setAttribute("pilotCountText", Resourcer.getString("jsp.main.noLogin.pilotCountText"));
 		request.setAttribute("freePilotCountText", Resourcer.getString("jsp.main.noLogin.freePilotCountText"));
-		/**
-		 * тут будет юзаться dao, было бы неплохо еше в пирс добавить поле которое показывает
-		 * его занятость: есть capacity, добавить остаточную вместимость
-		 */
-		Collection<Pier> piersData = new ArrayList<Pier>();
-		
-		piersData.add(new Pier(0, null, 1, null));
-		piersData.add(new Pier(1, PierStatus.FILLED, 1, null));
 		request.setAttribute("aboutPiersInformationText", Resourcer.getString("jsp.main.noLogin.aboutPiersInformationText"));
 		request.setAttribute("piersData", piersData);
 		request.setAttribute("pierIdText", Resourcer.getString("jsp.main.noLogin.pierIdText"));
