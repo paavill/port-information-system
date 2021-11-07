@@ -41,7 +41,7 @@ public class OracleUserDao implements UserDao {
 		}
 		return result;
 	}
-	
+
 	@Override
 	public User getByLogin(String login) throws DataRequestException {
 		User user = null;
@@ -80,7 +80,6 @@ public class OracleUserDao implements UserDao {
 	}
 
 	private UserRole getUserRoleFromResultSet(ResultSet resultSet) throws SQLException {
-//		UserRole role = UserRole.getById(resultSet.getInt("user_role_id"));
 		UserRole role = UserRole.valueOf(resultSet.getString(Resourcer.getString("database.userRole.title")).trim());
 		return role;
 	}
@@ -150,7 +149,7 @@ public class OracleUserDao implements UserDao {
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
 	}
-	
+
 	private void setUserUpdateParametres(User user, PreparedStatement preparedStatement) throws SQLException {
 		preparedStatement.setString(1, user.getLogin());
 		preparedStatement.setString(2, user.getPassword());
@@ -169,7 +168,7 @@ public class OracleUserDao implements UserDao {
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
 	}
-	
+
 	public void setUserDataUpdateParametres(UserData data, PreparedStatement preparedStatement) throws SQLException {
 		preparedStatement.setInt(1, data.getRole().ordinal());
 		preparedStatement.setString(2, data.getPassportNumber());

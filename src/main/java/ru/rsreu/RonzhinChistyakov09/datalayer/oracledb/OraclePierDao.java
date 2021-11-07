@@ -32,11 +32,7 @@ public class OraclePierDao implements PierDao {
 		try (Statement statement = this.connection.createStatement()) {
 			try (ResultSet resultSet = statement.executeQuery(query)) {
 				while (resultSet.next()) {
-					int id = resultSet.getInt("id");
-					PierStatus status = PierStatus.valueOf(resultSet.getString("status").trim());
-					int capacity = resultSet.getInt("capacity");
-					int residualCapacity = resultSet.getInt("residual_capacity");
-					Pier pier = new Pier(id, status, capacity, null, residualCapacity);
+					Pier pier = getPierFromResultSet(resultSet);
 					result.add(pier);
 				}
 			}
@@ -45,6 +41,16 @@ public class OraclePierDao implements PierDao {
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
 		return result;
+	}
+
+	private Pier getPierFromResultSet(ResultSet resultSet) throws SQLException {
+		int id = resultSet.getInt(Resourcer.getString("database.piers.id"));
+		PierStatus status = PierStatus
+				.valueOf(resultSet.getString(Resourcer.getString("database.piers.status")).trim());
+		int capacity = resultSet.getInt(Resourcer.getString("database.piers.capacity"));
+		int residualCapacity = resultSet.getInt(Resourcer.getString("database.piers.capacity.residual"));
+		Pier pier = new Pier(id, status, capacity, null, residualCapacity);
+		return pier;
 	}
 
 	@Override
@@ -93,7 +99,8 @@ public class OraclePierDao implements PierDao {
 		}
 	}
 
-	private void setPierParametresOnPreparedStatement(Pier pier, PreparedStatement preparedStatement) throws SQLException {
+	private void setPierParametresOnPreparedStatement(Pier pier, PreparedStatement preparedStatement)
+			throws SQLException {
 		preparedStatement.setInt(1, pier.getId());
 		preparedStatement.setString(2, pier.getStatus().toString());
 		preparedStatement.setInt(3, pier.getCapacity());
@@ -110,7 +117,7 @@ public class OraclePierDao implements PierDao {
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
 	}
-	
+
 	private void setPierUpdateParametres(Pier pier, PreparedStatement preparedStatement) throws SQLException {
 		preparedStatement.setString(1, pier.getStatus().toString());
 		preparedStatement.setInt(2, pier.getCapacity());

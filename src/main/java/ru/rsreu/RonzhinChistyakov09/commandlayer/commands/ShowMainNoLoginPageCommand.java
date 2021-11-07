@@ -2,6 +2,7 @@ package ru.rsreu.RonzhinChistyakov09.commandlayer.commands;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,6 +18,8 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.DBType;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.pier.Pier;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.pier.PierStatus;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.pilot.Pilot;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.pilot.PilotStatus;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PilotDao;
@@ -27,13 +30,10 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 	@Override
 	public ICommandResult execute(HttpServletRequest request) {
 		String page = null;
-		
 		request.setAttribute("titleText", Resourcer.getString("jsp.main.noLogin.titleText"));
 		request.setAttribute("logoText", Resourcer.getString("jsp.main.noLogin.logoText"));
 		request.setAttribute("authorizationText", Resourcer.getString("jsp.main.noLogin.authorizationText"));
 		request.setAttribute("aboutSystemText", Resourcer.getString("jsp.main.noLogin.aboutSystemText"));
-		
-		
 		Port port = null;
 		Collection<Pier> piersData = new ArrayList<Pier>();
 		try {
@@ -45,28 +45,25 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 			int pilotsCount = pilotDao.getPilotsCount();
 			int freePilotsCount = pilotDao.getFreePilotsCount();
 			port = new Port("PortName", piersCount, freePiersCount, pilotsCount, freePilotsCount);
-			Pier pier = new Pier(1, PierStatus.FILLED, 20);
-			pierDao.updatePier(pier);
 			piersData = pierDao.getAllPiers();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		request.setAttribute("aboutPortInformationText", Resourcer.getString("jsp.main.noLogin.aboutPortInformationText"));
+		request.setAttribute("aboutPortInformationText",
+				Resourcer.getString("jsp.main.noLogin.aboutPortInformationText"));
 		request.setAttribute("portData", port);
 		request.setAttribute("piarCountText", Resourcer.getString("jsp.main.noLogin.piarCountText"));
 		request.setAttribute("freePiarCountText", Resourcer.getString("jsp.main.noLogin.freePiarCountText"));
 		request.setAttribute("pilotCountText", Resourcer.getString("jsp.main.noLogin.pilotCountText"));
 		request.setAttribute("freePilotCountText", Resourcer.getString("jsp.main.noLogin.freePilotCountText"));
-		request.setAttribute("aboutPiersInformationText", Resourcer.getString("jsp.main.noLogin.aboutPiersInformationText"));
+		request.setAttribute("aboutPiersInformationText",
+				Resourcer.getString("jsp.main.noLogin.aboutPiersInformationText"));
 		request.setAttribute("piersData", piersData);
 		request.setAttribute("pierIdText", Resourcer.getString("jsp.main.noLogin.pierIdText"));
 		request.setAttribute("pierStatusText", Resourcer.getString("jsp.main.noLogin.pierStatusText"));
 		request.setAttribute("pierCapacityText", Resourcer.getString("jsp.main.noLogin.pierCapacityText"));
-		
-		page = Resourcer.getString("jsp.main.noLogin");
 
-	
+		page = Resourcer.getString("jsp.main.noLogin");
 		return new CommandResultResponseForward(page);
 	}
 }

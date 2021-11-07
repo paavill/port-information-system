@@ -1,6 +1,11 @@
 package ru.rsreu.RonzhinChistyakov09.datalayer.data.pilot;
 
 public class Pilot {
+	@Override
+	public String toString() {
+		return "Pilot [id=" + id + ", status=" + status + ", fullName=" + fullName + "]";
+	}
+
 	private int id;
 	private PilotStatus status;
 	private String fullName;
