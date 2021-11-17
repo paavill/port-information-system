@@ -3,7 +3,6 @@ package ru.rsreu.RonzhinChistyakov09.datalayer.interfaces;
 import java.util.Collection;
 
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserData;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
 public interface UserDao {
@@ -16,6 +15,4 @@ public interface UserDao {
 	abstract int getUsersCount() throws DataRequestException;
 	
 	abstract void updateUser(User user) throws DataRequestException;
-	
-	abstract void updateUserData(UserData userData) throws DataRequestException;
 }

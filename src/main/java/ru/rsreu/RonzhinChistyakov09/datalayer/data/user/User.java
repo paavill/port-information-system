@@ -2,38 +2,24 @@ package ru.rsreu.RonzhinChistyakov09.datalayer.data.user;
 
 public class User {
 	private int id;
-	private UserData data;
 	private String login;
 	private String password;
+	private String fullName;
 	private UserStatus status;
-	
-	public User(int id, UserData data, String login, String password, UserStatus status) {
+	private UserRole role;
+
+	public User(int id, String login, String password, String fullName, UserStatus status, UserRole role) {
 		super();
 		this.id = id;
-		this.data = data;
 		this.login = login;
 		this.password = password;
+		this.fullName = fullName;
 		this.status = status;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	public UserStatus getStatus() {
-		return status;
+		this.role = role;
 	}
 
 	public int getId() {
 		return id;
-	}
-
-	public UserData getData() {
-		return data;
 	}
 
 	public String getLogin() {
@@ -43,14 +29,22 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
-	
-	public void setStatus(UserStatus status) {
-		this.status = status;
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public UserStatus getStatus() {
+		return status;
+	}
+
+	public UserRole getRole() {
+		return role;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", data=" + data.toString() + ", login=" + login + ", password=" + password + ", status="
-				+ status + "]";
+		return "User [id=" + id + ", login=" + login + ", password=" + password + ", fullName=" + fullName + ", status="
+				+ status + ", role=" + role + "]";
 	}
 }

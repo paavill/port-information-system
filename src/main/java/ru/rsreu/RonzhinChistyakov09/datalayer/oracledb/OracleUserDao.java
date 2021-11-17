@@ -11,7 +11,6 @@ import java.util.Collection;
 import com.prutzkow.resourcer.Resourcer;
 
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserData;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserRole;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserStatus;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
@@ -41,6 +40,19 @@ public class OracleUserDao implements UserDao {
 		}
 		return result;
 	}
+	
+
+	private User getUserFromResultSet(ResultSet resultSet) throws SQLException {
+		int id = resultSet.getInt(Resourcer.getString("database.users.id"));
+		String login = resultSet.getString(Resourcer.getString("database.users.login"));
+		String password = resultSet.getString(Resourcer.getString("database.users.password"));
+		String fullName = resultSet.getString(Resourcer.getString("database.users.fullName"));
+		UserStatus status = new UserStatus(resultSet.getInt(Resourcer.getString("database.users.statusId")), 
+				resultSet.getString(Resourcer.getString("database.users.statusTitle")));
+		UserRole role = new UserRole(resultSet.getInt(Resourcer.getString("database.users.roleId")), 
+				resultSet.getString(Resourcer.getString("database.users.roleTitle")));
+		return new User(id, login, password, fullName, status, role);
+	}
 
 	@Override
 	public User getByLogin(String login) throws DataRequestException {
@@ -60,36 +72,12 @@ public class OracleUserDao implements UserDao {
 		return user;
 	}
 
-	private User getUserFromResultSet(ResultSet resultSet) throws SQLException {
-		UserData data = getUserDataFromResultSet(resultSet);
-		int id = resultSet.getInt(Resourcer.getString("database.users.id"));
-		String login = resultSet.getString(Resourcer.getString("database.users.login"));
-		String password = resultSet.getString(Resourcer.getString("database.users.password"));
-		UserStatus status = UserStatus
-				.valueOf(resultSet.getString(Resourcer.getString("database.users.status")).trim());
-		return new User(id, data, login, password, status);
-	}
-
-	private UserData getUserDataFromResultSet(ResultSet resultSet) throws SQLException {
-		int id = resultSet.getInt(Resourcer.getString("database.userData.id"));
-		UserRole role = getUserRoleFromResultSet(resultSet);
-		String passport = resultSet.getString(Resourcer.getString("database.userData.passport"));
-		String fullName = resultSet.getString(Resourcer.getString("database.userData.fullName"));
-		int age = resultSet.getInt(Resourcer.getString("database.userData.age"));
-		return new UserData(id, role, passport, fullName, age);
-	}
-
-	private UserRole getUserRoleFromResultSet(ResultSet resultSet) throws SQLException {
-		UserRole role = UserRole.valueOf(resultSet.getString(Resourcer.getString("database.userRole.title")).trim());
-		return role;
-	}
-
+	// FIX
 	@Override
 	public void createUser(User user) throws DataRequestException {
 		String createUserDataQuery = Resourcer.getString("requests.sql.create.userData");
 		try (PreparedStatement createDataPreparedStatement = connection.prepareStatement(createUserDataQuery)) {
-			UserData data = user.getData();
-			setUserDataParametresOnPreparedStatement(data, createDataPreparedStatement);
+			
 			createDataPreparedStatement.executeQuery();
 			String createUserQuery = Resourcer.getString("requests.sql.create.user");
 			try (PreparedStatement createUserPreparedStatement = connection.prepareStatement(createUserQuery)) {
@@ -102,25 +90,16 @@ public class OracleUserDao implements UserDao {
 		}
 	}
 
-	private void setUserDataParametresOnPreparedStatement(UserData data, PreparedStatement preparedStatement)
-			throws SQLException {
-		preparedStatement.setInt(1, data.getId());
-		preparedStatement.setInt(2, data.getRole().ordinal());
-		preparedStatement.setString(3, data.getPassportNumber());
-		preparedStatement.setString(4, data.getFullName());
-		preparedStatement.setInt(5, data.getAge());
-	}
-
+	// FIX
 	private void setUserParametresOnPreparedStatement(User user, PreparedStatement preparedStatement)
 			throws SQLException {
 		preparedStatement.setInt(1, user.getId());
-		UserData data = user.getData();
-		preparedStatement.setInt(2, data.getId());
-		preparedStatement.setString(3, user.getLogin());
-		preparedStatement.setString(4, user.getPassword());
-		preparedStatement.setString(5, user.getStatus().toString());
+		preparedStatement.setString(2, user.getLogin());
+		preparedStatement.setString(3, user.getPassword());
+		preparedStatement.setString(4, user.getStatus().toString());
 	}
 
+	// FIX
 	@Override
 	public int getUsersCount() throws DataRequestException {
 		int usersCount = 0;
@@ -138,6 +117,7 @@ public class OracleUserDao implements UserDao {
 		return usersCount;
 	}
 
+	// FIX
 	@Override
 	public void updateUser(User user) throws DataRequestException {
 		String query = Resourcer.getString("requests.sql.update.user");
@@ -155,25 +135,5 @@ public class OracleUserDao implements UserDao {
 		preparedStatement.setString(2, user.getPassword());
 		preparedStatement.setString(3, user.getStatus().toString());
 		preparedStatement.setInt(4, user.getId());
-	}
-
-	@Override
-	public void updateUserData(UserData userData) throws DataRequestException {
-		String query = Resourcer.getString("requests.sql.update.userData");
-		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-			setUserDataUpdateParametres(userData, preparedStatement);
-			preparedStatement.executeQuery();
-		} catch (SQLException e) {
-			throw new DataRequestException(
-					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
-		}
-	}
-
-	public void setUserDataUpdateParametres(UserData data, PreparedStatement preparedStatement) throws SQLException {
-		preparedStatement.setInt(1, data.getRole().ordinal());
-		preparedStatement.setString(2, data.getPassportNumber());
-		preparedStatement.setString(3, data.getFullName());
-		preparedStatement.setInt(4, data.getAge());
-		preparedStatement.setInt(5, data.getId());
 	}
 }

@@ -36,19 +36,19 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 		request.setAttribute("aboutSystemText", Resourcer.getString("jsp.main.noLogin.aboutSystemText"));
 		Port port = null;
 		Collection<Pier> piersData = new ArrayList<Pier>();
-		try {
-			DaoFactory factory = DaoFactory.getInstance(DBType.ORACLE);
-			PierDao pierDao = factory.getPierDao();
-			int piersCount = pierDao.getPiersCount();
-			int freePiersCount = pierDao.getFreePiersCount();
-			PilotDao pilotDao = factory.getPilotDao();
-			int pilotsCount = pilotDao.getPilotsCount();
-			int freePilotsCount = pilotDao.getFreePilotsCount();
-			port = new Port("PortName", piersCount, freePiersCount, pilotsCount, freePilotsCount);
-			piersData = pierDao.getAllPiers();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			DaoFactory factory = DaoFactory.getInstance(DBType.ORACLE);
+//			PierDao pierDao = factory.getPierDao();
+//			int piersCount = pierDao.getPiersCount();
+//			int freePiersCount = pierDao.getFreePiersCount();
+//			PilotDao pilotDao = factory.getPilotDao();
+//			int pilotsCount = pilotDao.getPilotsCount();
+//			int freePilotsCount = pilotDao.getFreePilotsCount();
+//			port = new Port("PortName", piersCount, freePiersCount, pilotsCount, freePilotsCount);
+//			piersData = pierDao.getAllPiers();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		request.setAttribute("aboutPortInformationText",
 				Resourcer.getString("jsp.main.noLogin.aboutPortInformationText"));
 		request.setAttribute("portData", port);

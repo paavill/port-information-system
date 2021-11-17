@@ -1,6 +1,7 @@
 package ru.rsreu.RonzhinChistyakov09;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Locale;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandFactory;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommandResult;
+import ru.rsreu.RonzhinChistyakov09.datalayer.DBType;
+import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 
 public class FrontController extends HttpServlet {
 
@@ -28,6 +33,17 @@ public class FrontController extends HttpServlet {
 			throws ServletException, IOException {
 		this.processRequest(request, response);
 		System.out.println("get");
+		try {
+			DaoFactory factory = DaoFactory.getInstance(DBType.ORACLE);
+			UserDao userDao = factory.getUserDao();
+			Collection<User> users = userDao.getAllUsers();
+			for(User user: users) {
+				System.out.println(user.toString());
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
