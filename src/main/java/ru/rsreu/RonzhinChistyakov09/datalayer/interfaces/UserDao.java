@@ -14,5 +14,5 @@ public interface UserDao {
 	
 	abstract int getUsersCount() throws DataRequestException;
 	
-	abstract void updateUser(User user) throws DataRequestException;
+	abstract void updateUser(int userId, User user) throws DataRequestException;
 }
