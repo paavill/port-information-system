@@ -1,29 +1,24 @@
 package ru.rsreu.RonzhinChistyakov09.datalayer.data.pier;
 
-import java.util.Collection;
-
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.goods.Goods;
-
 public class Pier {
 	private int id;
-	private PierStatus status;
 	private int capacity;
-	private Collection<Goods> goods;
-	private int residualÑapacity; // Ìá ñ÷èòàòü âìåñòèìîñòü ïî ìàññèâó òîâàğîâ, à íå õğàíèòü îòäåëüíîå ïîëå
+	private int residualÑapacity; 
 	
-	public Pier(int id, PierStatus status, int capacity, Collection<Goods> goods, int residualÑapacity) {
+	public Pier(int id, int capacity, int residualÑapacity) {
 		super();
 		this.id = id;
-		this.status = status;
 		this.capacity = capacity;
-		this.goods = goods;
 		this.residualÑapacity = residualÑapacity;
 	}
 
-	public Pier(int id, PierStatus status, int capacity) {
+	public int getResidualÑapacity() {
+		return residualÑapacity;
+	}
+
+	public Pier(int id, int capacity) {
 		super();
 		this.id = id;
-		this.status = status;
 		this.capacity = capacity;
 	}
 
@@ -31,11 +26,12 @@ public class Pier {
 		return id;
 	}
 	
-	public PierStatus getStatus() {
-		return status;
-	}
-	
 	public int getCapacity() {
 		return capacity;
+	}
+	
+	@Override
+	public String toString() {
+		return "Pier [id=" + id + ", capacity=" + capacity + ", residualÑapacity=" + residualÑapacity + "]";
 	}
 }

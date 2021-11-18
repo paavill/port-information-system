@@ -11,8 +11,6 @@ import java.util.Collection;
 import com.prutzkow.resourcer.Resourcer;
 
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.pier.Pier;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.pier.PierStatus;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
@@ -44,11 +42,9 @@ public class OraclePierDao implements PierDao {
 
 	private Pier getPierFromResultSet(ResultSet resultSet) throws SQLException {
 		int id = resultSet.getInt(Resourcer.getString("database.piers.id"));
-		PierStatus status = PierStatus
-				.valueOf(resultSet.getString(Resourcer.getString("database.piers.status")).trim());
 		int capacity = resultSet.getInt(Resourcer.getString("database.piers.capacity"));
 		int residualCapacity = resultSet.getInt(Resourcer.getString("database.piers.capacity.residual"));
-		Pier pier = new Pier(id, status, capacity, null, residualCapacity);
+		Pier pier = new Pier(id, capacity, residualCapacity);
 		return pier;
 	}
 
@@ -72,17 +68,6 @@ public class OraclePierDao implements PierDao {
 	@Override
 	public int getFreePiersCount() throws DataRequestException {
 		int freePiersCount = 0;
-		String query = Resourcer.getString("requests.sql.get.piers.free.count");
-		try (Statement statement = this.connection.createStatement()) {
-			try (ResultSet resultSet = statement.executeQuery(query)) {
-				while (resultSet.next()) {
-					freePiersCount = resultSet.getInt(1);
-				}
-			}
-		} catch (SQLException e) {
-			throw new DataRequestException(
-					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
-		}
 		return freePiersCount;
 	}
 
@@ -101,7 +86,6 @@ public class OraclePierDao implements PierDao {
 	private void setPierParametresOnPreparedStatement(Pier pier, PreparedStatement preparedStatement)
 			throws SQLException {
 		preparedStatement.setInt(1, pier.getId());
-		preparedStatement.setString(2, pier.getStatus().toString());
 		preparedStatement.setInt(3, pier.getCapacity());
 	}
 
@@ -109,17 +93,11 @@ public class OraclePierDao implements PierDao {
 	public void updatePier(Pier pier) throws DataRequestException {
 		String query = Resourcer.getString("requests.sql.update.pier");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-			setPierUpdateParametres(pier, preparedStatement);
+			
 			preparedStatement.executeQuery();
 		} catch (SQLException e) {
 			throw new DataRequestException(
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
-	}
-
-	private void setPierUpdateParametres(Pier pier, PreparedStatement preparedStatement) throws SQLException {
-		preparedStatement.setString(1, pier.getStatus().toString());
-		preparedStatement.setInt(2, pier.getCapacity());
-		preparedStatement.setInt(3, pier.getId());
 	}
 }

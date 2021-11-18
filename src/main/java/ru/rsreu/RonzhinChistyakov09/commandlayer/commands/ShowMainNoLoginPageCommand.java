@@ -17,12 +17,8 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DBType;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.pier.Pier;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.pier.PierStatus;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.pilot.Pilot;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.pilot.PilotStatus;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
-import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PilotDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 
 public class ShowMainNoLoginPageCommand implements ICommand {
@@ -41,9 +37,6 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 //			PierDao pierDao = factory.getPierDao();
 //			int piersCount = pierDao.getPiersCount();
 //			int freePiersCount = pierDao.getFreePiersCount();
-//			PilotDao pilotDao = factory.getPilotDao();
-//			int pilotsCount = pilotDao.getPilotsCount();
-//			int freePilotsCount = pilotDao.getFreePilotsCount();
 //			port = new Port("PortName", piersCount, freePiersCount, pilotsCount, freePilotsCount);
 //			piersData = pierDao.getAllPiers();
 //		} catch (Exception e) {
