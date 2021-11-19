@@ -1,7 +1,5 @@
 package ru.rsreu.RonzhinChistyakov09.datalayer.data.goods;
 
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.pier.Pier;
-
 public class Goods {
 	private int id;
 	private GoodsSpecifications specifications;

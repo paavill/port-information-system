@@ -10,6 +10,7 @@ import java.util.Collection;
 
 import com.prutzkow.resourcer.Resourcer;
 
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.Ship;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserRole;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserStatus;
@@ -131,5 +132,50 @@ public class OracleUserDao implements UserDao {
 			throw new DataRequestException(
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
+	}
+
+	@Override
+	public Ship getUserShip(int userId) throws DataRequestException {
+		Ship ship = null;
+		String query = Resourcer.getString("requests.sql.get.users.ships");
+		try (PreparedStatement preparedStatement = this.connection.prepareStatement(query)) {
+			preparedStatement.setInt(1, userId);
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
+					ship = getShipFromResultSet(resultSet);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+		return ship;
+	}
+	
+	private Ship getShipFromResultSet(ResultSet resultSet) throws SQLException {
+		int id = resultSet.getInt(Resourcer.getString("database.ships.id"));
+		String title = resultSet.getString(Resourcer.getString("database.ships.title"));
+		int capacity = resultSet.getInt(Resourcer.getString("database.ships.capacity"));
+		Ship ship = new Ship(id, title, capacity);
+		return ship;
+	}
+
+	@Override
+	public void createShip(int userId, Ship ship) throws DataRequestException {
+		String query = Resourcer.getString("requests.sql.create.ship");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			setShipParametresOnPreparedStatement(userId, ship, preparedStatement);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+	}
+	
+	private void setShipParametresOnPreparedStatement(int userId, Ship ship, PreparedStatement preparedStatement) throws SQLException {
+		preparedStatement.setInt(1, ship.getId());
+		preparedStatement.setInt(2, userId);
+		preparedStatement.setString(3, ship.getTitle());
+		preparedStatement.setInt(4, ship.getCapacity());
 	}
 }

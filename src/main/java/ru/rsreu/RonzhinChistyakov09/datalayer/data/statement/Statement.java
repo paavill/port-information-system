@@ -10,12 +10,11 @@ public class Statement {
 	private int id;
 	private User user;
 	private Ship ship; 
-	private Pier pier; // NULL
+	private Pier pier;
 	private StatementType type;
 	private StatementState state;
 	private Date doDate; 
-	private Date finishDate; // NULL
-	
+	private Date finishDate;
 	
 	public int getId() {
 		return id;
@@ -32,7 +31,6 @@ public class Statement {
 	public Pier getPier() {
 		return pier;
 	}
-
 
 	public StatementType getType() {
 		return type;

@@ -1,5 +1,20 @@
 package ru.rsreu.RonzhinChistyakov09.datalayer.data.statement;
 
-public interface StatementType {
+public class StatementType {
+	private int id;
+	private String title;
+	
+	public StatementType(int id, String title) {
+		super();
+		this.id = id;
+		this.title = title;
+	}
 
+	public int getId() {
+		return id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
 }

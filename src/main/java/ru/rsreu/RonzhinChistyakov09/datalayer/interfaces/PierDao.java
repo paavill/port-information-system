@@ -14,5 +14,5 @@ public interface PierDao {
 	
 	abstract void createPier(Pier pier) throws DataRequestException;
 	
-	abstract void updatePier(Pier pier) throws DataRequestException;
+	abstract void updatePier(int pierId, Pier pier) throws DataRequestException;
 }
