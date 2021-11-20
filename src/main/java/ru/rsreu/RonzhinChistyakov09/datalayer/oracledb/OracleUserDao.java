@@ -12,8 +12,6 @@ import com.prutzkow.resourcer.Resourcer;
 
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.Ship;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserRole;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserStatus;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
@@ -31,7 +29,7 @@ public class OracleUserDao implements UserDao {
 		try (Statement statement = this.connection.createStatement()) {
 			try (ResultSet resultSet = statement.executeQuery(query)) {
 				while (resultSet.next()) {
-					User user = getUserFromResultSet(resultSet);
+					User user = ResultSetConverter.getUser(resultSet);
 					result.add(user);
 				}
 			}
@@ -40,27 +38,6 @@ public class OracleUserDao implements UserDao {
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
 		return result;
-	}
-	
-
-	private User getUserFromResultSet(ResultSet resultSet) throws SQLException {
-		int id = resultSet.getInt(Resourcer.getString("database.users.id"));
-		String login = resultSet.getString(Resourcer.getString("database.users.login"));
-		String password = resultSet.getString(Resourcer.getString("database.users.password"));
-		String fullName = resultSet.getString(Resourcer.getString("database.users.fullName"));
-		UserStatus status = getUserStatusFromResultSet(resultSet);
-		UserRole role = getUserRoleFromResultSet(resultSet);
-		return new User(id, login, password, fullName, status, role);
-	}
-	
-	private UserStatus getUserStatusFromResultSet(ResultSet resultSet) throws SQLException {
-		return  new UserStatus(resultSet.getInt(Resourcer.getString("database.users.statusId")), 
-				resultSet.getString(Resourcer.getString("database.users.statusTitle")));
-	}
-	
-	private UserRole getUserRoleFromResultSet(ResultSet resultSet) throws SQLException {
-		return new UserRole(resultSet.getInt(Resourcer.getString("database.users.roleId")), 
-				resultSet.getString(Resourcer.getString("database.users.roleTitle")));
 	}
 
 	@Override
@@ -71,7 +48,7 @@ public class OracleUserDao implements UserDao {
 			preparedStatement.setString(1, login);
 			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 				if (resultSet.next()) {
-					user = getUserFromResultSet(resultSet);
+					user = ResultSetConverter.getUser(resultSet);
 				}
 			}
 		} catch (SQLException e) {
@@ -80,7 +57,6 @@ public class OracleUserDao implements UserDao {
 		}
 		return user;
 	}
-	
 
 	@Override
 	public int getUsersCount() throws DataRequestException {
@@ -125,8 +101,8 @@ public class OracleUserDao implements UserDao {
 	public void updateUser(int userId, User user) throws DataRequestException {
 		String query = Resourcer.getString("requests.sql.update.user");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-			 setUserParametresOnPreparedStatement(user, preparedStatement);
-			 preparedStatement.setInt(7, userId);
+			setUserParametresOnPreparedStatement(user, preparedStatement);
+			preparedStatement.setInt(7, userId);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			throw new DataRequestException(
@@ -142,21 +118,13 @@ public class OracleUserDao implements UserDao {
 			preparedStatement.setInt(1, userId);
 			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 				if (resultSet.next()) {
-					ship = getShipFromResultSet(resultSet);
+					ship = ResultSetConverter.getShip(resultSet);
 				}
 			}
 		} catch (SQLException e) {
 			throw new DataRequestException(
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
-		return ship;
-	}
-	
-	private Ship getShipFromResultSet(ResultSet resultSet) throws SQLException {
-		int id = resultSet.getInt(Resourcer.getString("database.ships.id"));
-		String title = resultSet.getString(Resourcer.getString("database.ships.title"));
-		int capacity = resultSet.getInt(Resourcer.getString("database.ships.capacity"));
-		Ship ship = new Ship(id, title, capacity);
 		return ship;
 	}
 
@@ -171,8 +139,9 @@ public class OracleUserDao implements UserDao {
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
 	}
-	
-	private void setShipParametresOnPreparedStatement(int userId, Ship ship, PreparedStatement preparedStatement) throws SQLException {
+
+	private void setShipParametresOnPreparedStatement(int userId, Ship ship, PreparedStatement preparedStatement)
+			throws SQLException {
 		preparedStatement.setInt(1, ship.getId());
 		preparedStatement.setInt(2, userId);
 		preparedStatement.setString(3, ship.getTitle());

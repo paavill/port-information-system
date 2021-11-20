@@ -16,10 +16,12 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.DBType;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.Ship;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.pier.Pier;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.Statement;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserRole;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserStatus;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 
 public class FrontController extends HttpServlet {
@@ -41,7 +43,18 @@ public class FrontController extends HttpServlet {
 		try {
 			DaoFactory factory = DaoFactory.getInstance(DBType.ORACLE);
 			UserDao userDao = factory.getUserDao();
-			System.out.println(userDao.getUserShip(2));
+			for(User user: userDao.getAllUsers()) {
+				System.out.println(user.toString());
+			}
+			System.out.println(userDao.getUserShip(1).toString());
+			PierDao pierDao = factory.getPierDao();
+			for(Pier pier: pierDao.getAllPiers()) {
+				System.out.println(pier.toString());
+			}
+			StatementDao statementDao = factory.getStatementDao();
+			for(Statement statement: statementDao.getAllStatements()) {
+				System.out.println(statement.toString());
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());

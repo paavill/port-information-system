@@ -12,9 +12,22 @@ public class Statement {
 	private Ship ship; 
 	private Pier pier;
 	private StatementType type;
-	private StatementState state;
+	private StatementStatus state;
 	private Date doDate; 
 	private Date finishDate;
+	
+	public Statement(int id, User user, Ship ship, Pier pier, StatementType type, StatementStatus state, Date doDate,
+			Date finishDate) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.ship = ship;
+		this.pier = pier;
+		this.type = type;
+		this.state = state;
+		this.doDate = doDate;
+		this.finishDate = finishDate;
+	}
 	
 	public int getId() {
 		return id;
@@ -36,7 +49,7 @@ public class Statement {
 		return type;
 	}
 
-	public StatementState getState() {
+	public StatementStatus getState() {
 		return state;
 	}
 
@@ -46,5 +59,11 @@ public class Statement {
 
 	public Date getFinishDate() {
 		return finishDate;
+	}
+	
+	@Override
+	public String toString() {
+		return "Statement [id=" + id + ", user=" + user + ", ship=" + ship + ", pier=" + pier + ", type=" + type
+				+ ", state=" + state + ", doDate=" + doDate + ", finishDate=" + finishDate + "]";
 	}
 }

@@ -11,9 +11,9 @@ public interface UserDao {
 	
 	abstract User getByLogin(String login) throws DataRequestException;
 	
-	abstract void createUser(User user) throws DataRequestException;
-	
 	abstract int getUsersCount() throws DataRequestException;
+	
+	abstract void createUser(User user) throws DataRequestException;
 	
 	abstract void updateUser(int userId, User user) throws DataRequestException;
 	

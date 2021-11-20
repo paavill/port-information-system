@@ -29,7 +29,7 @@ public class OraclePierDao implements PierDao {
 		try (Statement statement = this.connection.createStatement()) {
 			try (ResultSet resultSet = statement.executeQuery(query)) {
 				while (resultSet.next()) {
-					Pier pier = getPierFromResultSet(resultSet);
+					Pier pier = ResultSetConverter.getPier(resultSet);
 					result.add(pier);
 				}
 			}
@@ -38,14 +38,6 @@ public class OraclePierDao implements PierDao {
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
 		return result;
-	}
-
-	private Pier getPierFromResultSet(ResultSet resultSet) throws SQLException {
-		int id = resultSet.getInt(Resourcer.getString("database.piers.id"));
-		int capacity = resultSet.getInt(Resourcer.getString("database.piers.capacity"));
-		int residualCapacity = resultSet.getInt(Resourcer.getString("database.piers.capacity.residual"));
-		Pier pier = new Pier(id, capacity, residualCapacity);
-		return pier;
 	}
 
 	@Override
