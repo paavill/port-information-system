@@ -45,7 +45,7 @@ public class OracleUserDao implements UserDao {
 		User user = null;
 		String query = Resourcer.getString("requests.sql.get.user.byLogin");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-			preparedStatement.setString(1, login);
+			PreparedStatementParametresSetter.set(preparedStatement, login);
 			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 				if (resultSet.next()) {
 					user = ResultSetConverter.getUser(resultSet);
@@ -64,7 +64,7 @@ public class OracleUserDao implements UserDao {
 		String query = Resourcer.getString("requests.sql.get.users.count");
 		try (Statement statement = this.connection.createStatement()) {
 			try (ResultSet resultSet = statement.executeQuery(query)) {
-				while (resultSet.next()) {
+				if (resultSet.next()) {
 					usersCount = resultSet.getInt(1);
 				}
 			}
@@ -79,7 +79,8 @@ public class OracleUserDao implements UserDao {
 	public void createUser(User user) throws DataRequestException {
 		String query = Resourcer.getString("requests.sql.create.user");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-			setUserParametresOnPreparedStatement(user, preparedStatement);
+			PreparedStatementParametresSetter.set(preparedStatement, user.getId(), user.getLogin(), user.getPassword(),
+					user.getFullName(), user.getStatus().getId(), user.getRole().getId());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			throw new DataRequestException(
@@ -87,22 +88,12 @@ public class OracleUserDao implements UserDao {
 		}
 	}
 
-	private void setUserParametresOnPreparedStatement(User user, PreparedStatement preparedStatement)
-			throws SQLException {
-		preparedStatement.setInt(1, user.getId());
-		preparedStatement.setString(2, user.getLogin());
-		preparedStatement.setString(3, user.getPassword());
-		preparedStatement.setString(4, user.getFullName());
-		preparedStatement.setInt(5, user.getStatus().getId());
-		preparedStatement.setInt(6, user.getRole().getId());
-	}
-
 	@Override
 	public void updateUser(int userId, User user) throws DataRequestException {
 		String query = Resourcer.getString("requests.sql.update.user");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-			setUserParametresOnPreparedStatement(user, preparedStatement);
-			preparedStatement.setInt(7, userId);
+			PreparedStatementParametresSetter.set(preparedStatement, user.getId(), user.getLogin(), user.getPassword(),
+					user.getFullName(), user.getStatus().getId(), user.getRole().getId(), userId);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			throw new DataRequestException(
@@ -132,19 +123,12 @@ public class OracleUserDao implements UserDao {
 	public void createShip(int userId, Ship ship) throws DataRequestException {
 		String query = Resourcer.getString("requests.sql.create.ship");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-			setShipParametresOnPreparedStatement(userId, ship, preparedStatement);
+			PreparedStatementParametresSetter.set(preparedStatement, ship.getId(), userId, ship.getTitle(),
+					ship.getCapacity());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			throw new DataRequestException(
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
-	}
-
-	private void setShipParametresOnPreparedStatement(int userId, Ship ship, PreparedStatement preparedStatement)
-			throws SQLException {
-		preparedStatement.setInt(1, ship.getId());
-		preparedStatement.setInt(2, userId);
-		preparedStatement.setString(3, ship.getTitle());
-		preparedStatement.setInt(4, ship.getCapacity());
 	}
 }

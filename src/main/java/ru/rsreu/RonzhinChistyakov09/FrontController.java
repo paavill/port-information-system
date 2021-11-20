@@ -43,11 +43,20 @@ public class FrontController extends HttpServlet {
 		try {
 			DaoFactory factory = DaoFactory.getInstance(DBType.ORACLE);
 			UserDao userDao = factory.getUserDao();
-			for(User user: userDao.getAllUsers()) {
-				System.out.println(user.toString());
+			
+			User user = new User(300, "update300", "pas", null, new UserStatus(1, " "), new UserRole(1, " "));
+			userDao.updateUser(300, user);
+			for(User i: userDao.getAllUsers()) {
+				System.out.println(i.toString());
 			}
-			System.out.println(userDao.getUserShip(1).toString());
+			Ship ship = new Ship(11, "Ships", 300);
+			userDao.createShip(4, ship);
+			System.out.println(userDao.getUserShip(300).toString());
 			PierDao pierDao = factory.getPierDao();
+			Pier pier3 = new Pier(300, 1000);
+			pierDao.createPier(pier3);
+			Pier pier4 = new Pier(1, 0);
+			pierDao.updatePier(1, pier4);
 			for(Pier pier: pierDao.getAllPiers()) {
 				System.out.println(pier.toString());
 			}

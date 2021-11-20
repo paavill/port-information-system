@@ -67,7 +67,7 @@ public class OraclePierDao implements PierDao {
 	public void createPier(Pier pier) throws DataRequestException {
 		String query = Resourcer.getString("requests.sql.create.pier");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-			setPierParametresOnPreparedStatement(pier, preparedStatement);
+			PreparedStatementParametresSetter.set(preparedStatement, pier.getId(), pier.getCapacity());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			throw new DataRequestException(
@@ -75,18 +75,11 @@ public class OraclePierDao implements PierDao {
 		}
 	}
 
-	private void setPierParametresOnPreparedStatement(Pier pier, PreparedStatement preparedStatement)
-			throws SQLException {
-		preparedStatement.setInt(1, pier.getId());
-		preparedStatement.setInt(2, pier.getCapacity());
-	}
-
 	@Override
 	public void updatePier(int pierId, Pier pier) throws DataRequestException {
 		String query = Resourcer.getString("requests.sql.update.pier");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-			setPierParametresOnPreparedStatement(pier, preparedStatement);
-			preparedStatement.setInt(3, pierId);
+			PreparedStatementParametresSetter.set(preparedStatement, pier.getId(), pier.getCapacity(), pierId);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			throw new DataRequestException(

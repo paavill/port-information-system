@@ -41,7 +41,6 @@ public class OracleStatementDao implements StatementDao {
 	@Override
 	public void createStatement(Statement statement) throws DataRequestException {
 		// TODO Auto-generated method stub
-		
 	}
 
 }
