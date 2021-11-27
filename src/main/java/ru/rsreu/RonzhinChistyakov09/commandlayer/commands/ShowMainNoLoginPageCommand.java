@@ -26,35 +26,20 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 	@Override
 	public ICommandResult execute(HttpServletRequest request) {
 		String page = null;
-		request.setAttribute("titleText", Resourcer.getString("jsp.main.noLogin.titleText"));
-		request.setAttribute("logoText", Resourcer.getString("jsp.main.noLogin.logoText"));
-		request.setAttribute("authorizationText", Resourcer.getString("jsp.main.noLogin.authorizationText"));
-		request.setAttribute("aboutSystemText", Resourcer.getString("jsp.main.noLogin.aboutSystemText"));
 		Port port = null;
 		Collection<Pier> piersData = new ArrayList<Pier>();
-//		try {
-//			DaoFactory factory = DaoFactory.getInstance(DBType.ORACLE);
-//			PierDao pierDao = factory.getPierDao();
-//			int piersCount = pierDao.getPiersCount();
-//			int freePiersCount = pierDao.getFreePiersCount();
-//			port = new Port("PortName", piersCount, freePiersCount, pilotsCount, freePilotsCount);
-//			piersData = pierDao.getAllPiers();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		request.setAttribute("aboutPortInformationText",
-				Resourcer.getString("jsp.main.noLogin.aboutPortInformationText"));
+		try {
+			DaoFactory factory = DaoFactory.getInstance(DBType.ORACLE);
+			PierDao pierDao = factory.getPierDao();
+			int piersCount = pierDao.getPiersCount();
+			int freePiersCount = pierDao.getFreePiersCount();
+			port = new Port("PortName", piersCount, freePiersCount);
+			piersData = pierDao.getAllPiers();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		request.setAttribute("portData", port);
-		request.setAttribute("piarCountText", Resourcer.getString("jsp.main.noLogin.piarCountText"));
-		request.setAttribute("freePiarCountText", Resourcer.getString("jsp.main.noLogin.freePiarCountText"));
-		request.setAttribute("pilotCountText", Resourcer.getString("jsp.main.noLogin.pilotCountText"));
-		request.setAttribute("freePilotCountText", Resourcer.getString("jsp.main.noLogin.freePilotCountText"));
-		request.setAttribute("aboutPiersInformationText",
-				Resourcer.getString("jsp.main.noLogin.aboutPiersInformationText"));
 		request.setAttribute("piersData", piersData);
-		request.setAttribute("pierIdText", Resourcer.getString("jsp.main.noLogin.pierIdText"));
-		request.setAttribute("pierStatusText", Resourcer.getString("jsp.main.noLogin.pierStatusText"));
-		request.setAttribute("pierCapacityText", Resourcer.getString("jsp.main.noLogin.pierCapacityText"));
 
 		page = Resourcer.getString("jsp.main.noLogin");
 		return new CommandResultResponseForward(page);
