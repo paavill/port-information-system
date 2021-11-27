@@ -31,9 +31,9 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 		try {
 			DaoFactory factory = DaoFactory.getInstance(DBType.ORACLE);
 			PierDao pierDao = factory.getPierDao();
-			int piersCount = pierDao.getPiersCount();
+			//int piersCount = pierDao.getPiersCount();
 			int freePiersCount = pierDao.getFreePiersCount();
-			port = new Port("PortName", piersCount, freePiersCount);
+			port = new Port("PortName", 0, freePiersCount);
 			piersData = pierDao.getAllPiers();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -18,6 +18,13 @@ public class LoginCommand implements ICommand {
 	@Override
 	public ICommandResult execute(HttpServletRequest request) {
 		boolean loginLogicResult = false;
+		
+		String login = request.getParameter("login");
+		String password = request.getParameter("password");
+		
+		System.out.println(login);
+		System.out.println(password);
+		
 		ICommandResult result = null;
 		if (loginLogicResult) {
 			// здесь SHOW_MAIN_NO_LOGIN_PAGE пока что, НО в зависимости от того, что

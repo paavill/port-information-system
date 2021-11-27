@@ -41,7 +41,7 @@
                     </div>
                 </div> 
             </section>
-            <section id="Pierses" class="container mainView">
+            <section id="Piers" class="container mainView">
                 <c:forEach var="pierData" items="${piersData}">
                     <div class="info">
                         <h3>Piers #${pierData.id}</h3>

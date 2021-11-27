@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<head lang="US">
+    <meta charset="UTF-8">
+    <title>Port</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/table.css">
+    <link rel="stylesheet" href="/css/scrollbars.css">
+    <link rel="stylesheet" href="/css/tableHead.css">
+    <link rel="stylesheet" href="/css/buttons.css">
+    <link rel="stylesheet" href="/css/adminMainPage.css">
+    <script src="/js/main.js"></script>
+</head>
+<body onload="setFirstActive()">
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">Port</a>
+            <nav>
+                <ul>
+                    <li><a href="FrontController?command=SHOW_LOGIN_PAGE">Authorization</a></li>
+                    <li><a href="">About system</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+        <div class="main">
+            <div class="tabs container">
+                <button class="tablinks" onclick="openTab(event, 'Users')">Users</button>
+                <button class="tablinks" onclick="openTab(event, 'Piers')">Piers</button>
+            </div>
+            <section id="Users" class="container mainView"> 
+                <div class="buttons">
+                    <a href="FrontController?command=SHOW_CREATE_USER_PAGE">Создать</a>
+                </div>
+                <c:forEach var="userData" items="${usersData}">
+                    <div class="info">
+                        <h3>User #${userData.id}</h3>
+                        <div>
+                            <h4>Status:</h4>
+                            <var>${userData.status.title}</var>
+                        </div>
+                        <div>
+                            <h4>Role:</h4>
+                            <var>${userData.role.title}</var>
+                        </div>
+                        <div>
+                            <h4>Login:</h4>
+                            <var>${userData.login}</var>
+                        </div>
+                        <div>
+                            <h4>Password:</h4>
+                            <var>${userData.password}</var>
+                        </div>
+                        <div>
+                            <h4>Full name:</h4>
+                            <var>${userData.fullName}</var>
+                        </div>
+                        <form action="FrontController" method="post">
+                            <input name="command" type="hidden" value="DELETE_USER">
+                            <section class="buttons">
+                                <input type="submit" value="Delete">
+                            </section>
+                        </form>
+                    </div> 
+                </c:forEach>
+            </section>
+            <section id="Piers" class="container mainView">
+                <c:forEach var="pierData" items="${piersData}">
+                    <div class="info">
+                        <h3>Piers #${pierData.id}</h3>
+                        <div>
+                            <h4>Pier status:</h4>
+                            <var>${pierData.status}</var>
+                        </div>
+                        <div>
+                            <h4>Pier capacity:</h4>
+                            <var>${pierData.capacity}</var>
+                        </div>
+                    </div> 
+                </c:forEach>
+            </section>     
+        </div>
+    <footer></footer>
+</body>

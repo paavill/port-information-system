@@ -1,0 +1,14 @@
+.buttons{
+    justify-content: left;
+    padding-bottom: 0;
+    border-radius: 10px;
+}
+
+.info section *{
+    background-color: #cecece;
+    color: #737373;
+}
+
+.info section *:hover{
+    background-color: #cecece;
+}

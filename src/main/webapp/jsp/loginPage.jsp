@@ -7,33 +7,37 @@
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/authorization.css">
-    <script src="js/main.js"></script>
+    <link rel="stylesheet" href="css/buttons.css">
+    <script src="/js/main.js"></script>
 </head>
 <body>
     <header>
         <div class="container">
-            <a href="index.html" class="logo">${logoText}</a>
+            <a href="index.html" class="logo">Port</a>
         </div>
     </header>
 
     <div class="main login">
         <div class="mainView">
-            <h3>${authorizationText}</h3>
-            <div>
-                <div class="enter">
-                    <h4>${loginText}</h4>
-                    <input type="text" placeholder="${placeholderLoginText}">
-                </div>
-                <div class="enter">
-                    <h4>${passwordText}</h4>
-                    <input type="password" placeholder="${placeholderPasswordText}">
-                </div>
-            </div>
-            <div class="buttons">
-                <a href="FrontController?command=LOGIN">${enterButtonText}</a>
-                <a href="FrontController?command=SHOW_MAIN_NO_LOGIN_PAGE">${cancelButtonText}</a>
-            </div>
-                <h5>${errorText}</h5>
+            <h3>Authorization</h3>
+            <form action="FrontController" method="post">
+            	<input name="command" value="LOGIN" type="hidden">
+	            <div>
+	                <div class="enter">
+	                    <h4>Login:</h4>
+	                    <input name="login" type="text" placeholder="Enter login">
+	                </div>
+	                <div class="enter">
+	                    <h4>Password:</h4>
+	                    <input name="password" type="password" placeholder="Enter password">
+	                </div>
+	            </div>
+	            <div class="buttons">
+	                <input type="submit" value="Enter">
+	                <a href="FrontController?command=SHOW_MAIN_NO_LOGIN_PAGE">Cancel</a>
+	            </div>
+	                <h5>${errorText}</h5>
+	         </form>    
         </div>
     </div>
 
