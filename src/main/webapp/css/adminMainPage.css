@@ -4,11 +4,16 @@
     border-radius: 10px;
 }
 
-.info section *{
-    background-color: #cecece;
-    color: #737373;
+.buttons form .button{
+    margin-left: 0;
+    background-color: rgb(190, 190, 190);
+    color: rgb(97, 97, 97);
 }
 
-.info section *:hover{
-    background-color: #cecece;
+.buttons form .button:hover{
+    background-color: rgb(211, 211, 211);
+}
+
+.buttons form{
+    margin: 0 0 0 0;
 }

@@ -40,34 +40,6 @@
     width: 95%;
 }
 
-.enter{
-    display: flex;
-    padding-top: 4%;
-    padding-bottom: 4%;
-    justify-content: space-between;
-
-    color: #643e64;
-}
-
-.enter input{
-    transform: scale(1);
-    transition: all 0.2s ease-out;
-
-    padding-top: 2%;
-    padding-bottom: 2%;
-    padding-left: 1%;
-
-    border-radius: 5px;
-    border-style: none;
-
-    outline-color: #838383;/*border when enter*/
-    box-shadow: 0 2px 3px rgba(51, 51, 82, 0.4);
-}
-
-.enter input:focus{
-    transform: scale(1.02);
-}
-
 .enter h4{
     padding-top: 2%;
     padding-bottom: 2%;

@@ -36,5 +36,9 @@
 }
 
 .tabs button.active:hover {
-    background-color: #d8d8d8;
+    transform: scale(1.05);
+}
+
+.tabs :first-child{
+    margin-left: 5px;
 }

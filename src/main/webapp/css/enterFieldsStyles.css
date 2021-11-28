@@ -1,0 +1,45 @@
+.enters {
+    display: flex;
+    flex-flow: row;
+    height: 60%;
+    justify-content: space-around;
+}
+
+.entersTitles{
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+
+.entersFields{
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+
+.title{
+    height: 20px;
+}
+
+.enter{
+    height: 20px;
+    transform: scale(1);
+    transition: all 0.2s ease-out;
+
+    padding-left: 2%;
+
+    border-radius: 5px;
+    border-style: none;
+
+    outline-color: #838383;/*border when enter*/
+    box-shadow: 0 2px 3px rgba(51, 51, 82, 0.4);
+}
+
+.enter:focus{
+    transform: scale(1.02);
+}
+
+.enter::selection{
+    background-color: #83838383;
+}
+

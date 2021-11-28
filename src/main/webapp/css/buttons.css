@@ -6,13 +6,14 @@
     padding-bottom: 2%;
 }
 
-.buttons *{
+.buttons .button{
     display: flex;
     justify-content: center;
     text-decoration: none;
     align-items: center;
     height: 33px;
     width: 75px;
+    margin: 0px 10px 0px 10px;
 
 	border-style: none;
     background-color: #737373;
@@ -22,7 +23,7 @@
     transition-duration: 0.1s;
 }
 
-.buttons *:hover{
+.buttons .button:hover{
     transform: scale(1.02);
     background-color: #838383;
     box-shadow: 0 2px 3px rgba(51, 51, 82, 0.7);

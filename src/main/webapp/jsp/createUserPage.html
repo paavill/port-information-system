@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<head lang="US">
+    <meta charset="UTF-8">
+    <title>Port</title>
+    <!--pages are controled main classes-->
+    <link rel="stylesheet" href="/css/main.css">
+    <!--head of sight styles-->
+    <link rel="stylesheet" href="/css/header.css">
+    <!--control elements styles-->
+    <link rel="stylesheet" href="/css/scrollbars.css">
+    <link rel="stylesheet" href="/css/buttons.css">
+    <link rel="stylesheet" href="/css/enterFieldsStyles.css">
+
+    <link rel="stylesheet" href="/css/createUserPage.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">Port</a>
+            <nav>
+                <ul>
+                    <li><a>Your role: admin</a></li>
+                    <li><a>Your user id: ${user.id}</a></li>
+                    <li><a href="">About system</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+        <div class="main">
+            <section id="Users" class="container mainView"> 
+                
+                <div class="info">
+                    <h3>Creating user #${user.id}</h3>
+                    <div class="enters">
+                        <div class="entersTitles">
+                            <h4>Role:</h4>
+                            <h4>Login:</h4>
+                            <h4>Password:</h4>
+                            <h4>Full name:</h4>
+                        </div>
+                        <form id="userData" class="entersFields" action="post">
+                            <input type="hidden" value="CREATE_USER">
+                            <select class="enter" name="role">
+                                <c:forEach var="role" items="${userRoles}"></c:forEach>
+                                    <option>${role.title}</option>
+                                    <option>${role.title}</option>
+                                </c:forEach>
+                            </select>
+                            <input class="enter" type="text">  
+                            <input class="enter" type="text">  
+                            <input class="enter" type="text">  
+                        </form>
+                    </div>
+                    <section class="buttons">
+                        <input class="button" type="submit" form="userData" value="Create">
+                        <a class="button" href="">Cancel</a>
+                    </section>
+                </div> 
+            
+            </section>
+        </div>
+    <footer></footer>
+</body>

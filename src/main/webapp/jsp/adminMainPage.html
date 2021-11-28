@@ -2,11 +2,15 @@
 <head lang="US">
     <meta charset="UTF-8">
     <title>Port</title>
-    <link rel="stylesheet" href="/css/header.css">
+    <!--pages are controled main classes-->
     <link rel="stylesheet" href="/css/main.css">
+    <!--head of sight styles-->
+    <link rel="stylesheet" href="/css/header.css">
+    <!--data table styles-->
     <link rel="stylesheet" href="/css/table.css">
-    <link rel="stylesheet" href="/css/scrollbars.css">
     <link rel="stylesheet" href="/css/tableHead.css">
+    <!--control elements styles-->
+    <link rel="stylesheet" href="/css/scrollbars.css">
     <link rel="stylesheet" href="/css/buttons.css">
     <link rel="stylesheet" href="/css/adminMainPage.css">
     <script src="/js/main.js"></script>
@@ -17,7 +21,8 @@
             <a href="index.html" class="logo">Port</a>
             <nav>
                 <ul>
-                    <li><a href="FrontController?command=SHOW_LOGIN_PAGE">Authorization</a></li>
+                    <li><a>Your role: admin</a></li>
+                    <li><a>Your user id: ${user.id}</a></li>
                     <li><a href="">About system</a></li>
                 </ul>
             </nav>
@@ -30,7 +35,7 @@
             </div>
             <section id="Users" class="container mainView"> 
                 <div class="buttons">
-                    <a href="FrontController?command=SHOW_CREATE_USER_PAGE">Создать</a>
+                    <a class="button" href="FrontController?command=SHOW_CREATE_USER_PAGE">Create</a>
                 </div>
                 <c:forEach var="userData" items="${usersData}">
                     <div class="info">
@@ -55,17 +60,26 @@
                             <h4>Full name:</h4>
                             <var>${userData.fullName}</var>
                         </div>
-                        <form action="FrontController" method="post">
-                            <input name="command" type="hidden" value="DELETE_USER">
-                            <section class="buttons">
-                                <input type="submit" value="Delete">
-                            </section>
-                        </form>
+                        <section class="buttons">
+                            <form action="FrontController" method="post">
+                                <input name="command" type="hidden" value="DELETE_USER">
+                                <input name="userIdToDelete" type="hidden" value="${userData.id}">
+                                <input class="button" type="submit" value="Delete">
+                            </form>
+                            <form action="FrontController" method="post">
+                                <input name="command" type="hidden" value="EDIT_USER">
+                                <input name="userIdToEdit" type="hidden" value="${userData.id}">
+                                <input class="button" type="submit" value="Edit">
+                            </form>
+                        </section>
                     </div> 
                 </c:forEach>
             </section>
             <section id="Piers" class="container mainView">
                 <c:forEach var="pierData" items="${piersData}">
+                    <div class="buttons">
+                        <a href="FrontController?command=SHOW_CREATE_PIER_PAGE">Create</a>
+                    </div>
                     <div class="info">
                         <h3>Piers #${pierData.id}</h3>
                         <div>
@@ -76,6 +90,13 @@
                             <h4>Pier capacity:</h4>
                             <var>${pierData.capacity}</var>
                         </div>
+                        <section class="buttons">
+                            <form action="FrontController" method="post">
+                                <input name="command" type="hidden" value="DELETE_PIER">
+                                <input name="pierIdToDelete" type="hidden" value="${pierData.id}">
+                                <input type="submit" value="Delete">
+                            </form>
+                        </section>
                     </div> 
                 </c:forEach>
             </section>     
