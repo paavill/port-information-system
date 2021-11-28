@@ -10,6 +10,7 @@
     
     <link rel="stylesheet" href="css/buttons.css">
     <link rel="stylesheet" href="css/enterFieldsStyles.css">
+    <link rel="stylesheet" href="css/scrollbars.css">
     <!--if something broke put next style before buttons-->
     <link rel="stylesheet" href="css/authorization.css">
     <script src="/js/main.js"></script>
@@ -26,13 +27,13 @@
             <h3>Authorization</h3>
             <form action="FrontController" method="post">
             	<input name="command" value="LOGIN" type="hidden">
-	            <div>
-	                <div>
-	                    <h4>Login:</h4>
-	                    <input class="enter" name="login" type="text" placeholder="Enter login">
+	            <div class="enters">
+	                <div class="entersTitles">
+	                    <h4 class="title">Login:</h4>
+	                    <h4 class="title">Password:</h4>
 	                </div>
-	                <div>
-	                    <h4>Password:</h4>
+	                <div class="entersFields">
+	                    <input class="enter" name="login" type="text" placeholder="Enter login">
 	                    <input class="enter" name="password" type="password" placeholder="Enter password">
 	                </div>
 	            </div>
