@@ -20,6 +20,7 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.data.pier.Pier;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.MainPageLogic;
 
 public class ShowMainNoLoginPageCommand implements ICommand {
 
@@ -31,13 +32,14 @@ public class ShowMainNoLoginPageCommand implements ICommand {
 		try {
 			DaoFactory factory = DaoFactory.getInstance(DBType.ORACLE);
 			PierDao pierDao = factory.getPierDao();
-			//int piersCount = pierDao.getPiersCount();
-			int freePiersCount = pierDao.getFreePiersCount();
-			port = new Port("PortName", 0, freePiersCount);
-			piersData = pierDao.getAllPiers();
+			// Не знаю как дао в логику передавать, пока так оставлю
+			MainPageLogic logic = new MainPageLogic(pierDao);
+			port = logic.getPort();
+			piersData = logic.getPiers();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		request.setAttribute("portData", port);
 		request.setAttribute("piersData", piersData);
 

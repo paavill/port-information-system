@@ -11,35 +11,34 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DBType;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.LoginLogic;
 
 public class LoginCommand implements ICommand {
 
 	@Override
 	public ICommandResult execute(HttpServletRequest request) {
-		boolean loginLogicResult = false;
-		
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 		
 		System.out.println(login);
 		System.out.println(password);
 		
-		ICommandResult result = null;
-		if (loginLogicResult) {
-			// здесь SHOW_MAIN_NO_LOGIN_PAGE пока что, НО в зависимости от того, что
-			// произойдет в логике
-			// будет браться другая команда (команда показать другую страницу), то есть
-			// будет редирект после логина на страницу
-			// пользователя в зависимости от его роли
-			// также тут будет логика изменения статуса в бд
-			System.out.println("OK!");
-			result = new CommandResultResponseSendRedirect("FrontController?command=SHOW_MAIN_NO_LOGIN_PAGE");
-		} else {
+		try {
+			DaoFactory factory = DaoFactory.getInstance(DBType.ORACLE);
+			UserDao userDao = factory.getUserDao();
+			LoginLogic logic = new LoginLogic(userDao);
+			User user = logic.login(login, password);
+			// Не знаю нужен ли тут юзер, если пароль не верный или юзера такого нет вылетит екзепшн
+			System.out.println(user.toString());
+			
+			return new CommandResultResponseSendRedirect("FrontController?command=SHOW_MAIN_NO_LOGIN_PAGE");
+		} catch(Exception e) {
+			System.out.println(e.toString());
 			String page = Resourcer.getString("jsp.login");
 			request.setAttribute("errorMessage", "fail to login");
-			result = new CommandResultResponseForward(page);
+			return new CommandResultResponseForward(page);
 		}
-		return result;
 	}
 }

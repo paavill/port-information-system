@@ -40,34 +40,6 @@ public class FrontController extends HttpServlet {
 			throws ServletException, IOException {
 		this.processRequest(request, response);
 		System.out.println("get");
-		try {
-			DaoFactory factory = DaoFactory.getInstance(DBType.ORACLE);
-			UserDao userDao = factory.getUserDao();
-			
-			User user = new User(300, "update300", "pas", null, new UserStatus(1, " "), new UserRole(1, " "));
-			userDao.updateUser(300, user);
-			for(User i: userDao.getAllUsers()) {
-				System.out.println(i.toString());
-			}
-			Ship ship = new Ship(11, "Ships", 300);
-			userDao.createShip(4, ship);
-			System.out.println(userDao.getUserShip(300).toString());
-			PierDao pierDao = factory.getPierDao();
-			Pier pier3 = new Pier(300, 1000);
-			pierDao.createPier(pier3);
-			Pier pier4 = new Pier(1, 0);
-			pierDao.updatePier(1, pier4);
-			for(Pier pier: pierDao.getAllPiers()) {
-				System.out.println(pier.toString());
-			}
-			StatementDao statementDao = factory.getStatementDao();
-			for(Statement statement: statementDao.getAllStatements()) {
-				System.out.println(statement.toString());
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
-		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

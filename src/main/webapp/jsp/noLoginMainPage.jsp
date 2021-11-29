@@ -45,10 +45,10 @@
                 <c:forEach var="pierData" items="${piersData}">
                     <div class="info">
                         <h3>Piers #${pierData.id}</h3>
-                        <div>
+                        <%-- <div>
                             <h4>Pier status:</h4>
                             <var>${pierData.status}</var>
-                        </div>
+                        </div> --%>
                         <div>
                             <h4>Pier capacity:</h4>
                             <var>${pierData.capacity}</var>

@@ -59,7 +59,7 @@ public class OraclePierDao implements PierDao {
 
 	@Override
 	public int getFreePiersCount() throws DataRequestException {
-		int freePiersCount = 0;
+		int freePiersCount = -2;
 		return freePiersCount;
 	}
 
