@@ -17,10 +17,14 @@
     <header>
         <div class="container">
             <a href="index.html" class="logo">Port</a>
+            <form id="logOutForm" action="/FrontController" method="post">
+                <input type="hidden" name="command" value="LOGOUT" />
+            </form>
             <nav>
                 <ul>
                     <li><a>Your role: admin</a></li>
                     <li><a>Your user id: ${user.id}</a></li>
+                    <li><input type="submit" form="logOutForm" value="Logout"></li>
                     <li><a href="">About system</a></li>
                 </ul>
             </nav>
@@ -38,8 +42,8 @@
                             <h4 class="title">Password:</h4>
                             <h4 class="title">Full name:</h4>
                         </div>
-                        <form id="userData" class="entersFields" action="post">
-                            <input type="hidden" value="CREATE_USER">
+                        <form id="userData" class="entersFields" action="/FrontController" method="post">
+                            <input type="hidden" name="command" value="CREATE_USER">
                             <select class="enter" name="role">
                                 <c:forEach var="role" items="${userRoles}"></c:forEach>
                                     <option>${role.title}</option>

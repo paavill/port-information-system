@@ -35,6 +35,20 @@ nav ul li {
   margin-right: 25px;
 }
 
+nav ul li input{
+  background-color: inherit;
+  border-style: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  font-size: 16px;
+  color: #7e4f7e;
+}
+
+nav ul li input:hover{
+  color: #551155;
+  transition: color .4s ease;
+}
+
 nav ul li:last-child {
   margin-right: 0px;
 }
