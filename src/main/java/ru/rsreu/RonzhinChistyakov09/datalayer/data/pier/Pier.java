@@ -3,12 +3,23 @@ package ru.rsreu.RonzhinChistyakov09.datalayer.data.pier;
 public class Pier {
 	private int id;
 	private int capacity;
-//	private int residualÑapacity; 
-
-	public Pier(int id, int capacity) {
+	private int residualÑapacity; 
+	private String status;
+	
+	public Pier(int id, int capacity, int residualCapacity, String status) {
 		super();
 		this.id = id;
 		this.capacity = capacity;
+		this.residualÑapacity = residualCapacity;
+		this.status = status;
+	}
+	
+	public int getResidualÑapacity() {
+		return residualÑapacity;
+	}
+
+	public String getStatus() {
+		return status;
 	}
 	
 	public int getId() {
