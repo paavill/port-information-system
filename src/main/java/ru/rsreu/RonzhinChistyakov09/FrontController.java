@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Locale;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +35,16 @@ public class FrontController extends HttpServlet {
 
 	public void init() throws ServletException {
 		Locale.setDefault(Locale.US);
+		try {
+			DaoFactory factory = DaoFactory.getInstance(DBType.ORACLE);
+			ServletContext context = this.getServletContext();
+			context.setAttribute("userDao", factory.getUserDao());
+			context.setAttribute("pierDao", factory.getPierDao());
+			System.out.println("Dao in context!");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

@@ -8,37 +8,42 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseForward;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedirect;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommandResult;
-import ru.rsreu.RonzhinChistyakov09.datalayer.DBType;
-import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
-import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
+import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
+import ru.rsreu.RonzhinChistyakov09.exceptions.UserNotFoundException;
+import ru.rsreu.RonzhinChistyakov09.exceptions.WrongPasswordException;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.LoginLogic;
 
 public class LoginCommand implements ICommand {
 
 	@Override
 	public ICommandResult execute(HttpServletRequest request) {
-		String login = request.getParameter("login");
-		String password = request.getParameter("password");
-		
-		System.out.println(login);
-		System.out.println(password);
-		
+
 		try {
-			DaoFactory factory = DaoFactory.getInstance(DBType.ORACLE);
-			UserDao userDao = factory.getUserDao();
-			LoginLogic logic = new LoginLogic(userDao);
-			User user = logic.login(login, password);
-			// Не знаю нужен ли тут юзер, если пароль не верный или юзера такого нет вылетит екзепшн
+			UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
+			LoginLogic loginLogic = new LoginLogic(userDao);
+			String login = request.getParameter("login");
+			String password = request.getParameter("password");
+			User user = loginLogic.login(login, password);
+
 			System.out.println(user.toString());
-			
 			return new CommandResultResponseSendRedirect("FrontController?command=SHOW_MAIN_NO_LOGIN_PAGE");
-		} catch(Exception e) {
-			System.out.println(e.toString());
+		} catch (DataRequestException | UserNotFoundException | WrongPasswordException e) {
+			String message;
+			if (e instanceof UserNotFoundException) {
+				message = "User is not found";
+			} else {
+				if (e instanceof WrongPasswordException) {
+					message = "Password is wrong";
+				} else {
+					message = "Unknown error";
+				}
+			}
 			String page = Resourcer.getString("jsp.login");
-			request.setAttribute("errorMessage", "fail to login");
+			request.setAttribute("errorMessage", message);
 			return new CommandResultResponseForward(page);
 		}
+
 	}
 }

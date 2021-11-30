@@ -9,11 +9,11 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.data.pier.Pier;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
-public class MainPageLogic {
+public class MainNoLoginPageLogic {
 
 	private PierDao pierDao;
 
-	public MainPageLogic(PierDao pierDao) {
+	public MainNoLoginPageLogic(PierDao pierDao) {
 		this.pierDao = pierDao;
 	}
 

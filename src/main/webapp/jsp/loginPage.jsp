@@ -41,7 +41,7 @@
 	                <input class="button" type="submit" value="Enter">
 	                <a class ="button" href="FrontController?command=SHOW_MAIN_NO_LOGIN_PAGE">Cancel</a>
 	            </div>
-	                <h5>${errorText}</h5>
+	                <h5>${errorMessage}</h5>
 	         </form>    
         </div>
     </div>
