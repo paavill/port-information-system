@@ -42,11 +42,11 @@ public class OraclePierDao implements PierDao {
 
 	@Override
 	public int getPiersCount() throws DataRequestException {
-		int piersCount = 0;
+		int piersCount = -1;
 		String query = Resourcer.getString("requests.sql.get.piers.count");
 		try (Statement statement = this.connection.createStatement()) {
 			try (ResultSet resultSet = statement.executeQuery(query)) {
-				while (resultSet.next()) {
+				if (resultSet.next()) {
 					piersCount = resultSet.getInt(1);
 				}
 			}
@@ -59,7 +59,18 @@ public class OraclePierDao implements PierDao {
 
 	@Override
 	public int getFreePiersCount() throws DataRequestException {
-		int freePiersCount = -2;
+		int freePiersCount = -1;
+		String query = Resourcer.getString("requests.sql.get.piers.free.count");
+		try (Statement statement = this.connection.createStatement()) {
+			try (ResultSet resultSet = statement.executeQuery(query)) {
+				if (resultSet.next()) {
+					freePiersCount = resultSet.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
 		return freePiersCount;
 	}
 
