@@ -32,9 +32,10 @@
     border-bottom-color: #643e642c;
 }
 
-.mainView h5{
+.mainView form h5{
     height: 12px;
     color: #643e64;
+    text-align: center;
 }
 
 .mainView form{

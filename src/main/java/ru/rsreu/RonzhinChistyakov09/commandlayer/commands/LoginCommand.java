@@ -33,12 +33,10 @@ public class LoginCommand implements ICommand {
 			String message;
 			if (e instanceof UserNotFoundException) {
 				message = "User is not found";
+			} else if (e instanceof WrongPasswordException) {
+				message = "Password is wrong";
 			} else {
-				if (e instanceof WrongPasswordException) {
-					message = "Password is wrong";
-				} else {
-					message = "Unknown error";
-				}
+				message = "Unknown error";
 			}
 			String page = Resourcer.getString("jsp.login");
 			request.setAttribute("errorMessage", message);
