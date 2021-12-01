@@ -1,19 +1,21 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <head lang="US">
     <meta charset="UTF-8">
     <title>Port</title>
     <!--pages are controled main classes-->
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="css/main.css">
     <!--head of sight styles-->
-    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="css/header.css">
     <!--data table styles-->
-    <link rel="stylesheet" href="/css/table.css">
-    <link rel="stylesheet" href="/css/tableHead.css">
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/tableHead.css">
     <!--control elements styles-->
-    <link rel="stylesheet" href="/css/scrollbars.css">
-    <link rel="stylesheet" href="/css/buttons.css">
-    <link rel="stylesheet" href="/css/adminMainPage.css">
-    <script src="/js/main.js"></script>
+    <link rel="stylesheet" href="css/scrollbars.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/adminMainPage.css">
+    <script src="js/main.js"></script>
 </head>
 <body onload="setFirstActive()">
     <header>
@@ -21,7 +23,7 @@
             <a href="index.html" class="logo">Port</a>
             <nav>
                 <ul>
-                    <li><a>Your role: admin</a></li>
+                    <li><a>Your role: administrator</a></li>
                     <li><a>Your user id: ${user.id}</a></li>
                     <li><a href="">About system</a></li>
                 </ul>

@@ -26,9 +26,9 @@ public class LoginCommand implements ICommand {
 			String login = request.getParameter("login");
 			String password = request.getParameter("password");
 			User user = loginLogic.login(login, password);
-
+			request.getSession().setAttribute("user", user);
 			System.out.println(user.toString());
-			return new CommandResultResponseSendRedirect("FrontController?command=SHOW_MAIN_NO_LOGIN_PAGE");
+			return new CommandResultResponseSendRedirect("FrontController?command=SHOW_MAIN_ADMIN_PAGE");
 		} catch (DataRequestException | UserNotFoundException | WrongPasswordException e) {
 			String message;
 			if (e instanceof UserNotFoundException) {
