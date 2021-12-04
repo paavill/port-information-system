@@ -14,6 +14,8 @@
     <!--control elements styles-->
     <link rel="stylesheet" href="/css/scrollbars.css">
     <link rel="stylesheet" href="/css/buttons.css">
+    <link rel="stylesheet" href="/css/enterFieldsStyles.css">
+
     <link rel="stylesheet" href="/css/captainMainPage.css">
     <script src="/js/main.js"></script>
 </head>
@@ -21,27 +23,54 @@
     <header>
         <div class="container">
             <a href="index.html" class="logo">Port</a>
+            <form id="logOutForm" action="/FrontController" method="post">
+                <input type="hidden" name="command" value="LOGOUT" />
+            </form>
             <nav>
                 <ul>
                     <li><a>Your role: captain</a></li>
                     <li><a>Your user id: ${user.id}</a></li>
+                    <li><input type="submit" form="logOutForm" value="Logout"></li>
                     <li><a href="">About system</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-        <div class="main">
-            <div>
-                skdlfn
+    <div class="main">
+        <div class="verticalContainer">
+            <div class="container statement">
+                <h3>Creating statement #${user.id}</h3>
+                <div class="enters">
+                    <div class="entersTitles">
+                        <h4 class="title">Role:</h4>
+                        <h4 class="title">Login:</h4>
+                        <h4 class="title">Password:</h4>
+                        <h4 class="title">Full name:</h4>
+                    </div>
+                    <form id="userData" class="entersFields" action="/FrontController" method="post">
+                        <input type="hidden" name="command" value="CREATE_USER">
+                        <select class="enter" name="role">
+                            <c:forEach var="role" items="${userRoles}"></c:forEach>
+                                <option>${role.title}</option>
+                                <option>${role.title}</option>
+                            </c:forEach>
+                        </select>
+                        <input class="enter" type="text">  
+                        <input class="enter" type="text">  
+                        <input class="enter" type="text">  
+                    </form>
+                </div>
+                <section class="buttons">
+                    <input class="button" type="submit" form="userData" value="Create">
+                </section>
             </div>
+        </div>
+        <div class="verticalContainer">
             <div class="tabs container">
                 <button class="tablinks" onclick="openTab(event, 'Old statements to enter')">Old statements to enter</button>
                 <button class="tablinks" onclick="openTab(event, 'Old statements to exit')">Old statements to exit</button>
             </div>
             <section id="Old statements to enter" class="container mainView"> 
-                <div class="buttons">
-                    <a class="button" href="FrontController?command=SHOW_CREATE_USER_PAGE">Create</a>
-                </div>
                 <c:forEach var="userData" items="${usersData}">
                     <div class="info">
                         <h3>User #${userData.id}</h3>
@@ -65,18 +94,6 @@
                             <h4>Full name:</h4>
                             <var>${userData.fullName}</var>
                         </div>
-                        <section class="buttons">
-                            <form action="FrontController" method="post">
-                                <input name="command" type="hidden" value="DELETE_USER">
-                                <input name="userIdToDelete" type="hidden" value="${userData.id}">
-                                <input class="button" type="submit" value="Delete">
-                            </form>
-                            <form action="FrontController" method="post">
-                                <input name="command" type="hidden" value="EDIT_USER">
-                                <input name="userIdToEdit" type="hidden" value="${userData.id}">
-                                <input class="button" type="submit" value="Edit">
-                            </form>
-                        </section>
                     </div> 
                 </c:forEach>
             </section>
@@ -104,7 +121,8 @@
                         </section>
                     </div> 
                 </c:forEach>
-            </section>     
-        </div>
+            </section> 
+        </div>   
+    </div>
     <footer></footer>
 </body>

@@ -7,6 +7,7 @@
     padding-right: 0;
     padding-top: 5px;
     background-color: #EBFBFF;
+    overflow-y:hidden;
 }
 
 /* Style the buttons that are used to open the tab content */
@@ -36,7 +37,7 @@
 }
 
 .tabs button.active:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 .tabs :first-child{
