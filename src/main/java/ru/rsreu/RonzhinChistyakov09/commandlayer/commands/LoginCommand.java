@@ -42,6 +42,5 @@ public class LoginCommand implements ICommand {
 			request.setAttribute("errorMessage", message);
 			return new CommandResultResponseForward(page);
 		}
-
 	}
 }

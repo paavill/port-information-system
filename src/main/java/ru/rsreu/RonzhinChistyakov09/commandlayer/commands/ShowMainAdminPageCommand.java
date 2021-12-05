@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseForward;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommandResult;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.pier.Pier;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.MainAdminPageLogic;
 
 public class ShowMainAdminPageCommand implements ICommand {
 
@@ -23,13 +25,16 @@ public class ShowMainAdminPageCommand implements ICommand {
 		PierDao pierDao = (PierDao) request.getServletContext().getAttribute("pierDao");
 		
 		try {
-			request.setAttribute("usersData", userDao.getAllUsers());
-			request.setAttribute("piersData", pierDao.getAllPiers());
+			MainAdminPageLogic logic = new MainAdminPageLogic(pierDao, userDao);
+			Collection<User> users = logic.getUsers();
+			Collection<Pier> piers = logic.getPiers();
+			request.setAttribute("usersData", users);
+			request.setAttribute("piersData", piers);
+			
 		} catch (DataRequestException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		String page = "/jsp/adminMainPage.jsp";
 		
 		return new CommandResultResponseForward(page);
