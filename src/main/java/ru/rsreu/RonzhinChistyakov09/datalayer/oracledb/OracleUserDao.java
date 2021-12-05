@@ -76,6 +76,23 @@ public class OracleUserDao implements UserDao {
 	}
 
 	@Override
+	public int getLastUserId() throws DataRequestException {
+		int lastUserId = 0;
+		String query = Resourcer.getString("requests.sql.get.users.lastId");
+		try (Statement statement = this.connection.createStatement()) {
+			try (ResultSet resultSet = statement.executeQuery(query)) {
+				if (resultSet.next()) {
+					lastUserId = resultSet.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+		return lastUserId;
+	}
+	
+	@Override
 	public void createUser(User user) throws DataRequestException {
 		String query = Resourcer.getString("requests.sql.create.user");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -94,6 +111,18 @@ public class OracleUserDao implements UserDao {
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 			PreparedStatementParametresSetter.set(preparedStatement, user.getId(), user.getLogin(), user.getPassword(),
 					user.getFullName(), user.getStatus().getId(), user.getRole().getId(), userId);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+	}
+	
+	@Override
+	public void deleteUser(int id) throws DataRequestException {
+		String query = Resourcer.getString("requests.sql.delete.user");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			PreparedStatementParametresSetter.set(preparedStatement, id);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			throw new DataRequestException(

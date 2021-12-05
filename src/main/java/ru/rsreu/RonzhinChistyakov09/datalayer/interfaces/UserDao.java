@@ -13,9 +13,13 @@ public interface UserDao {
 	
 	abstract int getUsersCount() throws DataRequestException;
 	
+	abstract int getLastUserId() throws DataRequestException;
+	
 	abstract void createUser(User user) throws DataRequestException;
 	
 	abstract void updateUser(int userId, User user) throws DataRequestException;
+	
+	abstract void deleteUser(int id) throws DataRequestException;
 	
 	abstract Ship getUserShip(int userId) throws DataRequestException;
 	

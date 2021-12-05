@@ -6,8 +6,12 @@ public class Pier {
 	private int residual—apacity; 
 	private String status;
 	
+	public Pier(int id, int capacity) {
+		this.id = id;
+		this.capacity = capacity;
+	}
+	
 	public Pier(int id, int capacity, int residualCapacity, String status) {
-		super();
 		this.id = id;
 		this.capacity = capacity;
 		this.residual—apacity = residualCapacity;

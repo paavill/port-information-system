@@ -73,6 +73,23 @@ public class OraclePierDao implements PierDao {
 		}
 		return freePiersCount;
 	}
+	
+	@Override
+	public int getLastPierId() throws DataRequestException {
+		int lastPierId = 0;
+		String query = Resourcer.getString("requests.sql.get.piers.lastId");
+		try (Statement statement = this.connection.createStatement()) {
+			try (ResultSet resultSet = statement.executeQuery(query)) {
+				if (resultSet.next()) {
+					return resultSet.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+		return lastPierId;
+	}
 
 	@Override
 	public void createPier(Pier pier) throws DataRequestException {
@@ -91,6 +108,18 @@ public class OraclePierDao implements PierDao {
 		String query = Resourcer.getString("requests.sql.update.pier");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 			PreparedStatementParametresSetter.set(preparedStatement, pier.getId(), pier.getCapacity(), pierId);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+	}
+	
+	@Override
+	public void deletePier(int id) throws DataRequestException {
+		String query = Resourcer.getString("requests.sql.delete.pier");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			PreparedStatementParametresSetter.set(preparedStatement, id);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			throw new DataRequestException(
