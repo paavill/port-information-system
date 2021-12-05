@@ -4,9 +4,11 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.CreatePierCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.CreateUserCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.DeletePierCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.DeleteUserCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.EditUserCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.LoginCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.ShowCreatePierPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.ShowCreateUserPageCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.ShowEditUserPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.ShowLoginPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.ShowMainAdminPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.ShowMainNoLoginPageCommand;
@@ -39,6 +41,11 @@ public enum CommandEnum {
 			this.command = new ShowCreateUserPageCommand();
 		}
 	},
+	SHOW_EDIT_USER_PAGE {
+		{
+			this.command = new ShowEditUserPageCommand();
+		}
+	},
 	CREATE_USER {
 		{
 			this.command = new CreateUserCommand();
@@ -62,6 +69,11 @@ public enum CommandEnum {
 	DELETE_PIER {
 		{
 			this.command = new DeletePierCommand();
+		}
+	},
+	EDIT_USER {
+		{
+			this.command = new EditUserCommand();
 		}
 	};
 

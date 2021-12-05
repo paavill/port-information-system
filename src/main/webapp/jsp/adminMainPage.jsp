@@ -21,10 +21,14 @@
     <header>
         <div class="container">
             <a href="index.html" class="logo">Port</a>
+            <form id="logOutForm" action="/FrontController" method="post">
+                <input type="hidden" name="command" value="LOGOUT">
+            </form>
             <nav>
                 <ul>
                     <li><a>Your role: administrator</a></li>
                     <li><a>Your user id: ${user.id}</a></li>
+                    <li><input type="submit" form="logOutForm" value="Logout"></li>
                     <li><a href="">About system</a></li>
                 </ul>
             </nav>
@@ -69,7 +73,7 @@
                                 <input class="button" type="submit" value="Delete">
                             </form>
                             <form action="FrontController" method="post">
-                                <input name="command" type="hidden" value="EDIT_USER">
+                                <input name="command" type="hidden" value="SHOW_EDIT_USER_PAGE">
                                 <input name="userIdToEdit" type="hidden" value="${userData.id}">
                                 <input class="button" type="submit" value="Edit">
                             </form>
