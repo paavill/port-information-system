@@ -12,7 +12,6 @@ import ru.rsreu.RonzhinChistyakov09.logiclayer.DeleteUserLogic;
 public class DeleteUserCommand implements ICommand {
 	@Override
 	public ICommandResult execute(HttpServletRequest request) {
-
 		try {
 			UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
 			DeleteUserLogic logic = new DeleteUserLogic(userDao);
