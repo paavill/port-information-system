@@ -31,12 +31,12 @@ public class ResultSetConverter {
 		return new User(id, login, password, fullName, status, role);
 	}
 	
-	private static UserStatus getUserStatus(ResultSet resultSet) throws SQLException {
+	public static UserStatus getUserStatus(ResultSet resultSet) throws SQLException {
 		return  new UserStatus(resultSet.getInt(Resourcer.getString("database.users.statusId")), 
 				resultSet.getString(Resourcer.getString("database.users.statusTitle")));
 	}
 	
-	private static UserRole getUserRole(ResultSet resultSet) throws SQLException {
+	public static UserRole getUserRole(ResultSet resultSet) throws SQLException {
 		return new UserRole(resultSet.getInt(Resourcer.getString("database.users.roleId")), 
 				resultSet.getString(Resourcer.getString("database.users.roleTitle")));
 	}	

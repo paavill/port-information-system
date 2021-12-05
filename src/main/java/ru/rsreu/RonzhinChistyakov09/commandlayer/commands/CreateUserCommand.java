@@ -19,22 +19,24 @@ public class CreateUserCommand implements ICommand {
 		try {
 			UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
 			CreateUserLogic logic = new CreateUserLogic(userDao);
-			String login = (String)request.getParameter("userLogin");
-			String password = (String)request.getParameter("userPassword");
-			String fullName = (String)request.getParameter("userFullName");
-			Collection<UserRole> roles = (Collection<UserRole>)request.getSession().getAttribute("userRoles");
-			String roleTitle = (String)request.getParameter("role");
-			UserRole userRole = null;
-			// В юзер роли интересует только id
-			if(roles != null) {
-				for(UserRole role: roles) {
-					if(role.getTitle().equals(roleTitle)) {
-						userRole = role;
-						break;
-					}
-				}
-			}
-			logic.createUser(login, password, fullName, userRole);
+			String login = (String) request.getParameter("userLogin");
+			String password = (String) request.getParameter("userPassword");
+			String fullName = (String) request.getParameter("userFullName");
+			String roleTitle = (String) request.getParameter("role");
+
+//			Collection<UserRole> roles = (Collection<UserRole>) request.getSession().getAttribute("userRoles");
+//			
+//			UserRole userRole = null;
+//			if (roles != null) {
+//				for (UserRole role : roles) {
+//					if (role.getTitle().equals(roleTitle)) {
+//						userRole = role;
+//						break;
+//					}
+//				}
+//			}
+
+			logic.createUser(login, password, fullName, roleTitle);
 		} catch (DataRequestException e) {
 			e.printStackTrace();
 		}
