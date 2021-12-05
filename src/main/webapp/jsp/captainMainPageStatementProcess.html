@@ -14,45 +14,56 @@
     <!--control elements styles-->
     <link rel="stylesheet" href="/css/scrollbars.css">
     <link rel="stylesheet" href="/css/buttons.css">
+    <link rel="stylesheet" href="/css/enterFieldsStyles.css">
 
-    <link rel="stylesheet" href="/css/captainMainPage.css">
-
+    <link rel="stylesheet" href="/css/captainMainPageStatementProcess.css">
     <script src="/js/main.js"></script>
 </head>
 <body onload="setFirstActive()">
     <header>
         <div class="container">
             <a href="index.html" class="logo">Port</a>
+            <form id="logOutForm" action="/FrontController" method="post">
+                <input type="hidden" name="command" value="LOGOUT" />
+            </form>
             <nav>
                 <ul>
                     <li><a>Your role: captain</a></li>
                     <li><a>Your user id: ${user.id}</a></li>
+                    <li><input type="submit" form="logOutForm" value="Logout"></li>
                     <li><a href="">About system</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-        <div class="main">
-            <form id="createStatement" action="FrontController" method="post">
-                <input type="hidden" name="command" value="CREATE_STATEMENT"/>
-                <input type="hidden" name="userId" value="${user.id}" />
-            </form>
-            <form id="unloadProduct" action="FrontController" method="post">
-                <input type="hidden" name="command" value="SHOW_UNLOAD_PAGE"/>
-                <input type="hidden" name="userId" value="${user.id}" />
-            </form>
-            <form id="loadProduct" action="FrontController" method="post">
-                <input type="hidden" name="command" value="SHOW_LOAD_PAGE"/>
-                <input type="hidden" name="userId" value="${user.id}" />
-            </form>
+    <div class="main">
+        <div class="verticalContainer">
+            <div class="container statement">
+                <h3>Statement in process</h3>
+                <div class="enters">
+                    <div class="entersTitles">
+                        <h4 class="title">Id:</h4>
+                        <h4 class="title">State:</h4>
+                        <h4 class="title">Type:</h4>    
+                    </div>
+                    <form id="statementData" class="entersFields" action="/FrontController" method="post">
+                        <input type="hidden" name="command" value="CANCEL_STATEMENT">
+                        <input type="hidden" name="statementId" value="${stetement.id}">
+                        <h4 class="title">${statement.id}</h4>
+                        <h4 class="title">${statement.status.title}</h4>
+                        <h4 class="title">${statement.type.title}</h4>
+                    </form>
+                </div>
+                <section class="buttons">
+                    <input class="button" type="submit" form="statementData" value="Cancel">
+                </section>
+                <h5>${statementErrorMessage}</h5>
+            </div>
+        </div>
+        <div class="verticalContainer">
             <div class="tabs container">
                 <button class="tablinks" onclick="openTab(event, 'Old statements to enter')">Old statements to enter</button>
                 <button class="tablinks" onclick="openTab(event, 'Old statements to exit')">Old statements to exit</button>
-                <div class="buttons">
-                    <input class="button" type="submit" value="${typeOfCreatingStatementText}" form="createStatement"/>
-                    <input class="button" type="${typeOfUnloadingButton}" value="Unload product" form="unloadProduct"/>
-                    <input class="button" type="${typeOfLoadingButton}" value="Load product" form="loadProduct"/>
-                </div>
             </div>
             <section id="Old statements to enter" class="container mainView"> 
                 <c:forEach var="statement" items="${enterStatements}">
@@ -99,7 +110,8 @@
                         </div>
                     </div> 
                 </c:forEach>
-            </section>     
-        </div>
+            </section> 
+        </div>   
+    </div>
     <footer></footer>
 </body>
