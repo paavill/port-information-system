@@ -9,6 +9,7 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserRoleDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
+import ru.rsreu.RonzhinChistyakov09.exceptions.LoginBusyException;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.EditUserLogic;
 
 public class EditUserCommand implements ActionCommand {
@@ -24,6 +25,9 @@ public class EditUserCommand implements ActionCommand {
 			logic.editUser(user);
 		} catch (DataRequestException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (LoginBusyException e) {
+			System.out.println("Login is busy");
 			e.printStackTrace();
 		}
 

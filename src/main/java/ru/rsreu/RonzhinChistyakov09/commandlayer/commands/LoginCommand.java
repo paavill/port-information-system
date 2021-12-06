@@ -19,7 +19,6 @@ public class LoginCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
-
 		try {
 			UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
 			LoginLogic loginLogic = new LoginLogic(userDao);

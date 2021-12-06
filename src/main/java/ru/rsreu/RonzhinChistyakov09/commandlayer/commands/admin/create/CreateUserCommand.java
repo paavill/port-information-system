@@ -9,6 +9,7 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserRoleDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
+import ru.rsreu.RonzhinChistyakov09.exceptions.LoginBusyException;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.CreateUserLogic;
 
 public class CreateUserCommand implements ActionCommand {
@@ -24,6 +25,9 @@ public class CreateUserCommand implements ActionCommand {
 			User user = userDto.getModel(request);
 			logic.createUser(user);
 		} catch (DataRequestException e) {
+			e.printStackTrace();
+		} catch (LoginBusyException e) {
+			System.out.println("Login is busy");
 			e.printStackTrace();
 		}
 		return new CommandResultResponseSendRedirect("FrontController?command=SHOW_MAIN_ADMIN_PAGE");

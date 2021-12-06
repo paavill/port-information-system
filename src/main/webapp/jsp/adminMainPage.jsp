@@ -28,7 +28,8 @@
                 <ul>
                     <li><a>Your role: administrator</a></li>
                     <li><a>Your user id: ${user.id}</a></li>
-                    <li><input type="submit" form="logOutForm" value="Logout"></li>
+                   <!--  <li><input type="submit" form="logOutForm" value="Logout"></li> -->
+                    <li><a href="FrontController?command=LOGOUT">Logout</a></li>
                     <li><a href="">About system</a></li>
                 </ul>
             </nav>
