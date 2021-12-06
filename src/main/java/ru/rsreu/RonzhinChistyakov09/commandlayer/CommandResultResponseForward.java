@@ -8,9 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommandResult;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 
-public class CommandResultResponseForward implements ICommandResult {
+public class CommandResultResponseForward implements ActionCommandResult {
 
 	private final String page;
 	

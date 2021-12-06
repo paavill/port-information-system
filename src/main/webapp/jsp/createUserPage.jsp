@@ -35,7 +35,7 @@
         <div class="main">
             <section class="container mainView"> 
                 <div class="info">
-                    <h3>Creating user #${user.id}</h3>
+                    <h3>Creating user</h3>
                     <div class="enters">
                         <div class="entersTitles">
                             <h4 class="title">Role:</h4>
@@ -50,9 +50,9 @@
                                     <option>${userRole.title}</option>
                                 </c:forEach>
                             </select>
-                            <input class="enter" name="userLogin" type="text">  
-                            <input class="enter" name="userPassword" type="text">  
-                            <input class="enter" name="userFullName" type="text">  
+                            <input class="enter" required name="userLogin" type="text">  
+                            <input class="enter" required name="userPassword" type="text">  
+                            <input class="enter" required name="userFullName" type="text">  
                         </form>
                     </div>
                     <section class="buttons">

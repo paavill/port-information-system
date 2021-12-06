@@ -1,16 +1,18 @@
-package ru.rsreu.RonzhinChistyakov09.commandlayer.commands;
+package ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.create;
 
 import javax.servlet.http.HttpServletRequest;
 
+import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseForward;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 
-public class EmptyCommand implements ActionCommand {
+public class ShowCreatePierPageCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		String page = "";
+
+		return new CommandResultResponseForward(page);
 	}
 
 }

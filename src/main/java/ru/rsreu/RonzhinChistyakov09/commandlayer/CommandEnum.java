@@ -1,18 +1,18 @@
 package ru.rsreu.RonzhinChistyakov09.commandlayer;
 
-import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.CreatePierCommand;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.CreateUserCommand;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.DeletePierCommand;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.DeleteUserCommand;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.EditUserCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.LoginCommand;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.ShowCreatePierPageCommand;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.ShowCreateUserPageCommand;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.ShowEditUserPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.ShowLoginPageCommand;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.ShowMainAdminPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.ShowMainNoLoginPageCommand;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.ShowMainAdminPageCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.create.CreatePierCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.create.CreateUserCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.create.ShowCreatePierPageCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.create.ShowCreateUserPageCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.delete.DeletePierCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.delete.DeleteUserCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.edit.EditUserCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.edit.ShowEditUserPageCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 
 public enum CommandEnum {
 	SHOW_MAIN_NO_LOGIN_PAGE {
@@ -77,9 +77,9 @@ public enum CommandEnum {
 		}
 	};
 
-	ICommand command;
+	ActionCommand command;
 
-	public ICommand getCurrentCommand() {
+	public ActionCommand getCurrentCommand() {
 		return command;
 	}
 }

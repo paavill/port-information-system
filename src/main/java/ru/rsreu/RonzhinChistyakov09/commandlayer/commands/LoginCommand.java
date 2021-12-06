@@ -6,8 +6,8 @@ import com.prutzkow.resourcer.Resourcer;
 
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseForward;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedirect;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommand;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommandResult;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
@@ -15,10 +15,10 @@ import ru.rsreu.RonzhinChistyakov09.exceptions.UserNotFoundException;
 import ru.rsreu.RonzhinChistyakov09.exceptions.WrongPasswordException;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.LoginLogic;
 
-public class LoginCommand implements ICommand {
+public class LoginCommand implements ActionCommand {
 
 	@Override
-	public ICommandResult execute(HttpServletRequest request) {
+	public ActionCommandResult execute(HttpServletRequest request) {
 
 		try {
 			UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");

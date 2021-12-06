@@ -1,18 +1,18 @@
-package ru.rsreu.RonzhinChistyakov09.commandlayer.commands;
+package ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.create;
 
 import javax.servlet.http.HttpServletRequest;
 
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedirect;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommand;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommandResult;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.CreatePierLogic;
 
-public class CreatePierCommand implements ICommand {
+public class CreatePierCommand implements ActionCommand {
 
 	@Override
-	public ICommandResult execute(HttpServletRequest request) {
+	public ActionCommandResult execute(HttpServletRequest request) {
 		try {
 			PierDao pierDao = (PierDao) request.getServletContext().getAttribute("pierDao");
 			CreatePierLogic logic = new CreatePierLogic(pierDao);

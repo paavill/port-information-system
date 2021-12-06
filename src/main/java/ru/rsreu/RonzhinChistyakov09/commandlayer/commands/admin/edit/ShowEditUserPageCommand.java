@@ -1,4 +1,4 @@
-package ru.rsreu.RonzhinChistyakov09.commandlayer.commands;
+package ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.edit;
 
 import java.util.Collection;
 
@@ -6,18 +6,18 @@ import javax.servlet.http.HttpServletRequest;
 
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseForward;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedirect;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommand;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommandResult;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserRole;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.EditUserPageLogic;
 
-public class ShowEditUserPageCommand implements ICommand {
+public class ShowEditUserPageCommand implements ActionCommand {
 
 	@Override
-	public ICommandResult execute(HttpServletRequest request) {
+	public ActionCommandResult execute(HttpServletRequest request) {
 		try {
 			UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
 			EditUserPageLogic logic = new EditUserPageLogic(userDao);

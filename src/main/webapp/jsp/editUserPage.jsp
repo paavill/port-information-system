@@ -46,8 +46,7 @@
                         <form id="userDataForm" class="entersFields" action="FrontController" method="post">
                             <input type="hidden" name="command" value="EDIT_USER">
                             <input type="hidden" name="currentUserId" value="${userToEdit.id}">
-                            <input type="hidden" name="currentUserStatus" value="${userToEdit.status.title}">
-                            <select id="userRoleSelect" class="enter" name="role">
+                            <select id="userRoleSelect" class="enter" name="currentUserRole">
                                 <c:forEach var="userRole" items="${userRoles}">
                                     <option>${userRole.title}</option>
                                 </c:forEach>
@@ -64,9 +63,9 @@
                                 }
 
                             </script>
-                            <input class="enter" name="currentUserLogin" type="text" value="${userToEdit.login}">  
-                            <input class="enter" name="currentUserPassword" type="text" value="${userToEdit.password}">  
-                            <input class="enter" name="currentUserFullName" type="text" value="${userToEdit.fullName}">  
+                            <input class="enter" required name="currentUserLogin" type="text" value="${userToEdit.login}">  
+                            <input class="enter" required name="currentUserPassword" type="text" value="${userToEdit.password}">  
+                            <input class="enter" required name="currentUserFullName" type="text" value="${userToEdit.fullName}">  
                         </form>
                     </div>
                     <section class="buttons">

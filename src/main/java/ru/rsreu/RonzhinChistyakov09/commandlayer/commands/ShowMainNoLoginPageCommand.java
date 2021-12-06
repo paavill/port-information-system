@@ -9,16 +9,16 @@ import com.prutzkow.resourcer.Resourcer;
 
 import ru.rsreu.RonzhinChistyakov09.Port;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseForward;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommand;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommandResult;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.pier.Pier;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.MainNoLoginPageLogic;
 
-public class ShowMainNoLoginPageCommand implements ICommand {
+public class ShowMainNoLoginPageCommand implements ActionCommand {
 
 	@Override
-	public ICommandResult execute(HttpServletRequest request) {
+	public ActionCommandResult execute(HttpServletRequest request) {
 		String page = null;
 		Port port = null;
 		Collection<Pier> piersData = new ArrayList<Pier>();

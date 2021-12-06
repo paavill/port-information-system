@@ -5,13 +5,13 @@ import javax.servlet.http.HttpServletRequest;
 import com.prutzkow.resourcer.Resourcer;
 
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseForward;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommand;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommandResult;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 
-public class ShowLoginPageCommand implements ICommand {
+public class ShowLoginPageCommand implements ActionCommand {
 
 	@Override
-	public ICommandResult execute(HttpServletRequest request) {
+	public ActionCommandResult execute(HttpServletRequest request) {
 		String page = null;
 		page = Resourcer.getString("jsp.login");
 		request.setAttribute("logoText", Resourcer.getString("jsp.login.logoText"));

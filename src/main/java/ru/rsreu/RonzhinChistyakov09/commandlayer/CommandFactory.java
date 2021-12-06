@@ -3,11 +3,11 @@ package ru.rsreu.RonzhinChistyakov09.commandlayer;
 import javax.servlet.http.HttpServletRequest;
 
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.EmptyCommand;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 
 public class CommandFactory {
-	public static ICommand getCommand(HttpServletRequest request) {
-		ICommand current = new EmptyCommand();
+	public static ActionCommand getCommand(HttpServletRequest request) {
+		ActionCommand current = new EmptyCommand();
 
 		String action = request.getParameter("command");
 		if (action == null || action.isEmpty()) {

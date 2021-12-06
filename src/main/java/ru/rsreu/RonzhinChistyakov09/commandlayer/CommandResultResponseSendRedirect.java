@@ -7,9 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommandResult;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 
-public class CommandResultResponseSendRedirect implements ICommandResult {
+public class CommandResultResponseSendRedirect implements ActionCommandResult {
 
 	private final String pathToRedirect;
 	

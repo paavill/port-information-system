@@ -33,8 +33,8 @@
 	                    <h4 class="title">Password:</h4>
 	                </div>
 	                <div class="entersFields">
-	                    <input class="enter" name="login" type="text" placeholder="Enter login">
-	                    <input class="enter" name="password" type="password" placeholder="Enter password">
+	                    <input class="enter" required name="login" type="text" placeholder="Enter login">
+	                    <input class="enter" required name="password" type="password" placeholder="Enter password">
 	                </div>
 	            </div>
 	            <div class="buttons">

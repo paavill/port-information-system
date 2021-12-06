@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandFactory;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommand;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ICommandResult;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DBType;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
 
@@ -51,9 +51,9 @@ public class FrontController extends HttpServlet {
 	private void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		ICommand command = CommandFactory.getCommand(request);
+		ActionCommand command = CommandFactory.getCommand(request);
 
-		ICommandResult commandExecutionResult = command.execute(request);
+		ActionCommandResult commandExecutionResult = command.execute(request);
 
 		commandExecutionResult.toResponse(getServletContext(), request, response);
 	}
