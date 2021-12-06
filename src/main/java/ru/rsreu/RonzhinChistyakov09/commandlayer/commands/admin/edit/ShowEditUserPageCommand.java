@@ -11,6 +11,7 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserRole;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserRoleDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.EditUserPageLogic;
 
@@ -20,7 +21,8 @@ public class ShowEditUserPageCommand implements ActionCommand {
 	public ActionCommandResult execute(HttpServletRequest request) {
 		try {
 			UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
-			EditUserPageLogic logic = new EditUserPageLogic(userDao);
+			UserRoleDao userRoleDao = (UserRoleDao) request.getServletContext().getAttribute("userRoleDao");
+			EditUserPageLogic logic = new EditUserPageLogic(userDao, userRoleDao);
 			Integer userId = Integer.valueOf(request.getParameter("userIdToEdit"));
 			User userToEdit = logic.getUserById(userId);
 			Collection<UserRole> userRoles = logic.getUserRoles();

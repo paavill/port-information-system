@@ -12,7 +12,6 @@ import com.prutzkow.resourcer.Resourcer;
 
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.Ship;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserRole;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
@@ -40,7 +39,7 @@ public class OracleUserDao implements UserDao {
 		}
 		return result;
 	}
-	
+
 	@Override
 	public User getUserById(int id) throws DataRequestException {
 		User user = null;
@@ -110,7 +109,7 @@ public class OracleUserDao implements UserDao {
 		}
 		return lastUserId;
 	}
-	
+
 	@Override
 	public void createUser(User user) throws DataRequestException {
 		String query = Resourcer.getString("requests.sql.create.user");
@@ -136,7 +135,7 @@ public class OracleUserDao implements UserDao {
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
 	}
-	
+
 	@Override
 	public void deleteUser(int id) throws DataRequestException {
 		String query = Resourcer.getString("requests.sql.delete.user");
@@ -178,42 +177,5 @@ public class OracleUserDao implements UserDao {
 			throw new DataRequestException(
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
-	}
-	
-	@Override
-	public Collection<UserRole> getUserRoles() throws DataRequestException{
-		Collection<UserRole> result = new ArrayList<UserRole>();
-		String query = Resourcer.getString("requests.sql.get.users.roles");
-		try (Statement statement = this.connection.createStatement()) {
-			try (ResultSet resultSet = statement.executeQuery(query)) {
-				while (resultSet.next()) {
-					UserRole userRole = ResultSetConverter.getUserRole(resultSet);
-					result.add(userRole);
-				}
-			}
-		} catch (SQLException e) {
-			throw new DataRequestException(
-					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
-		}
-		return result;
-	}
-
-
-	@Override
-	public UserRole getUserRoleByTitle(String title) throws DataRequestException {
-		UserRole userRole = null;
-		String query = Resourcer.getString("requests.sql.get.users.role.byTitle");
-		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-			PreparedStatementParametresSetter.set(preparedStatement, title);
-			try (ResultSet resultSet = preparedStatement.executeQuery()) {
-				if (resultSet.next()) {
-					userRole = ResultSetConverter.getUserRole(resultSet);
-				}
-			}
-		} catch (SQLException e) {
-			throw new DataRequestException(
-					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
-		}
-		return userRole;
 	}
 }

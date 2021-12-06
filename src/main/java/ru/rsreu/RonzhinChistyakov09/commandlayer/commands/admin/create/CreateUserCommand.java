@@ -7,6 +7,7 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserRoleDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.CreateUserLogic;
 
@@ -16,8 +17,10 @@ public class CreateUserCommand implements ActionCommand {
 	public ActionCommandResult execute(HttpServletRequest request) {
 		try {
 			UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
+			UserRoleDao userRoleDao = (UserRoleDao) request.getServletContext().getAttribute("userRoleDao");
+
 			CreateUserLogic logic = new CreateUserLogic(userDao);
-			CreateUserTransferObject userDto = new CreateUserTransferObject(userDao);
+			CreateUserTransferObject userDto = new CreateUserTransferObject(userDao, userRoleDao);
 			User user = userDto.getModel(request);
 			logic.createUser(user);
 		} catch (DataRequestException e) {

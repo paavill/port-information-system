@@ -10,6 +10,7 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserRoleDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.StorageException;
 
 public class OracleDataBaseDaoFactory extends DaoFactory {
@@ -44,12 +45,17 @@ public class OracleDataBaseDaoFactory extends DaoFactory {
 					String.format(Resourcer.getString("database.oracle.connected.fail"), e.getMessage()));
 		}
 	}
-	
+
 	@Override
 	public UserDao getUserDao() {
 		return new OracleUserDao(this.connection);
 	}
-	
+
+	@Override
+	public UserRoleDao getUserRoleDao() {
+		return new OracleUserRoleDao(this.connection);
+	}
+
 	@Override
 	public StatementDao getStatementDao() {
 		return new OracleStatementDao(this.connection);

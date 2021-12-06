@@ -7,6 +7,7 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserRoleDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.EditUserLogic;
 
@@ -16,8 +17,9 @@ public class EditUserCommand implements ActionCommand {
 	public ActionCommandResult execute(HttpServletRequest request) {
 		try {
 			UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
+			UserRoleDao userRoleDao = (UserRoleDao) request.getServletContext().getAttribute("userRoleDao");
 			EditUserLogic logic = new EditUserLogic(userDao);
-			EditUserDataTransferObject dto = new EditUserDataTransferObject(userDao);
+			EditUserDataTransferObject dto = new EditUserDataTransferObject(userDao, userRoleDao);
 			User user = dto.getModel(request);
 			logic.editUser(user);
 		} catch (DataRequestException e) {

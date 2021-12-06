@@ -29,6 +29,7 @@ public class FrontController extends HttpServlet {
 			DaoFactory factory = DaoFactory.getInstance(DBType.ORACLE);
 			ServletContext context = this.getServletContext();
 			context.setAttribute("userDao", factory.getUserDao());
+			context.setAttribute("userRoleDao", factory.getUserRoleDao());
 			context.setAttribute("pierDao", factory.getPierDao());
 			System.out.println("Dao in context!");
 		} catch (Exception e) {

@@ -9,7 +9,7 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedire
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserRole;
-import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserRoleDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.CreateUserPageLogic;
 
@@ -18,8 +18,8 @@ public class ShowCreateUserPageCommand implements ActionCommand {
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
 		try {
-			UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
-			CreateUserPageLogic logic = new CreateUserPageLogic(userDao);
+			UserRoleDao userRoleDao = (UserRoleDao) request.getServletContext().getAttribute("userRoleDao");
+			CreateUserPageLogic logic = new CreateUserPageLogic(userRoleDao);
 			Collection<UserRole> roles = logic.getUserRoles();
 			request.setAttribute("userRoles", roles);
 			String page = "/jsp/createUserPage.jsp";

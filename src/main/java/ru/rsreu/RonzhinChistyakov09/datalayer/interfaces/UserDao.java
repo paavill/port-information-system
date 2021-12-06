@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.Ship;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserRole;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
 public interface UserDao {
@@ -27,8 +26,4 @@ public interface UserDao {
 	abstract Ship getUserShip(int userId) throws DataRequestException;
 	
 	abstract void createShip(int userId, Ship ship) throws DataRequestException;
-	
-	abstract Collection<UserRole> getUserRoles() throws DataRequestException;
-
-	abstract UserRole getUserRoleByTitle(String title) throws DataRequestException;
 }
