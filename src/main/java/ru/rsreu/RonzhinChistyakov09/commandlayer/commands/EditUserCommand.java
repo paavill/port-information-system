@@ -23,10 +23,6 @@ public class EditUserCommand implements ICommand {
 			String roleTitle = (String) request.getParameter("role");
 			String statusTitle = (String) request.getParameter("currentUserStatus");
 			logic.editUser(userId, login, password, fullName, statusTitle, roleTitle);
-			//
-			request.getSession().removeAttribute("userToEdit");
-			request.getSession().removeAttribute("userStatuses");
-			request.getSession().removeAttribute("userRoles");
 		} catch (DataRequestException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -25,25 +25,16 @@ public class ShowEditUserPageCommand implements ICommand {
 			User userToEdit = logic.getUserById(userId);
 			Collection<UserRole> userRoles = logic.getUserRoles();
 
-			// Ќе пон€л почему в сессию суем, а не в реквест
-			request.getSession().setAttribute("userRoles", userRoles);
-			request.getSession().setAttribute("userToEdit", userToEdit);
+			request.setAttribute("userToEdit", userToEdit);
+			request.setAttribute("userRoles", userRoles);
 			request.setAttribute("selectedUserRole", userToEdit.getRole().getTitle());
-			/*
-			 * request.setAttribute("currentUserId", userToEdit.getId());
-			 * request.setAttribute("currentUserStatus", userToEdit.getStatus());
-			 * request.setAttribute("currentUserLogin", userToEdit.getLogin());
-			 * request.setAttribute("currentUserPassword", userToEdit.getPassword());
-			 * request.setAttribute("currentUserFullName", userToEdit.getFullName());
-			 */
 
 			String page = "/jsp/editUserPage.jsp";
 			return new CommandResultResponseForward(page);
 		} catch (DataRequestException e) {
-
 			e.printStackTrace();
-			return new CommandResultResponseSendRedirect("FrontController?command=SHOW_MAIN_ADMIN_PAGE");
 		}
+		return new CommandResultResponseSendRedirect("FrontController?command=SHOW_MAIN_ADMIN_PAGE");
 	}
 
 }

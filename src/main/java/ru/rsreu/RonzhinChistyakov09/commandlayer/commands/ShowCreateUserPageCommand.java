@@ -20,9 +20,8 @@ public class ShowCreateUserPageCommand implements ICommand {
 		try {
 			UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
 			CreateUserPageLogic logic = new CreateUserPageLogic(userDao);
-			Collection<UserRole> roles;
-			roles = logic.getUserRoles();
-			request.getSession().setAttribute("userRoles", roles);
+			Collection<UserRole> roles = logic.getUserRoles();
+			request.setAttribute("userRoles", roles);
 			String page = "/jsp/createUserPage.jsp";
 			return new CommandResultResponseForward(page);
 		} catch (DataRequestException e) {

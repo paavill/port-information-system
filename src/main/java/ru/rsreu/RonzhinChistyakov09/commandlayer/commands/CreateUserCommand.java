@@ -24,18 +24,6 @@ public class CreateUserCommand implements ICommand {
 			String fullName = (String) request.getParameter("userFullName");
 			String roleTitle = (String) request.getParameter("role");
 
-//			Collection<UserRole> roles = (Collection<UserRole>) request.getSession().getAttribute("userRoles");
-//			
-//			UserRole userRole = null;
-//			if (roles != null) {
-//				for (UserRole role : roles) {
-//					if (role.getTitle().equals(roleTitle)) {
-//						userRole = role;
-//						break;
-//					}
-//				}
-//			}
-
 			logic.createUser(login, password, fullName, roleTitle);
 		} catch (DataRequestException e) {
 			e.printStackTrace();
