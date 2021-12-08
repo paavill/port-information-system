@@ -1,0 +1,12 @@
+.buttons .button{
+    background-color: rgb(190, 190, 190);
+    color: rgb(97, 97, 97);
+}
+
+.buttons .button:hover{
+    background-color: rgb(211, 211, 211);
+}
+
+.buttons{
+    justify-content: right;
+}

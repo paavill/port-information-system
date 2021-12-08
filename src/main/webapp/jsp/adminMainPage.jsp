@@ -21,14 +21,14 @@
     <header>
         <div class="container">
             <a href="index.html" class="logo">Port</a>
-            <form id="logOutForm" action="/FrontController" method="post">
+            <form id="logOutForm" action="FrontController" method="post">
                 <input type="hidden" name="command" value="LOGOUT">
             </form>
             <nav>
                 <ul>
                     <li><a>Your role: administrator</a></li>
                     <li><a>Your user id: ${user.id}</a></li>
-                   <!--  <li><input type="submit" form="logOutForm" value="Logout"></li> -->
+                    <li><input type="submit" form="logOutForm" value="Logout"></li>
                     <li><a href="FrontController?command=LOGOUT">Logout</a></li>
                     <li><a href="">About system</a></li>
                 </ul>
