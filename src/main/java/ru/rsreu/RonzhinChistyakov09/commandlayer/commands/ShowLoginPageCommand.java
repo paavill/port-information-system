@@ -14,14 +14,6 @@ public class ShowLoginPageCommand implements ActionCommand {
 	public ActionCommandResult execute(HttpServletRequest request) {
 		String page = null;
 		page = Resourcer.getString("jsp.login");
-		request.setAttribute("logoText", Resourcer.getString("jsp.login.logoText"));
-		request.setAttribute("authorizationText", Resourcer.getString("jsp.login.authorizationText"));
-		request.setAttribute("loginText", Resourcer.getString("jsp.login.loginText"));
-		request.setAttribute("placeholderLoginText", Resourcer.getString("jsp.login.placeholderLoginText"));
-		request.setAttribute("passwordText", Resourcer.getString("jsp.login.passwordText"));
-		request.setAttribute("placeholderPasswordText", Resourcer.getString("jsp.login.placeholderPasswordText"));
-		request.setAttribute("enterButtonText", Resourcer.getString("jsp.login.enterButtonText"));
-		request.setAttribute("cancelButtonText", Resourcer.getString("jsp.login.cancelButtonText"));
 		return new CommandResultResponseForward(page);
 	}
 

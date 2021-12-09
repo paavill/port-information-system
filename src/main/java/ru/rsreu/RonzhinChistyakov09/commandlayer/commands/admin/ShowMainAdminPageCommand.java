@@ -4,6 +4,8 @@ import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.prutzkow.resourcer.Resourcer;
+
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseForward;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
@@ -35,7 +37,7 @@ public class ShowMainAdminPageCommand implements ActionCommand {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String page = "/jsp/adminMainPage.jsp";
+		String page = Resourcer.getString("jsp.admin.main");
 		
 		return new CommandResultResponseForward(page);
 	}

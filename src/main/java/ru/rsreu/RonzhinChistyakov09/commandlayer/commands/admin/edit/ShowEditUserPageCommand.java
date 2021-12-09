@@ -4,6 +4,8 @@ import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.prutzkow.resourcer.Resourcer;
+
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseForward;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedirect;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
@@ -31,7 +33,7 @@ public class ShowEditUserPageCommand implements ActionCommand {
 			request.setAttribute("userRoles", userRoles);
 			request.setAttribute("selectedUserRole", userToEdit.getRole().getTitle());
 
-			String page = "/jsp/editUserPage.jsp";
+			String page = Resourcer.getString("jsp.admin.editUser");
 			return new CommandResultResponseForward(page);
 		} catch (DataRequestException e) {
 			e.printStackTrace();

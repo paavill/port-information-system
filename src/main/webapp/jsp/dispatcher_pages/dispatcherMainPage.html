@@ -39,11 +39,14 @@
         <div class="main">
             <div class="tabs container">
                 <button class="tablinks" onclick="openTab(event, 'Statements for processing')">Statements for processing</button>
+                <button class="tablinks" onclick="openTab(event, 'Captains')">Captains</button>
+                <button class="tablinks" onclick="openTab(event, 'Ships')">Ships</button>
+                <button class="tablinks" onclick="openTab(event, 'Piers')">Piers</button>
             </div>
             <section id="Statements for processing" class="container mainView"> 
                 <c:forEach var="statement" items="${statementsToProcess}">
                     <div class="info">
-                        <h3>User #${statement.id}</h3>
+                        <h3>Statement #${statement.id}</h3>
                         <div>
                             <h4>Captain Id:</h4>
                             <var>${statement.user.id}</var>
@@ -79,6 +82,63 @@
                     </div>
                 </c:forEach>
             </section>
+            <section id="Captains" class="container mainView"> 
+                <c:forEach var="captainData" items="${captainsData}">
+                    <div class="info">
+                        <h3>Captain #${captainData.id}</h3>
+                        <div>
+                            <h4>Status:</h4>
+                            <var>${captainData.status.title}</var>
+                        </div>
+                        <div>
+                            <h4>Login:</h4>
+                            <var>${captainData.login}</var>
+                        </div>
+                        <div>
+                            <h4>Full name:</h4>
+                            <var>${captainData.fullName}</var>
+                        </div>
+                    </div> 
+                </c:forEach>
+            </section>
+            <section id="Ships" class="container mainView"> 
+                <c:forEach var="shipData" items="${shipsData}">
+                    <div class="info">
+                        <h3>Ship #${shipData.id}</h3>
+                        <div>
+                            <h4>Title:</h4>
+                            <var>${shipData.title}</var>
+                        </div>
+                        <div>
+                            <h4>Captain Id:</h4>
+                            <var>${shipData.captain}</var>
+                        </div>
+                        <div>
+                            <h4>Capacity:</h4>
+                            <var>${shipData.capacity}</var>
+                        </div>
+                    </div> 
+                </c:forEach>
+            </section>
+            <section id="Piers" class="container mainView">
+                <c:forEach var="pierData" items="${piersData}">
+                    <div class="info">
+                        <h3>Pier #${pierData.id}</h3>
+                        <div>
+                            <h4>Pier status:</h4>
+                            <var>${pierData.status}</var>
+                        </div>
+                        <div>
+                            <h4>Pier capacity:</h4>
+                            <var>${pierData.capacity}</var>
+                        </div>
+                        <div>
+                            <h4>Residual capacity:</h4>
+                            <var>${pierData.residualСapacity}</var>
+                        </div>
+                    </div> 
+                </c:forEach>
+            </section>     
         </div>
     <footer></footer>
 </body>

@@ -29,7 +29,6 @@
                     <li><a>Your role: administrator</a></li>
                     <li><a>Your user id: ${user.id}</a></li>
                     <li><input type="submit" form="logOutForm" value="Logout"></li>
-                    <li><a href="FrontController?command=LOGOUT">Logout</a></li>
                     <li><a href="">About system</a></li>
                 </ul>
             </nav>
@@ -39,6 +38,7 @@
             <div class="tabs container">
                 <button class="tablinks" onclick="openTab(event, 'Users')">Users</button>
                 <button class="tablinks" onclick="openTab(event, 'Piers')">Piers</button>
+                <button class="tablinks" onclick="openTab(event, 'Ships')">Ships</button>
             </div>
             <section id="Users" class="container mainView"> 
                 <div class="buttons">
@@ -83,12 +83,12 @@
                 </c:forEach>
             </section>
             <section id="Piers" class="container mainView">
+            	<div class="buttons">
+                     <a class="button" href="FrontController?command=SHOW_CREATE_PIER_PAGE">Create</a>
+                </div>
                 <c:forEach var="pierData" items="${piersData}">
-                    <div class="buttons">
-                        <a href="FrontController?command=SHOW_CREATE_PIER_PAGE">Create</a>
-                    </div>
                     <div class="info">
-                        <h3>Piers #${pierData.id}</h3>
+                        <h3>Pier #${pierData.id}</h3>
                         <div>
                             <h4>Pier status:</h4>
                             <var>${pierData.status}</var>
@@ -106,7 +106,32 @@
                         </section>
                     </div> 
                 </c:forEach>
-            </section>     
+            </section>
+            <section id="Ships" class="container mainView">
+            	<div class="buttons">
+                        <a class="button" href="FrontController?command=SHOW_CREATE_SHIP_PAGE">Create</a>
+                </div>
+                <c:forEach var="shipData" items="${shipsData}">
+                    <div class="info">
+                        <h3>Ship #${shipData.id}</h3>
+                        <div>
+                            <h4>Pier status:</h4>
+                            <var>${shipData.status}</var>
+                        </div>
+                        <div>
+                            <h4>Pier capacity:</h4>
+                            <var>${shipData.capacity}</var>
+                        </div>
+                        <section class="buttons">
+                            <form action="FrontController" method="post">
+                                <input name="command" type="hidden" value="DELETE_PIER">
+                                <input name="pierIdToDelete" type="hidden" value="${pierData.id}">
+                                <input type="submit" value="Delete">
+                            </form>
+                        </section>
+                    </div> 
+                </c:forEach>
+            </section>    
         </div>
     <footer></footer>
 </body>

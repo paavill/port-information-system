@@ -4,6 +4,8 @@ import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.prutzkow.resourcer.Resourcer;
+
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseForward;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedirect;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
@@ -22,7 +24,7 @@ public class ShowCreateUserPageCommand implements ActionCommand {
 			CreateUserPageLogic logic = new CreateUserPageLogic(userRoleDao);
 			Collection<UserRole> roles = logic.getUserRoles();
 			request.setAttribute("userRoles", roles);
-			String page = "/jsp/createUserPage.jsp";
+			String page = Resourcer.getString("jsp.admin.createUser");
 			return new CommandResultResponseForward(page);
 		} catch (DataRequestException e) {
 			e.printStackTrace();

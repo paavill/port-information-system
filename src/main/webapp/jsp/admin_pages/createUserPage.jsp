@@ -19,7 +19,7 @@
     <header>
         <div class="container">
             <a href="index.html" class="logo">Port</a>
-            <form id="logOutForm" action="/FrontController" method="post">
+            <form id="logOutForm" action="FrontController" method="post">
                 <input type="hidden" name="command" value="LOGOUT">
             </form>
             <nav>
