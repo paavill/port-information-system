@@ -27,7 +27,7 @@ public class LoginCommand implements ActionCommand {
 			User user = loginLogic.login(login, password);
 			request.getSession().setAttribute("user", user);
 			System.out.println(user.toString());
-			return new CommandResultResponseSendRedirect("FrontController?command=SHOW_MAIN_ADMIN_PAGE");
+			return new CommandResultResponseSendRedirect("FrontController?command=ROUTING_USER");
 		} catch (DataRequestException | UserNotFoundException | WrongPasswordException e) {
 			String message;
 			if (e instanceof UserNotFoundException) {

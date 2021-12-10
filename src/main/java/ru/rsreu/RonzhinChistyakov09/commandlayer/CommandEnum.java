@@ -2,6 +2,7 @@ package ru.rsreu.RonzhinChistyakov09.commandlayer;
 
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.LoginCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.LogoutCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.RoutingUserCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.ShowLoginPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.ShowMainNoLoginPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.ShowMainAdminPageCommand;
@@ -19,6 +20,11 @@ public enum CommandEnum {
 	SHOW_MAIN_NO_LOGIN_PAGE {
 		{
 			this.command = new ShowMainNoLoginPageCommand();
+		}
+	},
+	ROUTING_USER {
+		{
+			this.command = new RoutingUserCommand();
 		}
 	},
 	SHOW_LOGIN_PAGE {
