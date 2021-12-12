@@ -1,4 +1,4 @@
-package ru.rsreu.RonzhinChistyakov09.logiclayer;
+package ru.rsreu.RonzhinChistyakov09.logiclayer.admin;
 
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;

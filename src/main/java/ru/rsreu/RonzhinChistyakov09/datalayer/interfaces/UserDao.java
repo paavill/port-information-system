@@ -2,7 +2,6 @@ package ru.rsreu.RonzhinChistyakov09.datalayer.interfaces;
 
 import java.util.Collection;
 
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.Ship;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
@@ -22,8 +21,6 @@ public interface UserDao {
 	abstract void updateUser(User user) throws DataRequestException;
 	
 	abstract void deleteUser(int id) throws DataRequestException;
-	
-	abstract Ship getUserShip(int userId) throws DataRequestException;
-	
-	abstract void createShip(int userId, Ship ship) throws DataRequestException;
+
+	abstract Collection<Integer> getCaptainsId() throws DataRequestException;
 }

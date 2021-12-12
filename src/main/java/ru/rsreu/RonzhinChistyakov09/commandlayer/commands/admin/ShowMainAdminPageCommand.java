@@ -9,12 +9,14 @@ import com.prutzkow.resourcer.Resourcer;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseForward;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.Ship;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.pier.Pier;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.ShipDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
-import ru.rsreu.RonzhinChistyakov09.logiclayer.MainAdminPageLogic;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.admin.MainAdminPageLogic;
 
 public class ShowMainAdminPageCommand implements ActionCommand {
 
@@ -25,14 +27,17 @@ public class ShowMainAdminPageCommand implements ActionCommand {
 		
 		UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
 		PierDao pierDao = (PierDao) request.getServletContext().getAttribute("pierDao");
+		ShipDao shipDao = (ShipDao) request.getServletContext().getAttribute("shipDao");
 		
 		try {
-			MainAdminPageLogic logic = new MainAdminPageLogic(pierDao, userDao);
+			MainAdminPageLogic logic = new MainAdminPageLogic(pierDao, userDao, shipDao);
 			Collection<User> users = logic.getUsers();
 			Collection<Pier> piers = logic.getPiers();
+			Collection<Ship> ships = logic.getShips();
+			
 			request.setAttribute("usersData", users);
 			request.setAttribute("piersData", piers);
-			
+			request.setAttribute("shipsData", ships);
 		} catch (DataRequestException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

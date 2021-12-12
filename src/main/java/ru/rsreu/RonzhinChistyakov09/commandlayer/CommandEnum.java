@@ -7,10 +7,13 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.ShowLoginPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.ShowMainNoLoginPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.ShowMainAdminPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.create.CreatePierCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.create.CreateShipCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.create.CreateUserCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.create.ShowCreatePierPageCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.create.ShowCreateShipPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.create.ShowCreateUserPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.delete.DeletePierCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.delete.DeleteShipCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.delete.DeleteUserCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.edit.EditUserCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.edit.ShowEditUserPageCommand;
@@ -52,14 +55,19 @@ public enum CommandEnum {
 			this.command = new ShowCreateUserPageCommand();
 		}
 	},
+	CREATE_USER {
+		{
+			this.command = new CreateUserCommand();
+		}
+	},
 	SHOW_EDIT_USER_PAGE {
 		{
 			this.command = new ShowEditUserPageCommand();
 		}
 	},
-	CREATE_USER {
+	EDIT_USER {
 		{
-			this.command = new CreateUserCommand();
+			this.command = new EditUserCommand();
 		}
 	},
 	SHOW_CREATE_PIER_PAGE {
@@ -82,9 +90,19 @@ public enum CommandEnum {
 			this.command = new DeletePierCommand();
 		}
 	},
-	EDIT_USER {
+	SHOW_CREATE_SHIP_PAGE{
 		{
-			this.command = new EditUserCommand();
+			this.command = new ShowCreateShipPageCommand();
+		}
+	},
+	CREATE_SHIP{
+		{
+			this.command = new CreateShipCommand();
+		}
+	},
+	DELETE_SHIP{
+		{
+			this.command = new DeleteShipCommand();
 		}
 	};
 

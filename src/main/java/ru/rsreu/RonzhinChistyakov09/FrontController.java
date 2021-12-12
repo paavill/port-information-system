@@ -31,6 +31,7 @@ public class FrontController extends HttpServlet {
 			context.setAttribute("userDao", factory.getUserDao());
 			context.setAttribute("userRoleDao", factory.getUserRoleDao());
 			context.setAttribute("pierDao", factory.getPierDao());
+			context.setAttribute("shipDao", factory.getShipDao());
 			System.out.println("Dao in context!");
 		} catch (Exception e) {
 			e.printStackTrace();

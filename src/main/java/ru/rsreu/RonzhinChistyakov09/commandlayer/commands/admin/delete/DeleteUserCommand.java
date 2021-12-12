@@ -7,7 +7,7 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
-import ru.rsreu.RonzhinChistyakov09.logiclayer.DeleteUserLogic;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.admin.DeleteUserLogic;
 
 public class DeleteUserCommand implements ActionCommand {
 	@Override

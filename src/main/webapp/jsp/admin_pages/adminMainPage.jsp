@@ -116,7 +116,7 @@
                         <h3>Ship #${shipData.id}</h3>
                         <div>
                             <h4>Pier status:</h4>
-                            <var>${shipData.status}</var>
+                            <var>${shipData.title}</var>
                         </div>
                         <div>
                             <h4>Pier capacity:</h4>
@@ -124,8 +124,8 @@
                         </div>
                         <section class="buttons">
                             <form action="FrontController" method="post">
-                                <input name="command" type="hidden" value="DELETE_PIER">
-                                <input name="pierIdToDelete" type="hidden" value="${pierData.id}">
+                                <input name="command" type="hidden" value="DELETE_SHIP">
+                                <input name="shipIdToDelete" type="hidden" value="${shipData.id}">
                                 <input type="submit" value="Delete">
                             </form>
                         </section>

@@ -1,4 +1,4 @@
-package ru.rsreu.RonzhinChistyakov09.logiclayer;
+package ru.rsreu.RonzhinChistyakov09.logiclayer.admin;
 
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;

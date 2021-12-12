@@ -15,7 +15,7 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserRole;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserRoleDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
-import ru.rsreu.RonzhinChistyakov09.logiclayer.EditUserPageLogic;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.admin.EditUserPageLogic;
 
 public class ShowEditUserPageCommand implements ActionCommand {
 

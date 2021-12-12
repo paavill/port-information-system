@@ -7,7 +7,7 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
-import ru.rsreu.RonzhinChistyakov09.logiclayer.DeletePierLogic;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.admin.DeletePierLogic;
 
 public class DeletePierCommand implements ActionCommand {
 

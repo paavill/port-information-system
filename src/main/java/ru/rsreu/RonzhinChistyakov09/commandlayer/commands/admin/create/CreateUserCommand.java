@@ -10,7 +10,7 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserRoleDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 import ru.rsreu.RonzhinChistyakov09.exceptions.LoginBusyException;
-import ru.rsreu.RonzhinChistyakov09.logiclayer.CreateUserLogic;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.admin.CreateUserLogic;
 
 public class CreateUserCommand implements ActionCommand {
 

@@ -147,35 +147,22 @@ public class OracleUserDao implements UserDao {
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
 	}
-
+	
 	@Override
-	public Ship getUserShip(int userId) throws DataRequestException {
-		Ship ship = null;
-		String query = Resourcer.getString("requests.sql.get.users.ships");
-		try (PreparedStatement preparedStatement = this.connection.prepareStatement(query)) {
-			preparedStatement.setInt(1, userId);
-			try (ResultSet resultSet = preparedStatement.executeQuery()) {
-				if (resultSet.next()) {
-					ship = ResultSetConverter.getShip(resultSet);
+	public Collection<Integer> getCaptainsId() throws DataRequestException{
+		Collection<Integer> result = new ArrayList<Integer>();
+		String query = Resourcer.getString("requests.sql.get.users.captains.id");
+		try (Statement statement = this.connection.createStatement()) {
+			try (ResultSet resultSet = statement.executeQuery(query)) {
+				while (resultSet.next()) {
+					result.add(resultSet.getInt(1));
 				}
 			}
 		} catch (SQLException e) {
 			throw new DataRequestException(
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
-		return ship;
-	}
-
-	@Override
-	public void createShip(int userId, Ship ship) throws DataRequestException {
-		String query = Resourcer.getString("requests.sql.create.ship");
-		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-			PreparedStatementParametresSetter.set(preparedStatement, ship.getId(), userId, ship.getTitle(),
-					ship.getCapacity());
-			preparedStatement.executeUpdate();
-		} catch (SQLException e) {
-			throw new DataRequestException(
-					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
-		}
+		return result;
+		
 	}
 }
