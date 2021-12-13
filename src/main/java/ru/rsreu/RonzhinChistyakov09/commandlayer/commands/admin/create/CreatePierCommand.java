@@ -16,7 +16,7 @@ public class CreatePierCommand implements ActionCommand {
 		try {
 			PierDao pierDao = (PierDao) request.getServletContext().getAttribute("pierDao");
 			CreatePierLogic logic = new CreatePierLogic(pierDao);
-			int capacity = 0;
+			int capacity = Integer.parseInt(request.getParameter("pierCapacity"));
 			logic.createPier(capacity);
 		} catch (DataRequestException e) {
 

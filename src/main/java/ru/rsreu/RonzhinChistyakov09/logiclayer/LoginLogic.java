@@ -23,8 +23,6 @@ public class LoginLogic {
 		if (checkPassword(user, password)) {
 			throw new WrongPasswordException();
 		}
-		user.setStatus(new UserStatus(0, "AUTHORIZED"));
-		userDao.updateUser(user);
 		return user;
 	}
 

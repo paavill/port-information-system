@@ -22,7 +22,7 @@ CREATE TABLE users
     id NUMBER(9) not null,
     login NVARCHAR2(30) not null,
     password NVARCHAR2(30) not null,
-    full_name NVARCHAR2(50),
+    full_name NVARCHAR2(50) not null,
     status_id NUMBER(9) not null,
     role_id NUMBER(9) not null,
     CONSTRAINT id_users_pk
@@ -56,6 +56,8 @@ CREATE TABLE piers
 (
     id NUMBER(9) not null,
     capacity NUMBER(20) not null,
+    start_date DATE not null,
+    end_date DATE,
     CONSTRAINT id_piers_pk
         PRIMARY KEY (id)  
 );

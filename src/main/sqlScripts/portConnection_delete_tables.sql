@@ -1,5 +1,4 @@
 drop table goods cascade constraints PURGE;
-drop table GOODS_SPECIFICATIONS cascade constraints PURGE;
 drop table PIERS cascade constraints PURGE;
 drop table ships cascade constraints PURGE;
 drop table STATEMENTS cascade constraints PURGE;

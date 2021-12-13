@@ -12,6 +12,7 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.ShipDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserRoleDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserStatusDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.StorageException;
 
 public class OracleDataBaseDaoFactory extends DaoFactory {
@@ -55,6 +56,11 @@ public class OracleDataBaseDaoFactory extends DaoFactory {
 	@Override
 	public UserRoleDao getUserRoleDao() {
 		return new OracleUserRoleDao(this.connection);
+	}
+	
+	@Override
+	public UserStatusDao getUserStatusDao() {
+		return new OracleUserStatusDao(this.connection);
 	}
 
 	@Override

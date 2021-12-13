@@ -14,9 +14,7 @@ public class LogoutLogic {
 	}
 
 	public void logout(User user) throws DataRequestException {
-		// если статуса такого не будет, логику удалить
-		user.setStatus(new UserStatus(0, "UNATHORIZED"));
-		this.userDao.updateUser(user);
+		
 	}
 
 }

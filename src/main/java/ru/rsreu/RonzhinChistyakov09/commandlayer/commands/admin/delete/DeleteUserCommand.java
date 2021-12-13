@@ -6,6 +6,7 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedire
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserStatusDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.admin.DeleteUserLogic;
 
@@ -14,7 +15,8 @@ public class DeleteUserCommand implements ActionCommand {
 	public ActionCommandResult execute(HttpServletRequest request) {
 		try {
 			UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
-			DeleteUserLogic logic = new DeleteUserLogic(userDao);
+			UserStatusDao userStatusDao = (UserStatusDao) request.getServletContext().getAttribute("userStatusDao");
+			DeleteUserLogic logic = new DeleteUserLogic(userDao, userStatusDao);
 			int userId = Integer.parseInt(request.getParameter("userIdToDelete"));
 			logic.deleteUser(userId);
 		} catch (DataRequestException e) {

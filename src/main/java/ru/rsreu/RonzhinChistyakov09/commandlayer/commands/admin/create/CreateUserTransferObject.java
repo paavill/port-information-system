@@ -8,17 +8,20 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserRole;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserStatus;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserRoleDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserStatusDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
 public class CreateUserTransferObject implements DataTransferObject<User> {
 
 	private final UserDao userDao;
 	private final UserRoleDao userRoleDao;
-	private static final UserStatus DEFAULT_USER_STATUS = new UserStatus(1, "UNATHORIZED");
+	private final UserStatusDao userStatusDao;
+	private static final String DEFAULT_USER_STATUS_TITLE = "ACTIVE";
 
-	public CreateUserTransferObject(UserDao userDao, UserRoleDao userRoleDao) {
+	public CreateUserTransferObject(UserDao userDao, UserRoleDao userRoleDao, UserStatusDao userStatusDao) {
 		this.userDao = userDao;
 		this.userRoleDao = userRoleDao;
+		this.userStatusDao = userStatusDao;
 	}
 
 	@Override
@@ -29,7 +32,8 @@ public class CreateUserTransferObject implements DataTransferObject<User> {
 		String fullName = (String) request.getParameter("userFullName");
 		String roleTitle = (String) request.getParameter("role");
 		UserRole userRole = this.userRoleDao.getUserRoleByTitle(roleTitle);
-		User user = new User(newUserId, login, password, fullName, DEFAULT_USER_STATUS, userRole);
+		UserStatus userStatus = this.userStatusDao.getUserStatusByTitle(DEFAULT_USER_STATUS_TITLE);
+		User user = new User(newUserId, login, password, fullName, userStatus, userRole);
 		return user;
 	}
 

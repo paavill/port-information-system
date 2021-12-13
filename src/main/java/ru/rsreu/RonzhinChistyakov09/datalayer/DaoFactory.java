@@ -5,6 +5,7 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.ShipDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserRoleDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserStatusDao;
 
 public abstract class DaoFactory implements AutoCloseable {
 	public static DaoFactory getInstance(DBType dbType) throws Exception {
@@ -14,6 +15,8 @@ public abstract class DaoFactory implements AutoCloseable {
 	public abstract UserDao getUserDao();
 	
 	public abstract UserRoleDao getUserRoleDao();
+	
+	public abstract UserStatusDao getUserStatusDao();
 	
 	public abstract StatementDao getStatementDao();
 	

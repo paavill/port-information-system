@@ -1,10 +1,13 @@
 package ru.rsreu.RonzhinChistyakov09.datalayer.oracledb;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -73,7 +76,7 @@ public class OraclePierDao implements PierDao {
 		}
 		return freePiersCount;
 	}
-	
+
 	@Override
 	public int getLastPierId() throws DataRequestException {
 		int lastPierId = 0;
@@ -95,7 +98,8 @@ public class OraclePierDao implements PierDao {
 	public void createPier(Pier pier) throws DataRequestException {
 		String query = Resourcer.getString("requests.sql.create.pier");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-			PreparedStatementParametresSetter.set(preparedStatement, pier.getId(), pier.getCapacity());
+			PreparedStatementParametresSetter.set(preparedStatement, pier.getId(), pier.getCapacity(),
+					Date.valueOf(LocalDate.now()));
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			throw new DataRequestException(
@@ -114,12 +118,12 @@ public class OraclePierDao implements PierDao {
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
 	}
-	
+
 	@Override
 	public void deletePier(int id) throws DataRequestException {
 		String query = Resourcer.getString("requests.sql.delete.pier");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-			PreparedStatementParametresSetter.set(preparedStatement, id);
+			PreparedStatementParametresSetter.set(preparedStatement, Date.valueOf(LocalDate.now()), id);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			throw new DataRequestException(
