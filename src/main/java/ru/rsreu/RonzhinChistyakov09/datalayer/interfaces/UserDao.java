@@ -23,4 +23,6 @@ public interface UserDao {
 	abstract void deleteUser(int id) throws DataRequestException;
 
 	abstract Collection<Integer> getCaptainsId() throws DataRequestException;
+	
+	abstract Collection<User> getUsersByStatusId(int statusId) throws DataRequestException;
 }

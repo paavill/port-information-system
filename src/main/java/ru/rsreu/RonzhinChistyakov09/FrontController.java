@@ -14,6 +14,10 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DBType;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.moderator.BlockUserLogic;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.moderator.MainModeratorPageLogic;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.moderator.UnblockUserLogic;
 
 public class FrontController extends HttpServlet {
 
@@ -33,7 +37,6 @@ public class FrontController extends HttpServlet {
 			context.setAttribute("userStatusDao", factory.getUserStatusDao());
 			context.setAttribute("pierDao", factory.getPierDao());
 			context.setAttribute("shipDao", factory.getShipDao());
-			System.out.println("Dao in context!");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -42,13 +45,11 @@ public class FrontController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		this.processRequest(request, response);
-		System.out.println("get");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		this.processRequest(request, response);
-		System.out.println("post");
 	}
 
 	private void processRequest(HttpServletRequest request, HttpServletResponse response)

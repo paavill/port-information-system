@@ -10,8 +10,8 @@ import java.util.Collection;
 
 import com.prutzkow.resourcer.Resourcer;
 
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.Ship;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserStatus;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
@@ -164,5 +164,24 @@ public class OracleUserDao implements UserDao {
 		}
 		return result;
 		
+	}
+
+	@Override
+	public Collection<User> getUsersByStatusId(int statusId) throws DataRequestException {
+		Collection<User> result = new ArrayList<User>();
+		String query = Resourcer.getString("requests.sql.get.users.byStatus");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			PreparedStatementParametresSetter.set(preparedStatement, statusId);
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				while (resultSet.next()) {
+					User user = ResultSetConverter.getUser(resultSet);
+					result.add(user);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+		return result;
 	}
 }
