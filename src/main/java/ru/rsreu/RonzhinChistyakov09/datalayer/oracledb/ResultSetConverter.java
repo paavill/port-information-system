@@ -53,7 +53,8 @@ public class ResultSetConverter {
 		int id = resultSet.getInt(Resourcer.getString("database.piers.id"));
 		int capacity = resultSet.getInt(Resourcer.getString("database.piers.capacity"));
 		int residualCapacity = resultSet.getInt(Resourcer.getString("database.piers.capacity.residual"));
-		String status = resultSet.getString(Resourcer.getString("database.piers.status"));
+		//String status = resultSet.getString(Resourcer.getString("database.piers.status"));
+		String status = " ";
 		Pier pier = new Pier(id, capacity, residualCapacity, status);
 		return pier;
 	}
