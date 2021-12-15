@@ -17,6 +17,10 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.delete.DeleteShi
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.delete.DeleteUserCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.edit.EditUserCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.edit.ShowEditUserPageCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.CreateExitStatementCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.CreateEnterStatementCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.ShowMainCaptainPageCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.dispatcher.ShowMainDispatcherPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 
 public enum CommandEnum {
@@ -25,26 +29,13 @@ public enum CommandEnum {
 			this.command = new ShowMainNoLoginPageCommand();
 		}
 	},
-	ROUTING_USER {
-		{
-			this.command = new RoutingUserCommand();
-		}
-	},
+	
 	SHOW_LOGIN_PAGE {
 		{
 			this.command = new ShowLoginPageCommand();
 		}
 	},
-	LOGIN {
-		{
-			this.command = new LoginCommand();
-		}
-	},
-	LOGOUT {
-		{
-			this.command = new LogoutCommand();
-		}
-	},
+	//admin show commands
 	SHOW_MAIN_ADMIN_PAGE {
 		{
 			this.command = new ShowMainAdminPageCommand();
@@ -55,24 +46,32 @@ public enum CommandEnum {
 			this.command = new ShowCreateUserPageCommand();
 		}
 	},
-	CREATE_USER {
-		{
-			this.command = new CreateUserCommand();
-		}
-	},
 	SHOW_EDIT_USER_PAGE {
 		{
 			this.command = new ShowEditUserPageCommand();
 		}
 	},
-	EDIT_USER {
-		{
-			this.command = new EditUserCommand();
-		}
-	},
 	SHOW_CREATE_PIER_PAGE {
 		{
 			this.command = new ShowCreatePierPageCommand();
+		}
+	},
+	SHOW_CREATE_SHIP_PAGE{
+		{
+			this.command = new ShowCreateShipPageCommand();
+		}
+	},
+	//end admin show commands
+	
+	//admin action commands
+	CREATE_USER {
+		{
+			this.command = new CreateUserCommand();
+		}
+	},
+	EDIT_USER {
+		{
+			this.command = new EditUserCommand();
 		}
 	},
 	CREATE_PIER {
@@ -90,11 +89,6 @@ public enum CommandEnum {
 			this.command = new DeletePierCommand();
 		}
 	},
-	SHOW_CREATE_SHIP_PAGE{
-		{
-			this.command = new ShowCreateShipPageCommand();
-		}
-	},
 	CREATE_SHIP{
 		{
 			this.command = new CreateShipCommand();
@@ -103,6 +97,52 @@ public enum CommandEnum {
 	DELETE_SHIP{
 		{
 			this.command = new DeleteShipCommand();
+		}
+	},
+	//end admin action commands
+	
+	//dispatcher show commands
+	SHOW_MAIN_DISPATCHER_PAGE{
+		{
+			this.command = new ShowMainDispatcherPageCommand();
+		}
+	},
+	
+	//captain show commands
+	SHOW_MAIN_CAPTAIN_PAGE{
+		{
+			this.command = new ShowMainCaptainPageCommand();
+		}
+	},
+	//end captain show commands
+	
+	//captain action commands
+	CREATE_EXIT_STATEMENT{
+		{
+			this.command = new CreateExitStatementCommand();
+		}
+	},
+	CREATE_ENTER_STATEMENT{
+		{
+			this.command = new CreateEnterStatementCommand();
+		}
+	},
+	//end captain action commands
+	
+	//system commands
+	ROUTING_USER {
+		{
+			this.command = new RoutingUserCommand();
+		}
+	},
+	LOGIN {
+		{
+			this.command = new LoginCommand();
+		}
+	},
+	LOGOUT {
+		{
+			this.command = new LogoutCommand();
 		}
 	};
 

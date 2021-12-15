@@ -37,6 +37,8 @@ public class FrontController extends HttpServlet {
 			context.setAttribute("userStatusDao", factory.getUserStatusDao());
 			context.setAttribute("pierDao", factory.getPierDao());
 			context.setAttribute("shipDao", factory.getShipDao());
+			context.setAttribute("statementDao", factory.getStatementDao());
+			//add attributes names to resources
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

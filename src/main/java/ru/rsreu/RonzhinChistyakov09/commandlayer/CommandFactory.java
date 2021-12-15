@@ -19,8 +19,6 @@ public class CommandFactory {
 			current = currentEnum.getCurrentCommand();
 		} catch (IllegalArgumentException e) {
 			System.out.println("err! enum exception in ActionFactory");
-			// request.setAttribute("wrongAction", action
-			// + MessageManager.getProperty("message.wrongaction"));
 		}
 		return current;
 	}

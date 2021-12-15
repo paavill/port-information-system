@@ -5,28 +5,32 @@
     <meta charset="UTF-8">
     <title>Port</title>
     <!--pages are controled main classes-->
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="css/main.css">
     <!--head of sight styles-->
-    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="css/header.css">
     <!--data table styles-->
-    <link rel="stylesheet" href="/css/table.css">
-    <link rel="stylesheet" href="/css/tableHead.css">
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/tableHead.css">
     <!--control elements styles-->
-    <link rel="stylesheet" href="/css/scrollbars.css">
-    <link rel="stylesheet" href="/css/buttons.css">
+    <link rel="stylesheet" href="css/scrollbars.css">
+    <link rel="stylesheet" href="css/buttons.css">
 
-    <link rel="stylesheet" href="/css/captainMainPage.css">
+    <link rel="stylesheet" href="css/captainMainPage.css">
 
-    <script src="/js/main.js"></script>
+    <script src="js/main.js"></script>
 </head>
 <body onload="setFirstActive()">
     <header>
         <div class="container">
             <a href="index.html" class="logo">Port</a>
+            <form id="logOutForm" action="FrontController" method="post">
+                <input type="hidden" name="command" value="LOGOUT">
+            </form>
             <nav>
                 <ul>
                     <li><a>Your role: captain</a></li>
                     <li><a>Your user id: ${user.id}</a></li>
+                    <li><input type="submit" form="logOutForm" value="Logout"></li>
                     <li><a href="">About system</a></li>
                 </ul>
             </nav>
@@ -34,7 +38,7 @@
     </header>
         <div class="main">
             <form id="createStatement" action="FrontController" method="post">
-                <input type="hidden" name="command" value="CREATE_STATEMENT"/>
+                <input type="hidden" name="command" value="${statementType}"/>
                 <input type="hidden" name="userId" value="${user.id}" />
             </form>
             <form id="unloadProduct" action="FrontController" method="post">

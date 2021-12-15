@@ -3,15 +3,15 @@
     <meta charset="UTF-8">
     <title>Port</title>
     <!--pages are controled main classes-->
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="css/main.css">
     <!--head of sight styles-->
-    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="css/header.css">
     <!--control elements styles-->
-    <link rel="stylesheet" href="/css/scrollbars.css">
-    <link rel="stylesheet" href="/css/buttons.css">
-    <link rel="stylesheet" href="/css/enterFieldsStyles.css">
+    <link rel="stylesheet" href="css/scrollbars.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/enterFieldsStyles.css">
 
-    <link rel="stylesheet" href="/css/createStatementPage.css">
+    <link rel="stylesheet" href="css/createStatementPage.css">
 </head>
 <body>
     <header>

@@ -1,17 +1,20 @@
-package ru.rsreu.RonzhinChistyakov09.commandlayer.commands;
+package ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain;
 
 import javax.servlet.http.HttpServletRequest;
+
+import com.prutzkow.resourcer.Resourcer;
 
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedirect;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 
-public class EmptyCommand implements ActionCommand {
+public class CreateExitStatementCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
-		//ADD UNDEF COMMAND PAGE
-		return new CommandResultResponseSendRedirect("FrontController?command=SHOW_MAIN_NO_LOGIN_PAGE");
+		// TODO Auto-generated method stub
+		//must be redirect to process statement page
+		return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.captain"));
 	}
 
 }

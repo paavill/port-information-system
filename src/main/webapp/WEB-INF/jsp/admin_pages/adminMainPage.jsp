@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <head lang="US">
     <meta charset="UTF-8">
-    <title>Port</title>
+    <title>Ports</title>
     <!--pages are controled main classes-->
     <link rel="stylesheet" href="css/main.css">
     <!--head of sight styles-->
@@ -101,7 +101,7 @@
                             <form action="FrontController" method="post">
                                 <input name="command" type="hidden" value="DELETE_PIER">
                                 <input name="pierIdToDelete" type="hidden" value="${pierData.id}">
-                                <input type="submit" value="Delete">
+                                <input class="button" type="submit" value="Delete">
                             </form>
                         </section>
                     </div> 
@@ -115,18 +115,18 @@
                     <div class="info">
                         <h3>Ship #${shipData.id}</h3>
                         <div>
-                            <h4>Pier status:</h4>
+                            <h4>Ship title:</h4>
                             <var>${shipData.title}</var>
                         </div>
                         <div>
-                            <h4>Pier capacity:</h4>
+                            <h4>Ship capacity:</h4>
                             <var>${shipData.capacity}</var>
                         </div>
                         <section class="buttons">
                             <form action="FrontController" method="post">
                                 <input name="command" type="hidden" value="DELETE_SHIP">
                                 <input name="shipIdToDelete" type="hidden" value="${shipData.id}">
-                                <input type="submit" value="Delete">
+                                <input class="button" type="submit" value="Delete">
                             </form>
                         </section>
                     </div> 

@@ -5,19 +5,19 @@
     <meta charset="UTF-8">
     <title>Port</title>
     <!--pages are controled main classes-->
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="css/main.css">
     <!--head of sight styles-->
-    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="css/header.css">
     <!--data table styles-->
-    <link rel="stylesheet" href="/css/table.css">
-    <link rel="stylesheet" href="/css/tableHead.css">
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/tableHead.css">
     <!--control elements styles-->
-    <link rel="stylesheet" href="/css/scrollbars.css">
-    <link rel="stylesheet" href="/css/buttons.css">
+    <link rel="stylesheet" href="css/scrollbars.css">
+    <link rel="stylesheet" href="css/buttons.css">
 
-    <link rel="stylesheet" href="/css/dispatcherMainPage.css">
+    <link rel="stylesheet" href="css/dispatcherMainPage.css">
 
-    <script src="/js/main.js"></script>
+    <script src="js/main.js"></script>
 </head>
 <body onload="setFirstActive()">
     <header>
