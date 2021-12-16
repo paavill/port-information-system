@@ -28,7 +28,7 @@ public class OraclePierDao implements PierDao {
 	@Override
 	public Collection<Pier> getAllPiers() throws DataRequestException {
 		Collection<Pier> result = new ArrayList<Pier>();
-		String query = Resourcer.getString("requests.sql.get.piers.allPiers");
+		String query = Resourcer.getString("requests.sql.get.piers.allPiers3");
 		try (Statement statement = this.connection.createStatement()) {
 			try (ResultSet resultSet = statement.executeQuery(query)) {
 				while (resultSet.next()) {
