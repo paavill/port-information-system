@@ -1,0 +1,54 @@
+.mainView{
+    display: block;
+    padding-bottom: 0;
+}
+
+.info div{
+    width:auto;
+    border-style: none;
+}
+
+.processTitle{
+    color: #643e64;
+    width: 100%;
+    border-bottom: #643e6456;
+    border-bottom-style: solid;
+}
+
+.entersFields{
+    display: flex;
+    flex-flow: column;
+}
+
+.enters{
+    flex-flow: row;
+    height: auto;
+}
+
+.buttons .button{
+    width: auto;
+    min-width: 40px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.buttons{
+    justify-content: left;
+    margin-top: 4px;
+}
+
+.buttons .button:first-child{
+    margin-left: 2px;
+}
+
+.title {
+    margin: 3px;
+}
+
+.enter{
+    margin: 3px;
+}
+
+.check-box{
+    margin: 3px;
+}
