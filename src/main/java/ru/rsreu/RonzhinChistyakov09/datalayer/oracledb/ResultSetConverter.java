@@ -50,12 +50,18 @@ public class ResultSetConverter {
 	}
 	
 	public static Pier getPier(ResultSet resultSet) throws SQLException {
-		int id = resultSet.getInt(Resourcer.getString("database.piers.ids"));
+		int id = resultSet.getInt(Resourcer.getString("database.piers.id"));
 		int capacity = resultSet.getInt(Resourcer.getString("database.piers.capacity"));
 		int residualCapacity = resultSet.getInt(Resourcer.getString("database.piers.capacity.residual"));
 		String status = resultSet.getString(Resourcer.getString("database.piers.status"));
-		//String status = " ";
 		Pier pier = new Pier(id, capacity, residualCapacity, status);
+		return pier;
+	}
+	
+	private static Pier getPierForStatement(ResultSet resultSet) throws SQLException {
+		int id = resultSet.getInt(Resourcer.getString("database.piers.id"));
+		int capacity = resultSet.getInt(Resourcer.getString("database.piers.capacity"));
+		Pier pier = new Pier(id, capacity);
 		return pier;
 	}
 	
@@ -63,7 +69,7 @@ public class ResultSetConverter {
 		int id = resultSet.getInt(Resourcer.getString("database.statements.id"));
 		User user = getUser(resultSet);
 		Ship ship = getShip(resultSet);
-		Pier pier = getPier(resultSet);
+		Pier pier = getPierForStatement(resultSet);
 		StatementType type = getStatementType(resultSet);
 		StatementStatus state = getStatementStatus(resultSet);
 		Date doDate = resultSet.getDate(Resourcer.getString("database.statements.doDate"));
@@ -72,13 +78,13 @@ public class ResultSetConverter {
 		return statement;
 	}
 	
-	private static StatementStatus getStatementStatus(ResultSet resultSet) throws SQLException {
+	public static StatementStatus getStatementStatus(ResultSet resultSet) throws SQLException {
 		int id = resultSet.getInt(Resourcer.getString("database.statements.statusId"));
 		String title = resultSet.getString(Resourcer.getString("database.statements.statusTitle"));
 		return new StatementStatus(id, title);
 	}
 	
-	private static StatementType getStatementType(ResultSet resultSet) throws SQLException {
+	public static StatementType getStatementType(ResultSet resultSet) throws SQLException {
 		int id = resultSet.getInt(Resourcer.getString("database.statements.typeId"));
 		String title = resultSet.getString(Resourcer.getString("database.statements.typeTitle"));
 		return new StatementType(id, title);

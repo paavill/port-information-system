@@ -14,10 +14,6 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DBType;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
-import ru.rsreu.RonzhinChistyakov09.logiclayer.moderator.BlockUserLogic;
-import ru.rsreu.RonzhinChistyakov09.logiclayer.moderator.MainModeratorPageLogic;
-import ru.rsreu.RonzhinChistyakov09.logiclayer.moderator.UnblockUserLogic;
 
 public class FrontController extends HttpServlet {
 
@@ -38,7 +34,10 @@ public class FrontController extends HttpServlet {
 			context.setAttribute("pierDao", factory.getPierDao());
 			context.setAttribute("shipDao", factory.getShipDao());
 			context.setAttribute("statementDao", factory.getStatementDao());
-			//add attributes names to resources
+			context.setAttribute("statementStatusDao", factory.getStatementStatusDao());
+			context.setAttribute("statementTypeDao", factory.getStatementTypeDao());
+			System.out.println(factory.getStatementDao().getLastByUserId(1));
+			// add attributes names to resources
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

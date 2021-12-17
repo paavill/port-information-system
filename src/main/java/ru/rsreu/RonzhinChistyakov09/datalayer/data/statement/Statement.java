@@ -12,7 +12,7 @@ public class Statement {
 	private Ship ship; 
 	private Pier pier;
 	private StatementType type;
-	private StatementStatus state;
+	private StatementStatus status;
 	private Date doDate; 
 	private Date finishDate;
 	
@@ -24,7 +24,7 @@ public class Statement {
 		this.ship = ship;
 		this.pier = pier;
 		this.type = type;
-		this.state = state;
+		this.status = state;
 		this.doDate = doDate;
 		this.finishDate = finishDate;
 	}
@@ -49,8 +49,8 @@ public class Statement {
 		return type;
 	}
 
-	public StatementStatus getState() {
-		return state;
+	public StatementStatus getStatus() {
+		return status;
 	}
 
 	public Date getDoDate() {
@@ -64,6 +64,6 @@ public class Statement {
 	@Override
 	public String toString() {
 		return "Statement [id=" + id + ", user=" + user + ", ship=" + ship + ", pier=" + pier + ", type=" + type
-				+ ", state=" + state + ", doDate=" + doDate + ", finishDate=" + finishDate + "]";
+				+ ", state=" + status + ", doDate=" + doDate + ", finishDate=" + finishDate + "]";
 	}
 }
