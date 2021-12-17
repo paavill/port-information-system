@@ -5,4 +5,6 @@
 .buttons .button{
     width: auto;
     min-width: 40px;
+    padding-left: 3px;
+    padding-right: 3px;
 }
