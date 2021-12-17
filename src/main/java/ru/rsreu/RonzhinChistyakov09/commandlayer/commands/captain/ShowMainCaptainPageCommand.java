@@ -13,7 +13,7 @@ public class ShowMainCaptainPageCommand implements ActionCommand {
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
 		String page = Resourcer.getString("jsp.captain.main");
-		boolean isInPort = true;
+		boolean isInPort = false;
 		if(isInPort) {
 			request.setAttribute("typeOfCreatingStatementText", "Create exit statement");
 			request.setAttribute("statementType", "CREATE_EXIT_STATEMENT");

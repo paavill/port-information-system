@@ -9,4 +9,8 @@ public interface StatementDao {
 	abstract Collection<Statement> getAllStatements() throws DataRequestException;
 	
 	abstract void createStatement(Statement statement) throws DataRequestException;
+	
+	abstract Statement getLastByUserId(int userId) throws DataRequestException;
+	
+	abstract int getCount() throws DataRequestException;
 }

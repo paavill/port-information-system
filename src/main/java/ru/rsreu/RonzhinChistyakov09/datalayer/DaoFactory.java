@@ -3,6 +3,8 @@ package ru.rsreu.RonzhinChistyakov09.datalayer;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.ShipDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementStatusDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementTypeDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserRoleDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserStatusDao;
@@ -23,4 +25,8 @@ public abstract class DaoFactory implements AutoCloseable {
 	public abstract PierDao getPierDao();
 
 	public abstract ShipDao getShipDao();
+
+	public abstract StatementStatusDao getStatementStatusDao();
+
+	public abstract StatementTypeDao getStatementTypeDao();
 }

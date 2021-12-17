@@ -10,6 +10,8 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.ShipDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementStatusDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementTypeDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserRoleDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserStatusDao;
@@ -66,6 +68,18 @@ public class OracleDataBaseDaoFactory extends DaoFactory {
 	@Override
 	public StatementDao getStatementDao() {
 		return new OracleStatementDao(this.connection);
+	}
+	
+
+	@Override
+	public StatementTypeDao getStatementTypeDao() {
+		return new OracleStatementTypeDao(this.connection);
+	}
+	
+
+	@Override
+	public StatementStatusDao getStatementStatusDao() {
+		return new OracleStatementStatusDao(this.connection);
 	}
 
 	@Override
