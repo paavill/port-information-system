@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="images/icon.png" type="image/png">
     <title>Port</title>
     <link rel="stylesheet" href="css/header.css">
     

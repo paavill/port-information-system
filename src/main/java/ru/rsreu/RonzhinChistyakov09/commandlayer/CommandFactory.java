@@ -18,7 +18,7 @@ public class CommandFactory {
 			CommandEnum currentEnum = CommandEnum.valueOf(action.toUpperCase());
 			current = currentEnum.getCurrentCommand();
 		} catch (IllegalArgumentException e) {
-			System.out.println("err! enum exception in ActionFactory");
+			System.out.println("err! enum exception in ActionFactory:" + action);
 		}
 		return current;
 	}

@@ -20,6 +20,8 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.edit.ShowEditUse
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.CreateExitStatementCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.CreateEnterStatementCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.ShowMainCaptainPageCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.ShowUnloadPageCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.UnloadProductsCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.dispatcher.ShowMainDispatcherPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 
@@ -114,6 +116,11 @@ public enum CommandEnum {
 			this.command = new ShowMainCaptainPageCommand();
 		}
 	},
+	SHOW_UNLOAD_PAGE{
+		{
+			this.command = new ShowUnloadPageCommand();
+		}
+	},
 	//end captain show commands
 	
 	//captain action commands
@@ -125,6 +132,11 @@ public enum CommandEnum {
 	CREATE_ENTER_STATEMENT{
 		{
 			this.command = new CreateEnterStatementCommand();
+		}
+	},
+	UNLOAD_PRODUCTS{
+		{
+			this.command = new UnloadProductsCommand();
 		}
 	},
 	//end captain action commands
