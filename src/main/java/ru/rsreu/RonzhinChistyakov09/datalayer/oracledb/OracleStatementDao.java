@@ -42,6 +42,24 @@ public class OracleStatementDao implements StatementDao {
 	}
 
 	@Override
+	public Statement getById(int statementId) throws DataRequestException {
+		String query = Resourcer.getString("requests.sql.get.statements.byId");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			PreparedStatementParametresSetter.set(preparedStatement, statementId);
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
+					return ResultSetConverter.getStatement(resultSet);
+
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+		return null;
+	}
+
+	@Override
 	public void createStatement(Statement statement) throws DataRequestException {
 		String query = Resourcer.getString("requests.sql.create.statement");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -60,8 +78,8 @@ public class OracleStatementDao implements StatementDao {
 		String query = Resourcer.getString("requests.sql.get.statement.lastByUserId");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 			PreparedStatementParametresSetter.set(preparedStatement, userId);
-			try(ResultSet resultSet = preparedStatement.executeQuery()){
-				if(resultSet.next()) {
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
 					return ResultSetConverter.getStatement(resultSet);
 				}
 			}
@@ -90,7 +108,8 @@ public class OracleStatementDao implements StatementDao {
 	}
 
 	@Override
-	public Collection<Statement> getUserStatementsByType(int userId, StatementType type, StatementStatus status) throws DataRequestException {
+	public Collection<Statement> getUserStatementsByType(int userId, StatementType type, StatementStatus status)
+			throws DataRequestException {
 		Collection<Statement> result = new ArrayList<Statement>();
 		String query = Resourcer.getString("requests.sql.get.statements.user.byRoleAndStatus");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -108,4 +127,35 @@ public class OracleStatementDao implements StatementDao {
 		return result;
 	}
 
+	@Override
+	public Collection<Statement> getStatementsByStatus(StatementStatus status) throws DataRequestException {
+		Collection<Statement> result = new ArrayList<Statement>();
+		String query = Resourcer.getString("requests.sql.get.statements.byStatus");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			PreparedStatementParametresSetter.set(preparedStatement, status.getId());
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				while (resultSet.next()) {
+					Statement statement = ResultSetConverter.getStatement(resultSet);
+					result.add(statement);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+		return result;
+	}
+
+	@Override
+	public void update(Statement statement) throws DataRequestException {
+		String query = Resourcer.getString("requests.sql.update.statement");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			PreparedStatementParametresSetter.set(preparedStatement, statement.getStatus().getId(),
+					statement.getPier().getId(), statement.getId());
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+	}
 }

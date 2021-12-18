@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -28,7 +27,7 @@ public class OraclePierDao implements PierDao {
 	@Override
 	public Collection<Pier> getAllPiers() throws DataRequestException {
 		Collection<Pier> result = new ArrayList<Pier>();
-		String query = Resourcer.getString("requests.sql.get.piers.allPiers3");
+		String query = Resourcer.getString("requests.sql.get.piers.allPiers");
 		try (Statement statement = this.connection.createStatement()) {
 			try (ResultSet resultSet = statement.executeQuery(query)) {
 				while (resultSet.next()) {

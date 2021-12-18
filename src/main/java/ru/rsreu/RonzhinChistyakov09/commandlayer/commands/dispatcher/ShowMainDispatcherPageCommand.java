@@ -10,6 +10,7 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.ShipDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementStatusDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserRoleDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
@@ -20,12 +21,14 @@ public class ShowMainDispatcherPageCommand implements ActionCommand {
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
 		StatementDao statementDao = (StatementDao) request.getServletContext().getAttribute("statementDao");
+		StatementStatusDao statementStatusDao = (StatementStatusDao) request.getServletContext()
+				.getAttribute("statementStatusDao");
 		UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
 		UserRoleDao userRoleDao = (UserRoleDao) request.getServletContext().getAttribute("userRoleDao");
 		PierDao pierDao = (PierDao) request.getServletContext().getAttribute("pierDao");
 		ShipDao shipDao = (ShipDao) request.getServletContext().getAttribute("shipDao");
 		MainDispatcherPageLogic logic = new MainDispatcherPageLogic(pierDao, userDao, shipDao, statementDao,
-				userRoleDao);
+				userRoleDao, statementStatusDao);
 		try {
 
 			request.setAttribute("statementsToProcess", logic.getStatements());

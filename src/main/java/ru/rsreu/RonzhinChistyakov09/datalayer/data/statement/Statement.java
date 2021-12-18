@@ -29,6 +29,18 @@ public class Statement {
 		this.finishDate = finishDate;
 	}
 	
+	public void setPier(Pier pier) {
+		this.pier = pier;
+	}
+
+	public void setStatus(StatementStatus status) {
+		this.status = status;
+	}
+
+	public void setFinishDate(Date finishDate) {
+		this.finishDate = finishDate;
+	}
+
 	public int getId() {
 		return id;
 	}

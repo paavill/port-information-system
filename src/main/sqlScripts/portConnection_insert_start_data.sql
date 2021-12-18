@@ -45,8 +45,8 @@ INSERT ALL
 SELECT * 
 FROM DUAL;
 
-UPDATE statements SET finish_statement_date = TO_DATE('2021/12/18 13:49:44', 'yyyy/mm/dd hh24:mi:ss'), status_id = 3 WHERE id = 1;
-UPDATE statements SET finish_statement_date = TO_DATE('2021/12/18 13:53:44', 'yyyy/mm/dd hh24:mi:ss'), status_id = 3 WHERE id = 2;
+UPDATE statements SET pier_id = 1, finish_statement_date = TO_DATE('2021/12/18 13:49:44', 'yyyy/mm/dd hh24:mi:ss'), status_id = 3 WHERE id = 3;
+UPDATE statements SET pier_id = 1, finish_statement_date = TO_DATE('2021/12/18 13:53:44', 'yyyy/mm/dd hh24:mi:ss'), status_id = 3 WHERE id = 2;
 
 SELECT pier_ids, pier_capacity, (pier_capacity - COUNT(goods.id)) AS r_c, pier_status
 FROM goods RIGHT JOIN (

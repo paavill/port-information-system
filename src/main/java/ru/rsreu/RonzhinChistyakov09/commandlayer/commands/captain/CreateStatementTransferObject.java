@@ -26,6 +26,7 @@ public class CreateStatementTransferObject implements DataTransferObject<Stateme
 	private StatementTypeDao statementTypeDao;
 	private static final String FINISH_STATUS_TITLE = "FINISHED";
 	private static final String CREATE_STATUS_TITLE = "CREATED";
+	private static final String REJECT_STATUS_TITLE = "REJECTED";
 	private static final String ENTER_TYPE_TITLE = "ENTER";
 	private static final String EXIT_TYPE_TITLE = "EXIT";
 
@@ -55,6 +56,10 @@ public class CreateStatementTransferObject implements DataTransferObject<Stateme
 		Statement lastStatement = this.statementDao.getLastByUserId(user.getId());
 		if(lastStatement == null) {
 			return enterType;
+		}
+		StatementStatus rejectStatus = this.statementStatusDao.getByTitle(REJECT_STATUS_TITLE);
+		if(lastStatement.getStatus().equals(rejectStatus)) {
+			return lastStatement.getType();
 		}
 		StatementStatus finishStatus = this.statementStatusDao.getByTitle(FINISH_STATUS_TITLE);
 		if (!lastStatement.getStatus().equals(finishStatus)) {

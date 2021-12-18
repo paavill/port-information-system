@@ -22,7 +22,9 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.CreateEnterSta
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.ShowMainCaptainPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.ShowUnloadPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.UnloadProductsCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.dispatcher.RejectStatementCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.dispatcher.ShowMainDispatcherPageCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.dispatcher.ShowProcessStatementPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.moderator.BlockUserCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.moderator.ShowMainModeratorPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.moderator.UnblockUserCommand;
@@ -34,13 +36,13 @@ public enum CommandEnum {
 			this.command = new ShowMainNoLoginPageCommand();
 		}
 	},
-	
+
 	SHOW_LOGIN_PAGE {
 		{
 			this.command = new ShowLoginPageCommand();
 		}
 	},
-	//admin show commands
+	// admin show commands
 	SHOW_MAIN_ADMIN_PAGE {
 		{
 			this.command = new ShowMainAdminPageCommand();
@@ -61,14 +63,14 @@ public enum CommandEnum {
 			this.command = new ShowCreatePierPageCommand();
 		}
 	},
-	SHOW_CREATE_SHIP_PAGE{
+	SHOW_CREATE_SHIP_PAGE {
 		{
 			this.command = new ShowCreateShipPageCommand();
 		}
 	},
-	//end admin show commands
-	
-	//admin action commands
+	// end admin show commands
+
+	// admin action commands
 	CREATE_USER {
 		{
 			this.command = new CreateUserCommand();
@@ -94,74 +96,84 @@ public enum CommandEnum {
 			this.command = new DeletePierCommand();
 		}
 	},
-	CREATE_SHIP{
+	CREATE_SHIP {
 		{
 			this.command = new CreateShipCommand();
 		}
 	},
-	DELETE_SHIP{
+	DELETE_SHIP {
 		{
 			this.command = new DeleteShipCommand();
 		}
 	},
-	//end admin action commands
-	
+	// end admin action commands
+
 	// moderator show command
-	SHOW_MAIN_MODERATOR_PAGE{
+	SHOW_MAIN_MODERATOR_PAGE {
 		{
 			this.command = new ShowMainModeratorPageCommand();
 		}
 	},
-	//moderator action commands
-	BLOCK_USER{
+	// moderator action commands
+	BLOCK_USER {
 		{
 			this.command = new BlockUserCommand();
 		}
 	},
-	UNBLOCK_USER{
+	UNBLOCK_USER {
 		{
 			this.command = new UnblockUserCommand();
 		}
 	},
-	//dispatcher show commands
-	SHOW_MAIN_DISPATCHER_PAGE{
+	// dispatcher show commands
+	SHOW_MAIN_DISPATCHER_PAGE {
 		{
 			this.command = new ShowMainDispatcherPageCommand();
 		}
 	},
-	
-	//captain show commands
-	SHOW_MAIN_CAPTAIN_PAGE{
+	SHOW_PROCESS_STATEMENT_PAGE {
+		{
+			this.command = new ShowProcessStatementPageCommand();
+		}
+	},
+	REJECT_STATEMENT {
+		{
+			this.command = new RejectStatementCommand();
+		}
+	},
+
+	// captain show commands
+	SHOW_MAIN_CAPTAIN_PAGE {
 		{
 			this.command = new ShowMainCaptainPageCommand();
 		}
 	},
-	SHOW_UNLOAD_PAGE{
+	SHOW_UNLOAD_PAGE {
 		{
 			this.command = new ShowUnloadPageCommand();
 		}
 	},
-	//end captain show commands
-	
-	//captain action commands
-	CREATE_EXIT_STATEMENT{
+	// end captain show commands
+
+	// captain action commands
+	CREATE_EXIT_STATEMENT {
 		{
 			this.command = new CreateExitStatementCommand();
 		}
 	},
-	CREATE_ENTER_STATEMENT{
+	CREATE_ENTER_STATEMENT {
 		{
 			this.command = new CreateEnterStatementCommand();
 		}
 	},
-	UNLOAD_PRODUCTS{
+	UNLOAD_PRODUCTS {
 		{
 			this.command = new UnloadProductsCommand();
 		}
 	},
-	//end captain action commands
-	
-	//system commands
+	// end captain action commands
+
+	// system commands
 	ROUTING_USER {
 		{
 			this.command = new RoutingUserCommand();
