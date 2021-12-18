@@ -10,7 +10,7 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementStatusDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementTypeDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
-public class ShowMainCaptainPageLogic {
+public class MainCaptainPageLogic {
 
 	private final StatementDao statementDao;
 	private final StatementTypeDao statementTypeDao;
@@ -20,7 +20,7 @@ public class ShowMainCaptainPageLogic {
 	private static final String FINISH_STATUS_TITLE = "FINISHED";
 	
 	
-	public ShowMainCaptainPageLogic(StatementDao statementDao, StatementTypeDao statementTypeDao, StatementStatusDao statementStatusDao) {
+	public MainCaptainPageLogic(StatementDao statementDao, StatementTypeDao statementTypeDao, StatementStatusDao statementStatusDao) {
 		this.statementDao = statementDao;
 		this.statementTypeDao = statementTypeDao;
 		this.statementStatusDao = statementStatusDao;

@@ -58,15 +58,15 @@
                         </div>
                         <div>
                             <h4>Status:</h4>
-                            <var>${statement.status}</var>
+                            <var>${statement.status.title}</var>
                         </div>
                         <div>
                             <h4>Type:</h4>
-                            <var>${statement.type}</var>
+                            <var>${statement.type.title}</var>
                         </div>
                         <div>
                             <h4>Filing date:</h4>
-                            <var>${statement.date.toString}</var>
+                            <var>${statement.doDate}</var>
                         </div>
                         <section class="buttons">
                             <form action="FrontController" method="post">
@@ -110,10 +110,10 @@
                             <h4>Title:</h4>
                             <var>${shipData.title}</var>
                         </div>
-                        <div>
+                        <%-- <div>
                             <h4>Captain Id:</h4>
                             <var>${shipData.captain}</var>
-                        </div>
+                        </div> --%>
                         <div>
                             <h4>Capacity:</h4>
                             <var>${shipData.capacity}</var>

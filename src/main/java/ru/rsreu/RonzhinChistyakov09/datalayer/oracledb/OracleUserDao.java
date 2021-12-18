@@ -11,7 +11,6 @@ import java.util.Collection;
 import com.prutzkow.resourcer.Resourcer;
 
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserStatus;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
@@ -28,6 +27,26 @@ public class OracleUserDao implements UserDao {
 		String query = Resourcer.getString("requests.sql.get.users.allUsers");
 		try (Statement statement = this.connection.createStatement()) {
 			try (ResultSet resultSet = statement.executeQuery(query)) {
+				while (resultSet.next()) {
+					User user = ResultSetConverter.getUser(resultSet);
+					result.add(user);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+		return result;
+	}
+	
+
+	@Override
+	public Collection<User> getUsersByRoleId(int roleId) throws DataRequestException {
+		Collection<User> result = new ArrayList<User>();
+		String query = Resourcer.getString("requests.sql.get.users.byRole");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			PreparedStatementParametresSetter.set(preparedStatement, roleId);
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 				while (resultSet.next()) {
 					User user = ResultSetConverter.getUser(resultSet);
 					result.add(user);

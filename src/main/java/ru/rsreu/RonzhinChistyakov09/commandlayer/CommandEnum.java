@@ -23,6 +23,9 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.ShowMainCaptai
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.ShowUnloadPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.UnloadProductsCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.dispatcher.ShowMainDispatcherPageCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.moderator.BlockUserCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.moderator.ShowMainModeratorPageCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.moderator.UnblockUserCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 
 public enum CommandEnum {
@@ -103,6 +106,23 @@ public enum CommandEnum {
 	},
 	//end admin action commands
 	
+	// moderator show command
+	SHOW_MAIN_MODERATOR_PAGE{
+		{
+			this.command = new ShowMainModeratorPageCommand();
+		}
+	},
+	//moderator action commands
+	BLOCK_USER{
+		{
+			this.command = new BlockUserCommand();
+		}
+	},
+	UNBLOCK_USER{
+		{
+			this.command = new UnblockUserCommand();
+		}
+	},
 	//dispatcher show commands
 	SHOW_MAIN_DISPATCHER_PAGE{
 		{

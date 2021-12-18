@@ -12,7 +12,7 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementStatusDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementTypeDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
-import ru.rsreu.RonzhinChistyakov09.logiclayer.captain.ShowMainCaptainPageLogic;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.captain.MainCaptainPageLogic;
 
 public class ShowMainCaptainPageCommand implements ActionCommand {
 
@@ -25,7 +25,7 @@ public class ShowMainCaptainPageCommand implements ActionCommand {
 		StatementStatusDao statementStatusDao = (StatementStatusDao) request.getServletContext()
 				.getAttribute("statementStatusDao");
 		User user = (User) request.getSession().getAttribute("user");
-		ShowMainCaptainPageLogic logic = new ShowMainCaptainPageLogic(statementDao, statementTypeDao,
+		MainCaptainPageLogic logic = new MainCaptainPageLogic(statementDao, statementTypeDao,
 				statementStatusDao);
 		try {
 			request.setAttribute("enterStatements", logic.getUserEnterTypeStatement(user.getId()));

@@ -1,8 +1,5 @@
 package ru.rsreu.RonzhinChistyakov09.commandlayer.commands.dispatcher;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import javax.servlet.http.HttpServletRequest;
 
 import com.prutzkow.resourcer.Resourcer;
@@ -10,21 +7,37 @@ import com.prutzkow.resourcer.Resourcer;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseForward;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.Statement;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.ShipDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserRoleDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.dispatcher.MainDispatcherPageLogic;
 
 public class ShowMainDispatcherPageCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
-		String page = Resourcer.getString("jsp.dispatcher.main");
-		StatementDao statementDao = (StatementDao) request.getAttribute("statementDao");// throws nullptr
-		Collection<Statement> statements = new ArrayList<Statement>();// = statementDao.getAllStatements();
+		StatementDao statementDao = (StatementDao) request.getServletContext().getAttribute("statementDao");
+		UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
+		UserRoleDao userRoleDao = (UserRoleDao) request.getServletContext().getAttribute("userRoleDao");
+		PierDao pierDao = (PierDao) request.getServletContext().getAttribute("pierDao");
+		ShipDao shipDao = (ShipDao) request.getServletContext().getAttribute("shipDao");
+		MainDispatcherPageLogic logic = new MainDispatcherPageLogic(pierDao, userDao, shipDao, statementDao,
+				userRoleDao);
+		try {
 
-		// shipsData
-		// captainsData
-		// check attributes in jsp that need to set
+			request.setAttribute("statementsToProcess", logic.getStatements());
+			request.setAttribute("captainsData", logic.getCaptains());
+			request.setAttribute("piersData", logic.getPiers());
+			request.setAttribute("shipsData", logic.getShips());
+
+		} catch (DataRequestException e) {
+			e.printStackTrace();
+		}
+
+		String page = Resourcer.getString("jsp.dispatcher.main");
 		return new CommandResultResponseForward(page);
 	}
 
