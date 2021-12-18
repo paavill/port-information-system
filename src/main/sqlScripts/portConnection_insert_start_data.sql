@@ -29,21 +29,24 @@ INSERT ALL
     INTO goods VALUES (3, 'TESTNAME', 0, 1)
     INTO goods VALUES (4, 'TESTNAME', 0, 1)
     
-    INTO statements VALUES (0, 1, 0, 0, 0, 3, TO_DATE('2021/12/12 21:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 22:02:44', 'yyyy/mm/dd hh24:mi:ss'))
-    INTO statements VALUES (1, 1, 0, 0, 1, 3, TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'))
-    INTO statements VALUES (2, 1, 0, 0, 0, 3, TO_DATE('2021/12/13 00:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 01:02:44', 'yyyy/mm/dd hh24:mi:ss'))
-    INTO statements VALUES (3, 1, 0, 0, 1, 3, TO_DATE('2021/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 03:02:44', 'yyyy/mm/dd hh24:mi:ss'))
-    
-    INTO statements VALUES (4, 1, 0, 1, 0, 3, TO_DATE('2020/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'))
-    INTO statements VALUES (5, 1, 0, 1, 1, 3, TO_DATE('2020/12/13 00:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 01:02:44', 'yyyy/mm/dd hh24:mi:ss'))
-    INTO statements VALUES (6, 1, 0, 1, 0, 3, TO_DATE('2020/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 04:02:44', 'yyyy/mm/dd hh24:mi:ss'))
-    
-    INTO statements VALUES (7, 1, 0, 2, 0, 3, TO_DATE('2020/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'))
-    INTO statements VALUES (8, 1, 0, 2, 1, 3, TO_DATE('2020/12/13 00:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 01:02:44', 'yyyy/mm/dd hh24:mi:ss'))
-    INTO statements VALUES (9, 1, 0, 2, 0, 3, TO_DATE('2020/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 03:02:44', 'yyyy/mm/dd hh24:mi:ss'))
-    INTO statements VALUES (10, 1, 0, 2, 1, 3, TO_DATE('2020/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 03:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+--    INTO statements VALUES (0, 1, 0, 0, 0, 3, TO_DATE('2021/12/12 21:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 22:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+--    INTO statements VALUES (1, 1, 0, 0, 1, 3, TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+--    INTO statements VALUES (2, 1, 0, 0, 0, 3, TO_DATE('2021/12/13 00:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 01:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+--    INTO statements VALUES (3, 1, 0, 0, 1, 3, TO_DATE('2021/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 03:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+--    
+--    INTO statements VALUES (4, 1, 0, 1, 0, 3, TO_DATE('2020/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+--    INTO statements VALUES (5, 1, 0, 1, 1, 3, TO_DATE('2020/12/13 00:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 01:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+--    INTO statements VALUES (6, 1, 0, 1, 0, 3, TO_DATE('2020/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 04:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+--    
+--    INTO statements VALUES (7, 1, 0, 2, 0, 3, TO_DATE('2020/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+--    INTO statements VALUES (8, 1, 0, 2, 1, 3, TO_DATE('2020/12/13 00:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 01:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+--    INTO statements VALUES (9, 1, 0, 2, 0, 3, TO_DATE('2020/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 03:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+--    INTO statements VALUES (10, 1, 0, 2, 1, 3, TO_DATE('2020/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 03:02:44', 'yyyy/mm/dd hh24:mi:ss'))
 SELECT * 
 FROM DUAL;
+
+UPDATE statements SET finish_statement_date = TO_DATE('2021/12/18 13:49:44', 'yyyy/mm/dd hh24:mi:ss'), status_id = 3 WHERE id = 1;
+UPDATE statements SET finish_statement_date = TO_DATE('2021/12/18 13:53:44', 'yyyy/mm/dd hh24:mi:ss'), status_id = 3 WHERE id = 2;
 
 SELECT pier_ids, pier_capacity, (pier_capacity - COUNT(goods.id)) AS r_c, pier_status
 FROM goods RIGHT JOIN (

@@ -20,8 +20,6 @@ public class CreateEnterStatementCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
-		System.out.println("Create");
-		UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
 		ShipDao shipDao = (ShipDao) request.getServletContext().getAttribute("shipDao");
 		StatementDao statementDao = (StatementDao) request.getServletContext().getAttribute("statementDao");
 		StatementTypeDao statementTypeDao = (StatementTypeDao) request.getServletContext()

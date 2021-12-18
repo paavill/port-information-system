@@ -10,6 +10,8 @@ import java.util.Collection;
 import com.prutzkow.resourcer.Resourcer;
 
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.Statement;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.StatementStatus;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.StatementType;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
@@ -85,6 +87,25 @@ public class OracleStatementDao implements StatementDao {
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
 		return count;
+	}
+
+	@Override
+	public Collection<Statement> getUserStatementsByType(int userId, StatementType type, StatementStatus status) throws DataRequestException {
+		Collection<Statement> result = new ArrayList<Statement>();
+		String query = Resourcer.getString("requests.sql.get.statements.user.byRoleAndStatus");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			PreparedStatementParametresSetter.set(preparedStatement, userId, type.getId(), status.getId());
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				while (resultSet.next()) {
+					Statement statement = ResultSetConverter.getStatement(resultSet);
+					result.add(statement);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+		return result;
 	}
 
 }

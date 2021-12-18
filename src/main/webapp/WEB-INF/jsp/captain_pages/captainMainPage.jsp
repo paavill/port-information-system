@@ -73,11 +73,11 @@
                         </div>
                         <div>
                             <h4>Filing time:</h4>
-                            <var>${statement.password}</var>
+                            <var>${statement.doDate}</var>
                         </div>
                         <div>
                             <h4>Lead time:</h4>
-                            <var>${statement.fullName}</var>
+                            <var>${statement.finishDate}</var>
                         </div>
                     </div> 
                 </c:forEach>
@@ -96,11 +96,11 @@
                         </div>
                         <div>
                             <h4>Filing time:</h4>
-                            <var>${statement.password}</var>
+                            <var>${statement.doDate}</var>
                         </div>
                         <div>
                             <h4>Lead time:</h4>
-                            <var>${statement.fullName}</var>
+                            <var>${statement.finishDate}</var>
                         </div>
                     </div> 
                 </c:forEach>

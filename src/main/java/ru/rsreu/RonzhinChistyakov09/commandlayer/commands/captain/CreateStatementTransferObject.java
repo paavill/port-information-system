@@ -25,6 +25,7 @@ public class CreateStatementTransferObject implements DataTransferObject<Stateme
 	private StatementStatusDao statementStatusDao;
 	private StatementTypeDao statementTypeDao;
 	private static final String FINISH_STATUS_TITLE = "FINISHED";
+	private static final String CREATE_STATUS_TITLE = "CREATED";
 	private static final String ENTER_TYPE_TITLE = "ENTER";
 	private static final String EXIT_TYPE_TITLE = "EXIT";
 
@@ -41,26 +42,28 @@ public class CreateStatementTransferObject implements DataTransferObject<Stateme
 		User user = (User) ((HttpServletRequest) request).getSession().getAttribute("user");
 		Ship ship = shipDao.getUserShip(user.getId());
 		int id = this.statementDao.getCount() + 1;
+		Date date = Date.valueOf(LocalDate.now());
+		StatementStatus createStatus = this.statementStatusDao.getByTitle(CREATE_STATUS_TITLE);
+		StatementType type = getStatementTypeNewStatement(user);
+		Statement statement = new Statement(id, user, ship, null, type, createStatus, date, null);
+		return statement;
+	}
+
+	private StatementType getStatementTypeNewStatement(User user) throws DataRequestException {
+		StatementType enterType = this.statementTypeDao.getByTitle(ENTER_TYPE_TITLE);
+		StatementType exitType = this.statementTypeDao.getByTitle(EXIT_TYPE_TITLE);
 		Statement lastStatement = this.statementDao.getLastByUserId(user.getId());
+		if(lastStatement == null) {
+			return enterType;
+		}
 		StatementStatus finishStatus = this.statementStatusDao.getByTitle(FINISH_STATUS_TITLE);
 		if (!lastStatement.getStatus().equals(finishStatus)) {
 			throw new DataRequestException("STATEMENT NOT FINISHED");
 		}
-		StatementType type = getStatementTypeNewStatement(lastStatement.getType());
-		Date date = Date.valueOf(LocalDate.now());
-
-		Statement statement = new Statement(id, user, ship, null, type, new StatementStatus(0, ""), date, null);
-		return statement;
-	}
-
-	private StatementType getStatementTypeNewStatement(StatementType lastStatementType) throws DataRequestException {
-		StatementType enterType = this.statementTypeDao.getByTitle(ENTER_TYPE_TITLE);
-		StatementType exitType = this.statementTypeDao.getByTitle(EXIT_TYPE_TITLE);
-
-		if (lastStatementType.equals(enterType)) {
+		if (lastStatement.getType().equals(enterType)) {
 			return exitType;
 		}
-		if (lastStatementType.equals(exitType)) {
+		if (lastStatement.getType().equals(exitType)) {
 			return enterType;
 		}
 		throw new DataRequestException("bad type");
