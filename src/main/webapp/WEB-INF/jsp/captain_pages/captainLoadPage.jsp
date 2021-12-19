@@ -48,33 +48,30 @@
                     <input id="input-products" type="hidden" name="jsonProducts">
                 </form>
                 
-                <div class="products-table">     
+                <div id="products-table">     
                     <c:forEach var="product" items="${productsData}">
                         <div class="info">
                             <h3>Product title: ${product.title}</h3>
                             <div class="enters">
                                 <div class="entersTitles">
                                     <h4 class="title">Number of products:</h4>
-                                    <h4 class="title">Pier capacity:</h4>
+                                    <h4 class="title">Product title:</h4>
                                     <h4 class="title">How many products to load:</h4>
-                                    <h4 class="title">Heed to load:</h4>
                                 </div>
 
                                 <div class="entersFields">
                                     <var class="title">${product.number}</var>
-                                    <var class="title">${pierData.capacity}</var>
-                                    <input class="enter" required name="number" type="number" placeholder="Enter number">
-                                    <input class="check-box" required name="needToLoad" type="checkbox" placeholder="Enter number">
-                                    <input type="hidden" name="prodTitle" value="${product.title}">
+                                    <var class="title">${product.title}</var>
+                                    <input class="enter" required type="number" placeholder="Enter number">
+                                    <input type="hidden" value="${product.title}">
                                 </div>
                             </div>
                         </div> 
                     </c:forEach>
                 </div>
-            
                 
                 <div class="buttons">
-                    <input class="button" type="submit" onclick="handleLoadClick()" form="loadForm" value="Load products">
+                    <input class="button" type="button" onclick="handleLoadClick()" form="loadForm" value="Load products">
                 </div>
             </section>   
         </div>

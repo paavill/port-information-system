@@ -19,32 +19,32 @@ INSERT ALL
     INTO users VALUES (1, 'aleksej', '123', 'Aleksej Vladimirovich Ronzhin', 3, 3)
     
     
---    INTO ships VALUES (0, 1, 'ship_title', 10)
---    --delete capacity from ship
---    
---    INTO piers VALUES (0, 123, TO_DATE('2021/12/12 21:02:44', 'yyyy/mm/dd hh24:mi:ss'), null)
---    INTO piers VALUES (1, 123, TO_DATE('2021/12/12 21:02:44', 'yyyy/mm/dd hh24:mi:ss'), null)
---    INTO piers VALUES (2, 123, TO_DATE('2021/12/12 21:02:44', 'yyyy/mm/dd hh24:mi:ss'), null)
---    
---    INTO goods VALUES (0, 'TESTNAME', 0, 1)
---    INTO goods VALUES (1, 'TESTNAME', 0, 1)
---    INTO goods VALUES (2, 'TESTNAME', 0, 1)
---    INTO goods VALUES (3, 'TESTNAME', 0, 1)
---    INTO goods VALUES (4, 'TESTNAME', 0, 1)
+    INTO ships VALUES (0, 1, 'ship_title', 10)
+    --delete capacity from ship
     
---    INTO statements VALUES (0, 1, 0, 0, 0, 3, TO_DATE('2021/12/12 21:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 22:02:44', 'yyyy/mm/dd hh24:mi:ss'))
---    INTO statements VALUES (1, 1, 0, 0, 1, 3, TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'))
---    INTO statements VALUES (2, 1, 0, 0, 0, 3, TO_DATE('2021/12/13 00:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 01:02:44', 'yyyy/mm/dd hh24:mi:ss'))
---    INTO statements VALUES (3, 1, 0, 0, 1, 3, TO_DATE('2021/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 03:02:44', 'yyyy/mm/dd hh24:mi:ss'))
---    
---    INTO statements VALUES (4, 1, 0, 1, 0, 3, TO_DATE('2020/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'))
---    INTO statements VALUES (5, 1, 0, 1, 1, 3, TO_DATE('2020/12/13 00:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 01:02:44', 'yyyy/mm/dd hh24:mi:ss'))
---    INTO statements VALUES (6, 1, 0, 1, 0, 3, TO_DATE('2020/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 04:02:44', 'yyyy/mm/dd hh24:mi:ss'))
---    
---    INTO statements VALUES (7, 1, 0, 2, 0, 3, TO_DATE('2020/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'))
---    INTO statements VALUES (8, 1, 0, 2, 1, 3, TO_DATE('2020/12/13 00:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 01:02:44', 'yyyy/mm/dd hh24:mi:ss'))
---    INTO statements VALUES (9, 1, 0, 2, 0, 3, TO_DATE('2020/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 03:02:44', 'yyyy/mm/dd hh24:mi:ss'))
---    INTO statements VALUES (10, 1, 0, 2, 1, 3, TO_DATE('2020/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 03:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+    INTO piers VALUES (0, 123, TO_DATE('2021/12/12 21:02:44', 'yyyy/mm/dd hh24:mi:ss'), null)
+    INTO piers VALUES (1, 123, TO_DATE('2021/12/12 21:02:44', 'yyyy/mm/dd hh24:mi:ss'), null)
+    INTO piers VALUES (2, 123, TO_DATE('2021/12/12 21:02:44', 'yyyy/mm/dd hh24:mi:ss'), null)
+    
+    INTO goods VALUES (0, 'TESTNAME', 0, 1)
+    INTO goods VALUES (1, 'TESTNAME', 0, 1)
+    INTO goods VALUES (2, 'TESTNAME', 0, 1)
+    INTO goods VALUES (3, 'TESTNAME', 0, 1)
+    INTO goods VALUES (4, 'TESTNAME', 0, 1)
+    
+    INTO statements VALUES (0, 1, 0, 0, 0, 3, TO_DATE('2021/12/12 21:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 22:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+    INTO statements VALUES (1, 1, 0, 0, 1, 3, TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+    INTO statements VALUES (2, 1, 0, 0, 0, 3, TO_DATE('2021/12/13 00:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 01:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+    INTO statements VALUES (3, 1, 0, 0, 1, 3, TO_DATE('2021/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 03:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+    
+    INTO statements VALUES (4, 1, 0, 1, 0, 3, TO_DATE('2020/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+    INTO statements VALUES (5, 1, 0, 1, 1, 3, TO_DATE('2020/12/13 00:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 01:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+    INTO statements VALUES (6, 1, 0, 1, 0, 3, TO_DATE('2020/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 04:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+    
+    INTO statements VALUES (7, 1, 0, 2, 0, 3, TO_DATE('2020/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+    INTO statements VALUES (8, 1, 0, 2, 1, 3, TO_DATE('2020/12/13 00:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 01:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+    INTO statements VALUES (9, 1, 0, 2, 0, 3, TO_DATE('2020/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 03:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+    INTO statements VALUES (10, 1, 0, 2, 1, 3, TO_DATE('2020/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 03:02:44', 'yyyy/mm/dd hh24:mi:ss'))
 SELECT * 
 FROM DUAL;
 

@@ -5,11 +5,17 @@ function handleLoadClick() {
 
     const children = table.children;
     for (let i = 0; i < children.length; i++) {
-        const id = children[i].lastElementChild.firstElementChild.value;
-        const shouldUpload = children[i].children[children[i].children.length - 2].firstElementChild.checked;
-        if (shouldUpload) {
-            products.push(id);
+        const entersFields = children[i].getElementsByClassName('entersFields')[0].children;
+        const number = entersFields[2].value;
+        const title = entersFields[3].value;
+        if (number != null && number > 0) {
+            products.push({
+                'title': title,
+                'number': number
+            });
         }
     }
-    document.getElementById('input-products').setAttribute('value', JSON.stringify(products));
+    if(products.length > 0){
+        document.getElementById('input-products').setAttribute('value', JSON.stringify(products));
+    }
 }
