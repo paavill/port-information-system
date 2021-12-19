@@ -21,7 +21,7 @@ public class LogoutCommand implements ActionCommand {
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute("user");
 			logoutLogic.logout(user);
-			session.removeAttribute("user");
+			session.invalidate();
 		} catch (DataRequestException e) {
 			e.printStackTrace();
 		}

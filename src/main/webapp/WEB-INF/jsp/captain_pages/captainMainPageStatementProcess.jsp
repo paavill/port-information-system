@@ -24,8 +24,8 @@
     <header>
         <div class="container">
             <a href="index.html" class="logo">Port</a>
-            <form id="logOutForm" action="/FrontController" method="post">
-                <input type="hidden" name="command" value="LOGOUT" />
+            <form id="logOutForm" action="FrontController" method="post">
+                <input type="hidden" name="command" value="LOGOUT">
             </form>
             <nav>
                 <ul>
@@ -49,7 +49,7 @@
                     </div>
                     <form id="statementData" class="entersFields" action="/FrontController" method="post">
                         <input type="hidden" name="command" value="CANCEL_STATEMENT">
-                        <input type="hidden" name="statementId" value="${stetement.id}">
+                        <input type="hidden" name="statementId" value="${statement.id}">
                         <h4 class="title">${statement.id}</h4>
                         <h4 class="title">${statement.status.title}</h4>
                         <h4 class="title">${statement.type.title}</h4>
@@ -79,12 +79,16 @@
                             <var>${statement.pier}</var>
                         </div>
                         <div>
+                            <h4>Status:</h4>
+                            <var>${statement.status.title}</var>
+                        </div>
+                        <div>
                             <h4>Filing time:</h4>
-                            <var>${statement.password}</var>
+                            <var>${statement.doDate}</var>
                         </div>
                         <div>
                             <h4>Lead time:</h4>
-                            <var>${statement.fullName}</var>
+                            <var>${statement.finishDate}</var>
                         </div>
                     </div> 
                 </c:forEach>
@@ -102,12 +106,16 @@
                             <var>${statement.pier}</var>
                         </div>
                         <div>
+                            <h4>Status:</h4>
+                            <var>${statement.status.title}</var>
+                        </div>
+                        <div>
                             <h4>Filing time:</h4>
-                            <var>${statement.password}</var>
+                            <var>${statement.doDate}</var>
                         </div>
                         <div>
                             <h4>Lead time:</h4>
-                            <var>${statement.fullName}</var>
+                            <var>${statement.finishDate}</var>
                         </div>
                     </div> 
                 </c:forEach>

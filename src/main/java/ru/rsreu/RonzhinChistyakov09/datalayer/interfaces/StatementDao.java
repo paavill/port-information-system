@@ -22,5 +22,5 @@ public interface StatementDao {
 
 	abstract Statement getById(int statementId) throws DataRequestException;
 
-	abstract void update(Statement statement) throws DataRequestException;
+	abstract void updateStatus(StatementStatus status, int id) throws DataRequestException;
 }

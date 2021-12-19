@@ -113,9 +113,6 @@ CREATE TABLE statements
     CONSTRAINT statements_ships_fk
         FOREIGN KEY (ship_id)
         REFERENCES ships(id),
-    CONSTRAINT statements_piers_fk
-        FOREIGN KEY (pier_id)
-        REFERENCES piers(id),
     CONSTRAINT statements_types_fk
       FOREIGN KEY (type_id)
       REFERENCES statements_types(id),

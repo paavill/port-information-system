@@ -7,6 +7,7 @@ import com.prutzkow.resourcer.Resourcer;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseForward;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.Statement;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementStatusDao;
@@ -28,20 +29,22 @@ public class ShowMainCaptainPageCommand implements ActionCommand {
 		MainCaptainPageLogic logic = new MainCaptainPageLogic(statementDao, statementTypeDao,
 				statementStatusDao);
 		try {
+			for(Statement st: logic.getUserEnterTypeStatement(user.getId())){
+				System.out.println(st);
+			}
 			request.setAttribute("enterStatements", logic.getUserEnterTypeStatement(user.getId()));
 			request.setAttribute("exitStatements", logic.getUserExitTypeStatement(user.getId()));
+			Statement statement = logic.getCurrentStatement(user.getId());
+			if( statement != null) {
+				page = Resourcer.getString("jsp.captain.main.process");
+				request.setAttribute("statement", statement);
+			} else {
+			}
 		} catch (DataRequestException e) {
 			e.printStackTrace();
 		}
-
-		request.setAttribute("typeOfCreatingStatementText", "Create statement");
-		request.setAttribute("statementType", "CREATE_ENTER_STATEMENT");
 		request.setAttribute("typeOfUnloadingButton", "hidden");
 		request.setAttribute("typeOfLoadingButton", "hidden");
-		// check other data attrubute
-		// we need to check is user in port or not in:
-		// show unload product page and unload product commands
-		// and all this in load commands
 		return new CommandResultResponseForward(page);
 	}
 

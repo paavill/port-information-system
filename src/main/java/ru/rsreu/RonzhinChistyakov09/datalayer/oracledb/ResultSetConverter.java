@@ -61,6 +61,9 @@ public class ResultSetConverter {
 	private static Pier getPierForStatement(ResultSet resultSet) throws SQLException {
 		int id = resultSet.getInt(Resourcer.getString("database.piers.id"));
 		int capacity = resultSet.getInt(Resourcer.getString("database.piers.capacity"));
+		if(id == 0 && capacity == 0) {
+			return null;
+		}
 		Pier pier = new Pier(id, capacity);
 		return pier;
 	}

@@ -12,11 +12,10 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.ShipDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementStatusDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementTypeDao;
-import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.captain.CreateStatementLogic;
 
-public class CreateEnterStatementCommand implements ActionCommand {
+public class CreateStatementCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {

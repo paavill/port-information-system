@@ -17,8 +17,7 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.delete.DeleteShi
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.delete.DeleteUserCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.edit.EditUserCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.edit.ShowEditUserPageCommand;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.CreateExitStatementCommand;
-import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.CreateEnterStatementCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.CreateStatementCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.ShowMainCaptainPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.ShowUnloadPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.UnloadProductsCommand;
@@ -156,14 +155,9 @@ public enum CommandEnum {
 	// end captain show commands
 
 	// captain action commands
-	CREATE_EXIT_STATEMENT {
+	CREATE_STATEMENT {
 		{
-			this.command = new CreateExitStatementCommand();
-		}
-	},
-	CREATE_ENTER_STATEMENT {
-		{
-			this.command = new CreateEnterStatementCommand();
+			this.command = new CreateStatementCommand();
 		}
 	},
 	UNLOAD_PRODUCTS {

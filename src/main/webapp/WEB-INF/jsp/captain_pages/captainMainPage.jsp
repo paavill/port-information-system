@@ -39,7 +39,7 @@
     </header>
         <div class="main">
             <form id="createStatement" action="FrontController" method="post">
-                <input type="hidden" name="command" value="${statementType}"/>
+                <input type="hidden" name="command" value="CREATE_STATEMENT"/>
                 <input type="hidden" name="userId" value="${user.id}" />
             </form>
             <form id="unloadProduct" action="FrontController" method="post">
@@ -54,7 +54,7 @@
                 <button class="tablinks" onclick="openTab(event, 'Old statements to enter')">Old statements to enter</button>
                 <button class="tablinks" onclick="openTab(event, 'Old statements to exit')">Old statements to exit</button>
                 <div class="buttons">
-                    <input class="button" type="submit" value="${typeOfCreatingStatementText}" form="createStatement"/>
+                    <input class="button" type="submit" value="Create statement" form="createStatement"/>
                     <input class="button" type="${typeOfUnloadingButton}" value="Unload product" form="unloadProduct"/>
                     <input class="button" type="${typeOfLoadingButton}" value="Load product" form="loadProduct"/>
                 </div>
@@ -70,6 +70,10 @@
                         <div>
                             <h4>Pier:</h4>
                             <var>${statement.pier}</var>
+                        </div>
+                        <div>
+                            <h4>Status:</h4>
+                            <var>${statement.status.title}</var>
                         </div>
                         <div>
                             <h4>Filing time:</h4>
@@ -93,6 +97,10 @@
                         <div>
                             <h4>Pier:</h4>
                             <var>${statement.pier}</var>
+                        </div>
+                        <div>
+                            <h4>Status:</h4>
+                            <var>${statement.status.title}</var>
                         </div>
                         <div>
                             <h4>Filing time:</h4>

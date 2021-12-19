@@ -15,6 +15,9 @@ INSERT ALL
     
     INTO users VALUES (0, 'root', '0000', 'root', 0, 0)
     INTO users VALUES (1, 'aleksej', '123', 'Aleksej Vladimirovich Ronzhin', 0, 3)
+    INTO users VALUES (2, 'moder', '123', 'Moderator', 0, 1)
+    INTO users VALUES (3, 'disp', '123', 'Dispatcher', 0, 2)
+    
     
     INTO ships VALUES (0, 1, 'ship_title', 10)
     --delete capacity from ship

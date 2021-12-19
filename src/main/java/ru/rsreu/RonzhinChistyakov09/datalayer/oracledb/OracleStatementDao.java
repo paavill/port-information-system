@@ -147,11 +147,10 @@ public class OracleStatementDao implements StatementDao {
 	}
 
 	@Override
-	public void update(Statement statement) throws DataRequestException {
-		String query = Resourcer.getString("requests.sql.update.statement");
+	public void updateStatus(StatementStatus status, int id) throws DataRequestException {
+		String query = Resourcer.getString("requests.sql.update.statement.status");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-			PreparedStatementParametresSetter.set(preparedStatement, statement.getStatus().getId(),
-					statement.getPier().getId(), statement.getId());
+			PreparedStatementParametresSetter.set(preparedStatement, status.getId(), id);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			throw new DataRequestException(
