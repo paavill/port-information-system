@@ -7,26 +7,28 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserStatus;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserStatusDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.getters.UserStatusGetter;
 
 public class MainModeratorPageLogic {
-	private UserDao userDao;
-	private UserStatusDao userStatusDao;
-	private static final String BLOCKED_STATUS_TITLE = "BLOCKED";
-	private static final String ACTIVE_STATUS_TITLE = "ACTIVE";
-	
+	private final UserDao userDao;
+	private final UserStatusGetter userStatusGetter;
+
 	public MainModeratorPageLogic(UserDao userDao, UserStatusDao userStatusDao) {
 		this.userDao = userDao;
-		this.userStatusDao = userStatusDao;
+		this.userStatusGetter = new UserStatusGetter(userStatusDao);
 	}
-	
-	public Collection<User> getBlockedUsers() throws DataRequestException{
-		UserStatus status = this.userStatusDao.getUserStatusByTitle(BLOCKED_STATUS_TITLE);
-		return userDao.getUsersByStatusId(status.getId());
+
+	public Collection<User> getBlockedUsers() throws DataRequestException {
+		UserStatus blockStatus = this.userStatusGetter.getBlockStatus();
+		return userDao.getUsersByStatusId(blockStatus.getId());
 	}
-	
-	public Collection<User> getActiveUsers() throws DataRequestException{
-		UserStatus status = this.userStatusDao.getUserStatusByTitle(ACTIVE_STATUS_TITLE);
-		return userDao.getUsersByStatusId(status.getId());
+
+	public Collection<User> getActiveUsers() throws DataRequestException {
+		UserStatus onlineStatus = this.userStatusGetter.getOnlineStatus();
+		UserStatus offlineStatus = this.userStatusGetter.getOfflineStatus();
+		Collection<User> result = this.userDao.getUsersByStatusId(onlineStatus.getId());
+		result.addAll(this.userDao.getUsersByStatusId(offlineStatus.getId()));
+		return result;
 	}
 
 }

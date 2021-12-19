@@ -10,13 +10,13 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserRoleDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserStatusDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.getters.UserStatusGetter;
 
 public class CreateUserTransferObject implements DataTransferObject<User> {
 
 	private final UserDao userDao;
 	private final UserRoleDao userRoleDao;
 	private final UserStatusDao userStatusDao;
-	private static final String DEFAULT_USER_STATUS_TITLE = "ACTIVE";
 
 	public CreateUserTransferObject(UserDao userDao, UserRoleDao userRoleDao, UserStatusDao userStatusDao) {
 		this.userDao = userDao;
@@ -32,8 +32,9 @@ public class CreateUserTransferObject implements DataTransferObject<User> {
 		String fullName = (String) request.getParameter("userFullName");
 		String roleTitle = (String) request.getParameter("role");
 		UserRole userRole = this.userRoleDao.getUserRoleByTitle(roleTitle);
-		UserStatus userStatus = this.userStatusDao.getUserStatusByTitle(DEFAULT_USER_STATUS_TITLE);
-		User user = new User(newUserId, login, password, fullName, userStatus, userRole);
+		UserStatusGetter getter = new UserStatusGetter(this.userStatusDao);
+		UserStatus offlineStatus = getter.getOfflineStatus();
+		User user = new User(newUserId, login, password, fullName, offlineStatus, userRole);
 		return user;
 	}
 

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.prutzkow.resourcer.Resourcer;
+
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandFactory;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
@@ -28,16 +30,14 @@ public class FrontController extends HttpServlet {
 		try {
 			DaoFactory factory = DaoFactory.getInstance(DBType.ORACLE);
 			ServletContext context = this.getServletContext();
-			context.setAttribute("userDao", factory.getUserDao());
-			context.setAttribute("userRoleDao", factory.getUserRoleDao());
-			context.setAttribute("userStatusDao", factory.getUserStatusDao());
-			context.setAttribute("pierDao", factory.getPierDao());
-			context.setAttribute("shipDao", factory.getShipDao());
-			context.setAttribute("statementDao", factory.getStatementDao());
-			context.setAttribute("statementStatusDao", factory.getStatementStatusDao());
-			context.setAttribute("statementTypeDao", factory.getStatementTypeDao());
-			System.out.println(factory.getStatementDao().getLastByUserId(1));
-			// add attributes names to resources
+			context.setAttribute(Resourcer.getString("serlvet.context.dao.users"), factory.getUserDao());
+			context.setAttribute(Resourcer.getString("serlvet.context.dao.usersRoles"), factory.getUserRoleDao());
+			context.setAttribute(Resourcer.getString("serlvet.context.dao.usersStatuses"), factory.getUserStatusDao());
+			context.setAttribute(Resourcer.getString("serlvet.context.dao.piers"), factory.getPierDao());
+			context.setAttribute(Resourcer.getString("serlvet.context.dao.ships"), factory.getShipDao());
+			context.setAttribute(Resourcer.getString("serlvet.context.dao.statements"), factory.getStatementDao());
+			context.setAttribute(Resourcer.getString("serlvet.context.dao.statementsStatuses"), factory.getStatementStatusDao());
+			context.setAttribute(Resourcer.getString("serlvet.context.dao.statementsTypes"), factory.getStatementTypeDao());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

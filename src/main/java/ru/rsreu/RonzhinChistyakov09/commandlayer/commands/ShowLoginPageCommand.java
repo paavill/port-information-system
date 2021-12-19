@@ -12,8 +12,7 @@ public class ShowLoginPageCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
-		String page = null;
-		page = Resourcer.getString("jsp.login");
+		String page = Resourcer.getString("jsp.login");
 		return new CommandResultResponseForward(page);
 	}
 

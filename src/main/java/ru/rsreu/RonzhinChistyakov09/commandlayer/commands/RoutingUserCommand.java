@@ -13,27 +13,20 @@ public class RoutingUserCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
-		User user = (User)request.getSession().getAttribute("user");
-		String roleTitle =  user.getRole().getTitle().toUpperCase();
-		ActionCommandResult resultCommand = null;//there will be command with redirect to error page 
-		switch(roleTitle) {
-		case "ADMINISTRATOR":
+		User user = (User) request.getSession().getAttribute(Resourcer.getString("servlet.session.attributes.user"));
+		String roleTitle = user.getRole().getTitle().toUpperCase();
+		ActionCommandResult resultCommand = null;// there will be command with redirect to error page
+		if (roleTitle.equals(Resourcer.getString("database.users.roles.administrator"))) {
 			resultCommand = new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.admin"));
-			break;
-		case "DISPATCHER":
+		} else if (roleTitle.equals(Resourcer.getString("database.users.roles.dispatcher"))) {
 			resultCommand = new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.dispatcher"));
-			break;
-		case "CAPTAIN":
+		} else if (roleTitle.equals(Resourcer.getString("database.users.roles.captain"))) {
 			resultCommand = new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.captain"));
-			break;
-		case "MODERATOR":
+		} else if (roleTitle.equals(Resourcer.getString("database.users.roles.moderator"))) {
 			resultCommand = new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.moderator"));
-			break;
-		default:
-			//add error routing page
+		} else {
 			resultCommand = new CommandResultResponseSendRedirect(Resourcer.getString("uri.empty"));
 			System.out.println("########USER ROLE UNDEF#########");
-			break;
 		}
 		return resultCommand;
 	}

@@ -3,11 +3,14 @@ package ru.rsreu.RonzhinChistyakov09.commandlayer.commands;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.prutzkow.resourcer.Resourcer;
+
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedirect;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserStatusDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.LogoutLogic;
 
@@ -15,15 +18,17 @@ public class LogoutCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
+		UserDao userDao = (UserDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.users"));
+		UserStatusDao userStatusDao = (UserStatusDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.usersStatuses"));
+		LogoutLogic logoutLogic = new LogoutLogic(userDao, userStatusDao);
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute(Resourcer.getString("servlet.session.attributes.user"));
 		try {
-			UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
-			LogoutLogic logoutLogic = new LogoutLogic(userDao);
-			HttpSession session = request.getSession();
-			User user = (User) session.getAttribute("user");
 			logoutLogic.logout(user);
 			session.invalidate();
 		} catch (DataRequestException e) {
-			e.printStackTrace();
 		}
 		String page = "FrontController?command=SHOW_MAIN_NO_LOGIN_PAGE";
 		return new CommandResultResponseSendRedirect(page);
