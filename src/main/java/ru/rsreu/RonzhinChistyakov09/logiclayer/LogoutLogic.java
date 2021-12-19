@@ -10,20 +10,19 @@ import ru.rsreu.RonzhinChistyakov09.logiclayer.getters.UserStatusGetter;
 public class LogoutLogic {
 
 	private final UserDao userDao;
-	private final UserStatusDao userStatusDao;
+	private final UserStatusGetter userStatusGetter;
 
 	public LogoutLogic(UserDao userDao, UserStatusDao userStatusDao) {
 		this.userDao = userDao;
-		this.userStatusDao = userStatusDao;
+		this.userStatusGetter = new UserStatusGetter(userStatusDao);
 	}
 
 	public void logout(User user) throws DataRequestException {
 		UserStatus currentStatus = getCurrentUserStatus(user.getId());
-		UserStatusGetter getter = new UserStatusGetter(this.userStatusDao);
-		UserStatus blockStatus = getter.getBlockStatus();
-		UserStatus deleteStatus = getter.getDeleteStatus();
+		UserStatus blockStatus = userStatusGetter.getBlockStatus();
+		UserStatus deleteStatus = userStatusGetter.getDeleteStatus();
 		if (!(currentStatus.equals(blockStatus) || currentStatus.equals(deleteStatus))) {
-			user.setStatus(getter.getOfflineStatus());
+			user.setStatus(userStatusGetter.getOfflineStatus());
 			this.userDao.updateUser(user);
 		}
 	}

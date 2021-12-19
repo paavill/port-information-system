@@ -43,6 +43,24 @@ public class OraclePierDao implements PierDao {
 	}
 
 	@Override
+	public Collection<Pier> getFreePiers() throws DataRequestException {
+		Collection<Pier> result = new ArrayList<Pier>();
+		String query = Resourcer.getString("requests.sql.get.piers.free");
+		try (Statement statement = this.connection.createStatement()) {
+			try (ResultSet resultSet = statement.executeQuery(query)) {
+				while (resultSet.next()) {
+					Pier pier = ResultSetConverter.getPier(resultSet);
+					result.add(pier);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+		return result;
+	}
+
+	@Override
 	public int getPiersCount() throws DataRequestException {
 		int piersCount = -1;
 		String query = Resourcer.getString("requests.sql.get.piers.count");

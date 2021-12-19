@@ -24,11 +24,7 @@ public class MainModeratorPageLogic {
 	}
 
 	public Collection<User> getActiveUsers() throws DataRequestException {
-		UserStatus onlineStatus = this.userStatusGetter.getOnlineStatus();
-		UserStatus offlineStatus = this.userStatusGetter.getOfflineStatus();
-		Collection<User> result = this.userDao.getUsersByStatusId(onlineStatus.getId());
-		result.addAll(this.userDao.getUsersByStatusId(offlineStatus.getId()));
-		return result;
+		return userDao.getActiveUsers();
 	}
 
 }

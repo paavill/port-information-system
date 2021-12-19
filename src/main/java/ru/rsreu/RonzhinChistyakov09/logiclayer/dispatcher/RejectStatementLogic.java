@@ -4,20 +4,20 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.StatementStatus;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementStatusDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.getters.StatementStatusGetter;
 
 public class RejectStatementLogic {
 
 	private final StatementDao statementDao;
-	private final StatementStatusDao statementStatusDao;
-	private final static String REJECT_STATEMENT_TITLE = "REJECTED";
+	private final StatementStatusGetter statementStatusGetter;
 
 	public RejectStatementLogic(StatementDao statementDao, StatementStatusDao statementStatusDao) {
 		this.statementDao = statementDao;
-		this.statementStatusDao = statementStatusDao;
+		this.statementStatusGetter = new StatementStatusGetter(statementStatusDao);
 	}
 
 	public void rejectStatement(int statementId) throws DataRequestException {
-		StatementStatus status = this.statementStatusDao.getByTitle(REJECT_STATEMENT_TITLE);
+		StatementStatus status = this.statementStatusGetter.getRejectedStatus();
 		this.statementDao.updateStatus(status, statementId);
 	}
 

@@ -95,22 +95,22 @@ public class OracleUserDao implements UserDao {
 		return user;
 	}
 
-	@Override
-	public int getUsersCount() throws DataRequestException {
-		int usersCount = 0;
-		String query = Resourcer.getString("requests.sql.get.users.count");
-		try (Statement statement = this.connection.createStatement()) {
-			try (ResultSet resultSet = statement.executeQuery(query)) {
-				if (resultSet.next()) {
-					usersCount = resultSet.getInt(1);
-				}
-			}
-		} catch (SQLException e) {
-			throw new DataRequestException(
-					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
-		}
-		return usersCount;
-	}
+//	@Override
+//	public int getUsersCount() throws DataRequestException {
+//		int usersCount = 0;
+//		String query = Resourcer.getString("requests.sql.get.users.count");
+//		try (Statement statement = this.connection.createStatement()) {
+//			try (ResultSet resultSet = statement.executeQuery(query)) {
+//				if (resultSet.next()) {
+//					usersCount = resultSet.getInt(1);
+//				}
+//			}
+//		} catch (SQLException e) {
+//			throw new DataRequestException(
+//					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+//		}
+//		return usersCount;
+//	}
 
 	@Override
 	public int getLastUserId() throws DataRequestException {
@@ -191,6 +191,24 @@ public class OracleUserDao implements UserDao {
 		String query = Resourcer.getString("requests.sql.get.users.byStatus");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 			PreparedStatementParametresSetter.set(preparedStatement, statusId);
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				while (resultSet.next()) {
+					User user = ResultSetConverter.getUser(resultSet);
+					result.add(user);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+		return result;
+	}
+
+	@Override
+	public Collection<User> getActiveUsers() throws DataRequestException {
+		Collection<User> result = new ArrayList<User>();
+		String query = Resourcer.getString("requests.sql.get.users.active");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 				while (resultSet.next()) {
 					User user = ResultSetConverter.getUser(resultSet);

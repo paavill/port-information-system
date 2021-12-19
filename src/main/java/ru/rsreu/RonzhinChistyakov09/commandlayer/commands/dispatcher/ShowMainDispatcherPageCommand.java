@@ -20,21 +20,27 @@ public class ShowMainDispatcherPageCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
-		StatementDao statementDao = (StatementDao) request.getServletContext().getAttribute("statementDao");
+		StatementDao statementDao = (StatementDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.statements"));
 		StatementStatusDao statementStatusDao = (StatementStatusDao) request.getServletContext()
-				.getAttribute("statementStatusDao");
-		UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
-		UserRoleDao userRoleDao = (UserRoleDao) request.getServletContext().getAttribute("userRoleDao");
-		PierDao pierDao = (PierDao) request.getServletContext().getAttribute("pierDao");
-		ShipDao shipDao = (ShipDao) request.getServletContext().getAttribute("shipDao");
+				.getAttribute(Resourcer.getString("serlvet.context.dao.statementsStatuses"));
+		UserDao userDao = (UserDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.users"));
+		UserRoleDao userRoleDao = (UserRoleDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.usersRoles"));
+		PierDao pierDao = (PierDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.piers"));
+		ShipDao shipDao = (ShipDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.ships"));
 		MainDispatcherPageLogic logic = new MainDispatcherPageLogic(pierDao, userDao, shipDao, statementDao,
 				userRoleDao, statementStatusDao);
 		try {
 
-			request.setAttribute("statementsToProcess", logic.getStatements());
-			request.setAttribute("captainsData", logic.getCaptains());
-			request.setAttribute("piersData", logic.getPiers());
-			request.setAttribute("shipsData", logic.getShips());
+			request.setAttribute(Resourcer.getString("servlet.requests.attributes.statementsToProcess"),
+					logic.getStatements());
+			request.setAttribute(Resourcer.getString("servlet.requests.attributes.captains"), logic.getCaptains());
+			request.setAttribute(Resourcer.getString("servlet.requests.attributes.piers"), logic.getPiers());
+			request.setAttribute(Resourcer.getString("servlet.requests.attributes.ships"), logic.getShips());
 
 		} catch (DataRequestException e) {
 			e.printStackTrace();

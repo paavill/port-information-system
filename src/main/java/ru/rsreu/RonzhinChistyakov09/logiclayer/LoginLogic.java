@@ -13,11 +13,11 @@ import ru.rsreu.RonzhinChistyakov09.logiclayer.getters.UserStatusGetter;
 public class LoginLogic {
 
 	private final UserDao userDao;
-	private final UserStatusDao userStatusDao;
+	private final UserStatusGetter userStatusGetter;
 
 	public LoginLogic(UserDao userDao, UserStatusDao userStatusDao) {
 		this.userDao = userDao;
-		this.userStatusDao = userStatusDao;
+		this.userStatusGetter = new UserStatusGetter(userStatusDao);
 	}
 
 	public User login(String login, String password)
@@ -29,12 +29,11 @@ public class LoginLogic {
 		if (checkPassword(user, password)) {
 			throw new WrongPasswordException();
 		}
-		UserStatusGetter getter = new UserStatusGetter(userStatusDao);
-		UserStatus blockStatus = getter.getBlockStatus();
+		UserStatus blockStatus = userStatusGetter.getBlockStatus();
 		if (user.getStatus().equals(blockStatus)) {
 			throw new BlockUserException();
 		}
-		UserStatus onlineStatus = getter.getOnlineStatus();
+		UserStatus onlineStatus = userStatusGetter.getOnlineStatus();
 		user.setStatus(onlineStatus);
 		this.userDao.updateUser(user);
 		return user;

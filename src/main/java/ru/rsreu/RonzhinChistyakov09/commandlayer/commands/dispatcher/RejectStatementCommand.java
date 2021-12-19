@@ -16,10 +16,12 @@ public class RejectStatementCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
-		StatementDao statementDao = (StatementDao) request.getServletContext().getAttribute("statementDao");
+		StatementDao statementDao = (StatementDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.statements"));
 		StatementStatusDao statementStatusDao = (StatementStatusDao) request.getServletContext()
-				.getAttribute("statementStatusDao");
-		int statementId = Integer.parseInt(request.getParameter("statementIdToReject"));
+				.getAttribute(Resourcer.getString("serlvet.context.dao.statementsStatuses"));
+		int statementId = Integer
+				.parseInt(request.getParameter(Resourcer.getString("servlet.requests.parametres.statementIdToReject")));
 		RejectStatementLogic logic = new RejectStatementLogic(statementDao, statementStatusDao);
 		try {
 			logic.rejectStatement(statementId);

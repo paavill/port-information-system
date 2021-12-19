@@ -30,7 +30,7 @@ public class LogoutCommand implements ActionCommand {
 			session.invalidate();
 		} catch (DataRequestException e) {
 		}
-		String page = "FrontController?command=SHOW_MAIN_NO_LOGIN_PAGE";
+		String page = Resourcer.getString("uri.show.mainPage.noLogin");
 		return new CommandResultResponseSendRedirect(page);
 	}
 

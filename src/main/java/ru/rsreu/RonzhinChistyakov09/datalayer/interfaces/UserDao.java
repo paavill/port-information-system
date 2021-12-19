@@ -14,8 +14,6 @@ public interface UserDao {
 	
 	abstract User getUserById(int id) throws DataRequestException;
 	
-	abstract int getUsersCount() throws DataRequestException;
-	
 	abstract int getLastUserId() throws DataRequestException;
 	
 	abstract void createUser(User user) throws DataRequestException;
@@ -27,4 +25,6 @@ public interface UserDao {
 	abstract Collection<Integer> getCaptainsId() throws DataRequestException;
 	
 	abstract Collection<User> getUsersByStatusId(int statusId) throws DataRequestException;
+	
+	abstract Collection<User> getActiveUsers() throws DataRequestException;
 }
