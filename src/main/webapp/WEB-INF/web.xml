@@ -6,14 +6,26 @@
     <display-name>FrontController</display-name>
     <servlet-name>FrontController</servlet-name>
     <servlet-class>ru.rsreu.RonzhinChistyakov09.FrontController</servlet-class>
- </servlet>
- <servlet-mapping>
+  </servlet>
+
+  <servlet-mapping>
     <servlet-name>FrontController</servlet-name>
     <url-pattern>/FrontController</url-pattern>
- </servlet-mapping>
- <session-config>
+  </servlet-mapping>
+
+  <filter>
+    <filter-name>RoleRedirect</filter-name>
+    <filter-class>ru.rsreu.RonzhinChistyakov09.filters.RoleRedirectFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>RoleRedirect</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <session-config>
     <session-timeout>30</session-timeout>
- </session-config>
+  </session-config>
 
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

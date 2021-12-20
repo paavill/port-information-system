@@ -5,8 +5,6 @@
     <title>Port</title>
 </head>
     <body>
-        <jsp:forward page="/FrontController">
-            <jsp:param name="command" value="SHOW_MAIN_NO_LOGIN_PAGE"/>
-        </jsp:forward>
+        <jsp:forward page="/FrontController?command=SHOW_MAIN_NO_LOGIN_PAGE"/>
     </body>
 </html>
