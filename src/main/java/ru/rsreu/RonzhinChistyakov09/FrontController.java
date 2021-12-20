@@ -38,6 +38,7 @@ public class FrontController extends HttpServlet {
 			context.setAttribute(Resourcer.getString("serlvet.context.dao.statements"), factory.getStatementDao());
 			context.setAttribute(Resourcer.getString("serlvet.context.dao.statementsStatuses"), factory.getStatementStatusDao());
 			context.setAttribute(Resourcer.getString("serlvet.context.dao.statementsTypes"), factory.getStatementTypeDao());
+			context.setAttribute(Resourcer.getString("serlvet.context.dao.products"), factory.getProductDao());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

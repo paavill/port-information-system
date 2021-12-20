@@ -8,6 +8,7 @@ import com.prutzkow.resourcer.Resourcer;
 
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.Ship;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.pier.Pier;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.product.Product;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.Statement;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.StatementStatus;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.StatementType;
@@ -44,8 +45,7 @@ public class ResultSetConverter {
 	public static Ship getShip(ResultSet resultSet) throws SQLException {
 		int id = resultSet.getInt(Resourcer.getString("database.ships.id"));
 		String title = resultSet.getString(Resourcer.getString("database.ships.title"));
-		int capacity = resultSet.getInt(Resourcer.getString("database.ships.capacity"));
-		Ship ship = new Ship(id, title, capacity);
+		Ship ship = new Ship(id, title);
 		return ship;
 	}
 	
@@ -91,5 +91,12 @@ public class ResultSetConverter {
 		int id = resultSet.getInt(Resourcer.getString("database.statements.typeId"));
 		String title = resultSet.getString(Resourcer.getString("database.statements.typeTitle"));
 		return new StatementType(id, title);
+	}
+
+	public static Product getProduct(ResultSet resultSet) throws SQLException {
+		String title = resultSet.getString(Resourcer.getString("database.products.title"));
+		int pier = resultSet.getInt(Resourcer.getString("database.piers.id"));
+		int count = resultSet.getInt(Resourcer.getString("database.products.count"));
+		return new Product(title, pier, count);
 	}
 }

@@ -62,8 +62,7 @@ public class OracleShipDao implements ShipDao {
 	public void createShip(int userId, Ship ship) throws DataRequestException {
 		String query = Resourcer.getString("requests.sql.create.ship");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-			PreparedStatementParametresSetter.set(preparedStatement, ship.getId(), userId, ship.getTitle(),
-					ship.getCapacity());
+			PreparedStatementParametresSetter.set(preparedStatement, ship.getId(), userId, ship.getTitle());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			throw new DataRequestException(

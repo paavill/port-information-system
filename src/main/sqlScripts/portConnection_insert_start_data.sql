@@ -18,19 +18,17 @@ INSERT ALL
     INTO users VALUES (0, 'root', '0000', 'root', 3, 0)
     INTO users VALUES (1, 'aleksej', '123', 'Aleksej Vladimirovich Ronzhin', 3, 3)
     
-    
-    INTO ships VALUES (0, 1, 'ship_title', 10)
-    --delete capacity from ship
+    INTO ships VALUES (0, 1, 'ship_title')
     
     INTO piers VALUES (0, 123, TO_DATE('2021/12/12 21:02:44', 'yyyy/mm/dd hh24:mi:ss'), null)
     INTO piers VALUES (1, 123, TO_DATE('2021/12/12 21:02:44', 'yyyy/mm/dd hh24:mi:ss'), null)
     INTO piers VALUES (2, 123, TO_DATE('2021/12/12 21:02:44', 'yyyy/mm/dd hh24:mi:ss'), null)
     
-    INTO goods VALUES (0, 'TESTNAME', 0, 1)
-    INTO goods VALUES (1, 'TESTNAME', 0, 1)
-    INTO goods VALUES (2, 'TESTNAME', 0, 1)
-    INTO goods VALUES (3, 'TESTNAME', 0, 1)
-    INTO goods VALUES (4, 'TESTNAME', 0, 1)
+    INTO goods VALUES ('TESTNAME', 1)
+    INTO goods VALUES ('TESTNAME', 1)
+    INTO goods VALUES ('TESTNAME', 1)
+    INTO goods VALUES ('TESTNAME', 1)
+    INTO goods VALUES ('TESTNAME', 1)
     
     INTO statements VALUES (0, 1, 0, 0, 0, 3, TO_DATE('2021/12/12 21:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 22:02:44', 'yyyy/mm/dd hh24:mi:ss'))
     INTO statements VALUES (1, 1, 0, 0, 1, 3, TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'))
@@ -48,8 +46,9 @@ INSERT ALL
 SELECT * 
 FROM DUAL;
 
-UPDATE statements SET pier_id = 1, finish_statement_date = TO_DATE('2021/12/18 13:49:44', 'yyyy/mm/dd hh24:mi:ss'), status_id = 3 WHERE id = 3;
-UPDATE statements SET pier_id = 1, finish_statement_date = TO_DATE('2021/12/18 13:53:44', 'yyyy/mm/dd hh24:mi:ss'), status_id = 3 WHERE id = 2;
+SELECT goods.name AS product_title, pier_id, COUNT(pier_id) AS count, piers.capacity AS pier_capacity, start_date, end_date
+FROM goods LEFT JOIN piers ON piers.id = goods.pier_id
+GROUP BY goods.name, pier_id, piers.capacity, start_date, end_date;
 
 SELECT pier_ids, pier_capacity, (pier_capacity - COUNT(goods.id)) AS r_c, pier_status
 FROM goods RIGHT JOIN (

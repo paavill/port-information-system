@@ -19,8 +19,7 @@ public class CreateShipTransferObject implements DataTransferObject<Ship> {
 	public Ship getModel(ServletRequest request) throws DataRequestException {
 		int id = shipDao.getLastId() + 1;
 		String title = request.getParameter("shipTitle");
-		int capacity = Integer.parseInt(request.getParameter("shipCapacity"));
-		Ship ship = new Ship(id, title, capacity);
+		Ship ship = new Ship(id, title);
 		return ship;
 	}
 

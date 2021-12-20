@@ -8,6 +8,7 @@ import com.prutzkow.resourcer.Resourcer;
 
 import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.ProductDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.ShipDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementStatusDao;
@@ -102,5 +103,10 @@ public class OracleDataBaseDaoFactory extends DaoFactory {
 				throw new StorageException(Resourcer.getString("exceptions.sql.disconnect"));
 			}
 		}
+	}
+
+	@Override
+	public ProductDao getProductDao() {
+		return new OracleProductDao(this.connection);
 	}
 }

@@ -3,13 +3,11 @@ package ru.rsreu.RonzhinChistyakov09.datalayer.data;
 public class Ship {
 	private int id;
 	private String title;
-	private int capacity;
 	
-	public Ship(int id, String title, int capacity) {
+	public Ship(int id, String title) {
 		super();
 		this.id = id;
 		this.title = title;
-		this.capacity = capacity;
 	}
 
 	public int getId() {
@@ -20,13 +18,9 @@ public class Ship {
 		return title;
 	}
 
-	public int getCapacity() {
-		return capacity;
-	}
-
 	@Override
 	public String toString() {
-		return "Ship [id=" + id + ", title=" + title + ", capacity=" + capacity + "]";
+		return "Ship [id=" + id + ", title=" + title + ", capacity=" + "]";
 	}
 
 }

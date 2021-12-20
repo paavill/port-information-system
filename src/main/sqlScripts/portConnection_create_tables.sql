@@ -42,7 +42,6 @@ CREATE TABLE ships
     id NUMBER(9) not null,
     user_id NUMBER(9) not null,
     title NVARCHAR2(20) not null,
-    capacity NUMBER(20) not null,
     CONSTRAINT id_ships_pk
         PRIMARY KEY (id),
     CONSTRAINT ships_user_id_unique UNIQUE (user_id),
@@ -56,8 +55,8 @@ CREATE TABLE piers
 (
     id NUMBER(9) not null,
     capacity NUMBER(20) not null,
-    start_date DATE not null,
-    end_date DATE,
+    start_date TIMESTAMP not null,
+    end_date TIMESTAMP,
     CONSTRAINT id_piers_pk
         PRIMARY KEY (id)  
 );
@@ -65,12 +64,8 @@ CREATE TABLE piers
 --Таблица 7 : Товары
 CREATE TABLE goods
 (
-    id NUMBER(9) not null,
     name NVARCHAR2(20) not null,
     pier_id NUMBER(9) not null,
-    count NUMBER(9) not null,
-    CONSTRAINT id_goods_pk
-        PRIMARY KEY (id),
     CONSTRAINT goods_piers_fk
         FOREIGN KEY (pier_id)
         REFERENCES piers(id)
@@ -103,8 +98,8 @@ CREATE TABLE statements
     pier_id NUMBER(9),
     type_id NUMBER(9) not null,
     status_id NUMBER(9) not null,
-    do_statement_date DATE not null,
-    finish_statement_date DATE,
+    do_statement_date TIMESTAMP not null,
+    finish_statement_date TIMESTAMP,
     CONSTRAINT id_statements_pk
         PRIMARY KEY (id),
     CONSTRAINT statements_users_fk
