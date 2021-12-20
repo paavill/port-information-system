@@ -157,4 +157,18 @@ public class OracleStatementDao implements StatementDao {
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
 	}
+
+	@Override
+	public void updatePier(int statementId, int pierId) throws DataRequestException {
+		String query = Resourcer.getString("requests.sql.update.statement.pier");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			PreparedStatementParametresSetter.set(preparedStatement, pierId, statementId);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+	}
+	
+	
 }

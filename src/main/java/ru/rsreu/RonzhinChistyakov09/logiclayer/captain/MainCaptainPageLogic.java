@@ -41,6 +41,7 @@ public class MainCaptainPageLogic {
 		if (statement.getStatus().equals(rejectStatus)) {
 			return null;
 		}
+		
 		return statement;
 	}
 

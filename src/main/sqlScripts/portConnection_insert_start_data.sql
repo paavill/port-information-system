@@ -12,6 +12,7 @@ INSERT ALL
     INTO statements_statuses VALUES (1, 'APPROVED')
     INTO statements_statuses VALUES (2, 'REJECTED')
     INTO statements_statuses VALUES (3, 'FINISHED')
+    INTO statements_statuses VALUES (4, 'CANCELED')
     INTO statements_types VALUES (0, 'ENTER')
     INTO statements_types VALUES (1, 'EXIT')
     

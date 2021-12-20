@@ -47,8 +47,8 @@
                         <h4 class="title">State:</h4>
                         <h4 class="title">Type:</h4>    
                     </div>
-                    <form id="statementData" class="entersFields" action="/FrontController" method="post">
-                        <input type="hidden" name="command" value="CANCEL_STATEMENT">
+                    <form id="statementData" class="entersFields" action="FrontController" method="post">
+                        <input type="hidden" name="command" value="${buttonCommand}">
                         <input type="hidden" name="statementId" value="${statement.id}">
                         <h4 class="title">${statement.id}</h4>
                         <h4 class="title">${statement.status.title}</h4>
@@ -56,7 +56,7 @@
                     </form>
                 </div>
                 <section class="buttons">
-                    <input class="button" type="submit" form="statementData" value="Cancel">
+                    <input class="button" type="submit" form="statementData" value="${buttonTitle}">
                 </section>
                 <h5>${statementErrorMessage}</h5>
             </div>
