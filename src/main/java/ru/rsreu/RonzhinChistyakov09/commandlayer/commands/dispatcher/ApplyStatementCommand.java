@@ -10,8 +10,10 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.StatementType;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementStatusDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementTypeDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.dispatcher.ApplyStatementLogic;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.getters.StatementTypeGetter;
 
 public class ApplyStatementCommand implements ActionCommand {
 
@@ -21,21 +23,22 @@ public class ApplyStatementCommand implements ActionCommand {
 				.getAttribute(Resourcer.getString("serlvet.context.dao.statements"));
 		StatementStatusDao statementStatusDao = (StatementStatusDao) request.getServletContext()
 				.getAttribute(Resourcer.getString("serlvet.context.dao.statementsStatuses"));
-
+		StatementTypeDao statementTypeDao = (StatementTypeDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.statementsTypes"));
 		int statementId = Integer.parseInt(
 				request.getParameter(Resourcer.getString("servlet.requests.parametres.statementIdToProcess")));
-		
+		StatementTypeGetter statementTypeGetter = new StatementTypeGetter(statementTypeDao);
 		ApplyStatementLogic logic = new ApplyStatementLogic(statementDao, statementStatusDao);
 		try {
 			StatementType type = logic.getStatementType(statementId);
-			System.out.println(type.getTitle());
-			if (type.getId() == 0) {
-				int pierId = Integer.parseInt(request.getParameter("selectedPier"));
+			StatementType enterType = statementTypeGetter.getEnterType();
+			if (type.equals(enterType)) {
+				int pierId = Integer.parseInt(
+						request.getParameter(Resourcer.getString("servlet.requests.parametres.selectedPier")));
 				logic.applyStatement(statementId, pierId);
 			} else {
 				logic.applyStatement(statementId);
 			}
-
 		} catch (DataRequestException e) {
 			e.printStackTrace();
 		}

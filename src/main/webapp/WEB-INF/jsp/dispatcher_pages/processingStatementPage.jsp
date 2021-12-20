@@ -43,7 +43,6 @@
 						<h4 class="title">Ship Id:</h4>
 						<h4 class="title">Type:</h4>
 						<h4 class="title">Filing date:</h4>
-						<h4 class="title">Pier:</h4>
 					</div>
 					<form id="statementDataForm" class="entersFields"
 						action="FrontController" method="post">

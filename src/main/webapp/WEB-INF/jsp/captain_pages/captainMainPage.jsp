@@ -54,7 +54,7 @@
                 <button class="tablinks" onclick="openTab(event, 'Old statements to enter')">Old statements to enter</button>
                 <button class="tablinks" onclick="openTab(event, 'Old statements to exit')">Old statements to exit</button>
                 <div class="buttons">
-                    <input class="button" type="submit" value="Create statement" form="createStatement"/>
+                    <input class="button" type="submit" value="Create ${statementType} statement" form="createStatement"/>
                     <input class="button" type="${typeOfUnloadingButton}" value="Unload product" form="unloadProduct"/>
                     <input class="button" type="${typeOfLoadingButton}" value="Load product" form="loadProduct"/>
                 </div>

@@ -21,20 +21,21 @@ public class CreateStatementCommand implements ActionCommand {
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
 		User user = (User) request.getSession().getAttribute(Resourcer.getString("servlet.session.attributes.user"));
-		ShipDao shipDao = (ShipDao) request.getServletContext().getAttribute("shipDao");
-		StatementDao statementDao = (StatementDao) request.getServletContext().getAttribute("statementDao");
-		StatementTypeDao statementTypeDao = (StatementTypeDao) request.getServletContext()
-				.getAttribute("statementTypeDao");
+		ShipDao shipDao = (ShipDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.ships"));
+		StatementDao statementDao = (StatementDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.statements"));
 		StatementStatusDao statementStatusDao = (StatementStatusDao) request.getServletContext()
-				.getAttribute("statementStatusDao");
+				.getAttribute(Resourcer.getString("serlvet.context.dao.statementsStatuses"));
+		StatementTypeDao statementTypeDao = (StatementTypeDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.statementsTypes"));
 
 		CreateStatementTransferObject csto = new CreateStatementTransferObject(shipDao, statementDao,
 				statementStatusDao, statementTypeDao);
 		try {
 			Statement statement = csto.getModel(request);
-			CreateStatementLogic logic = new CreateStatementLogic(statementDao);
+			CreateStatementLogic logic = new CreateStatementLogic(statementDao, statementTypeDao);
 			logic.createStatement(statement, user);
-			System.out.println(statement);
 		} catch (DataRequestException e) {
 			e.printStackTrace();
 		}

@@ -52,4 +52,12 @@ public class MainCaptainPageLogic {
 	private Collection<Statement> getUserStatementByType(int userId, StatementType type) throws DataRequestException {
 		return this.statementDao.getUserStatementsByType(userId, type);
 	}
+
+	public Statement getLastStatement(int userId) throws DataRequestException {
+		return this.statementDao.getLastByUserId(userId);
+	}
+
+	public StatementStatus getCreatedStatement() throws DataRequestException {
+		return this.statementStatusGetter.getCreatedStatus();
+	}
 }

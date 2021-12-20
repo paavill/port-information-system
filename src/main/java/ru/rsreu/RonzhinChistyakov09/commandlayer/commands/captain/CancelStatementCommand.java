@@ -16,18 +16,18 @@ public class CancelStatementCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
-		StatementDao statementDao = (StatementDao) request.getServletContext().getAttribute("statementDao");
+		StatementDao statementDao = (StatementDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.statements"));
 		StatementStatusDao statementStatusDao = (StatementStatusDao) request.getServletContext()
-				.getAttribute("statementStatusDao");
-		int statementId = Integer.parseInt(request.getParameter("statementId"));
+				.getAttribute(Resourcer.getString("serlvet.context.dao.statementsStatuses"));
+		int statementId = Integer
+				.parseInt(request.getParameter(Resourcer.getString("servlet.requests.parametres.statementId")));
 		CancelStatementLogic logic = new CancelStatementLogic(statementDao, statementStatusDao);
 		try {
 			logic.cancelStatement(statementId);
 		} catch (DataRequestException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.captain"));
 	}
 

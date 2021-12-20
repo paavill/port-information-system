@@ -16,21 +16,19 @@ public class ShowMainModeratorPageCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
-
-		UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
-		UserStatusDao userStatusDao = (UserStatusDao) request.getServletContext().getAttribute("userStatusDao");
-		
+		UserDao userDao = (UserDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.users"));
+		UserStatusDao userStatusDao = (UserStatusDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.usersStatuses"));
 		MainModeratorPageLogic logic = new MainModeratorPageLogic(userDao, userStatusDao);
 		try {
-			request.setAttribute("unblockedUsers", logic.getActiveUsers());
-			request.setAttribute("blockedUsers", logic.getBlockedUsers());
+			request.setAttribute(Resourcer.getString("servlet.requests.attributes.users.unblocked"),
+					logic.getActiveUsers());
+			request.setAttribute(Resourcer.getString("servlet.requests.attributes.users.blocked"),
+					logic.getBlockedUsers());
 		} catch (DataRequestException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
 		String page = Resourcer.getString("jsp.moderator.main");
 		return new CommandResultResponseForward(page);
 	}

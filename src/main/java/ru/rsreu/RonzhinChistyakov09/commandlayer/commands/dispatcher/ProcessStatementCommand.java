@@ -19,26 +19,24 @@ public class ProcessStatementCommand implements ActionCommand {
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
 		String page = Resourcer.getString("uri.show.mainPage.dispatcher");
-		StatementDao statementDao = (StatementDao) request.getServletContext().getAttribute("statementDao");
+		StatementDao statementDao = (StatementDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.statements"));
 		StatementTypeDao statementTypeDao = (StatementTypeDao) request.getServletContext()
-				.getAttribute("statementTypeDao");
+				.getAttribute(Resourcer.getString("serlvet.context.dao.statementsTypes"));
 		int statementId = Integer.parseInt(
 				request.getParameter(Resourcer.getString("servlet.requests.parametres.statementIdToProcess")));
 		ProcessStatementLogic logic = new ProcessStatementLogic(statementDao, statementTypeDao);
 		try {
 			StatementType type = logic.getStatementType(statementId);
-			System.out.println(type);
-			if(type.getTitle().equals("ENTER")) {
-				return new CommandResultResponseForward("/FrontController?command=SHOW_PROCESS_STATEMENT_PAGE");
-			} else if(type.getTitle().equals("EXIT")) {
-				return new CommandResultResponseForward("/FrontController?command=APPLY_STATEMENT");
+			StatementType enterType = logic.getEnterStatementType();
+			if (type.equals(enterType)) {
+				return new CommandResultResponseForward(Resourcer.getString("uri.show.processStatementPage"));
+			} else {
+				return new CommandResultResponseForward(Resourcer.getString("uri.applyStatement"));
 			}
 		} catch (DataRequestException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return new CommandResultResponseSendRedirect(page);
 	}
-
 }

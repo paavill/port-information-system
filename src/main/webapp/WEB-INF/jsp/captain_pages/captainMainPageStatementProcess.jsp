@@ -45,7 +45,8 @@
                     <div class="entersTitles">
                         <h4 class="title">Id:</h4>
                         <h4 class="title">State:</h4>
-                        <h4 class="title">Type:</h4>    
+                        <h4 class="title">Type:</h4>
+                        <h4 class="title">Pier:</h4>
                     </div>
                     <form id="statementData" class="entersFields" action="FrontController" method="post">
                         <input type="hidden" name="command" value="${buttonCommand}">
@@ -53,6 +54,7 @@
                         <h4 class="title">${statement.id}</h4>
                         <h4 class="title">${statement.status.title}</h4>
                         <h4 class="title">${statement.type.title}</h4>
+                        <h4 class="title">${statement.pier}</h4>
                     </form>
                 </div>
                 <section class="buttons">

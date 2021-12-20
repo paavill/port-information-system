@@ -29,7 +29,6 @@ public class ShowProcessStatementPageCommand implements ActionCommand {
 			request.setAttribute(Resourcer.getString("servlet.requests.attributes.statement"),
 					logic.getStatementById(statementId));
 		} catch (DataRequestException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

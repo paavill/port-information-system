@@ -65,6 +65,10 @@
                             <var>${statement.type.title}</var>
                         </div>
                         <div>
+                            <h4>Pier:</h4>
+                            <var>${statement.pier}</var>
+                        </div>
+                        <div>
                             <h4>Filing date:</h4>
                             <var>${statement.doDate}</var>
                         </div>
