@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="css/scrollbars.css">
     <!--if something broke put next style before buttons-->
     <link rel="stylesheet" href="css/authorization.css">
-    <script src="/js/main.js"></script>
 </head>
 <body>
     <header>

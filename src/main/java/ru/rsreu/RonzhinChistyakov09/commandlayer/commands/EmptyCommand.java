@@ -2,7 +2,9 @@ package ru.rsreu.RonzhinChistyakov09.commandlayer.commands;
 
 import javax.servlet.http.HttpServletRequest;
 
-import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedirect;
+import com.prutzkow.resourcer.Resourcer;
+
+import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseForward;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 
@@ -10,8 +12,7 @@ public class EmptyCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
-		//ADD UNDEF COMMAND PAGE
-		return new CommandResultResponseSendRedirect("FrontController?command=SHOW_MAIN_NO_LOGIN_PAGE");
+		return new CommandResultResponseForward(Resourcer.getString("jsp.undefinedCommand"));
 	}
 
 }

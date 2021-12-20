@@ -13,6 +13,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.prutzkow.resourcer.Resourcer;
 
@@ -34,7 +35,7 @@ public class StatusRedirectFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		HttpServletRequest req = (HttpServletRequest) request;
+		boolean isErrorCommand = false;
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 
 		User user = (User) httpRequest.getSession()
@@ -44,21 +45,24 @@ public class StatusRedirectFilter implements Filter {
 		} else {
 			UserStatus status = user.getStatus();
 
-			String action = req.getParameter("command");
-			CommandEnum commandEnum = CommandEnum.LOGIN;//block_page_show
+			String action = httpRequest.getParameter("command");
+			CommandEnum commandEnum = CommandEnum.LOGIN;// block_page_show
 			if (!(action == null || action.isEmpty())) {
 				try {
 					commandEnum = CommandEnum.valueOf(action.toUpperCase());
 				} catch (IllegalArgumentException exception) {
 					System.err.println(exception.getMessage());
+					isErrorCommand = true;
 				}
 			}
 
-			if (!status.getTitle().equals(Resourcer.getString("database.users.statuses.blocked"))) {
+			if (!status.getTitle().equals(Resourcer.getString("database.users.statuses.blocked")) || isErrorCommand) {
 				chain.doFilter(request, response);
 			} else if (!availableCommands.contains(commandEnum)) {
+				this.sessionInvalidate(request);
 				((HttpServletResponse) response).sendRedirect("FrontController?command=SHOW_BLOCKED_PAGE");
 			} else {
+				this.sessionInvalidate(request);
 				chain.doFilter(request, response);
 			}
 
@@ -68,6 +72,14 @@ public class StatusRedirectFilter implements Filter {
 	@Override
 	public void destroy() {
 		Filter.super.destroy();
+	}
+
+	private void sessionInvalidate(ServletRequest request) {
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpSession session = httpRequest.getSession(false);
+		if (session != null) {
+			session.invalidate();
+		}
 	}
 
 }

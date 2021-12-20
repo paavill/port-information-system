@@ -2,6 +2,8 @@ package ru.rsreu.RonzhinChistyakov09.commandlayer;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.prutzkow.resourcer.Resourcer;
+
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.EmptyCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 
@@ -18,7 +20,7 @@ public class CommandFactory {
 			CommandEnum currentEnum = CommandEnum.valueOf(action.toUpperCase());
 			current = currentEnum.getCurrentCommand();
 		} catch (IllegalArgumentException e) {
-			System.out.println("err! enum exception in ActionFactory:" + action);
+			request.setAttribute(Resourcer.getString("jsp.undefinedCommand.errorCommand"), action);
 		}
 		return current;
 	}

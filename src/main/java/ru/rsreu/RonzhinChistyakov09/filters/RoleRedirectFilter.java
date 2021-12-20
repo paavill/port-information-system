@@ -90,8 +90,9 @@ public class RoleRedirectFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
 			throws IOException, ServletException {
+		boolean isErrorCommand = false;
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
-
+		
 		User user = (User) httpRequest.getSession()
 				.getAttribute(Resourcer.getString("servlet.session.attributes.user"));
 		String role = guestRoleTitle;
@@ -106,12 +107,13 @@ public class RoleRedirectFilter implements Filter {
 				commandEnum = CommandEnum.valueOf(action.toUpperCase());
 			} catch (IllegalArgumentException exception) {
 				System.err.println(exception.getMessage());
+				isErrorCommand = true;
 			}
 		}
 
 		List<CommandEnum> commands = roleWithCommandMap.get(role);
 
-		if (commands.contains(commandEnum)) {
+		if (commands.contains(commandEnum) || isErrorCommand) {
 			filterChain.doFilter(request, response);
 		} else if (user == null) {
 			((HttpServletResponse) response).sendRedirect(Resourcer.getString("uri.show.mainPage.noLogin"));
