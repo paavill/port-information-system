@@ -119,10 +119,6 @@
                             <h4>Ship title:</h4>
                             <var>${shipData.title}</var>
                         </div>
-                        <div>
-                            <h4>Ship capacity:</h4>
-                            <var>${shipData.capacity}</var>
-                        </div>
                         <section class="buttons">
                             <form action="FrontController" method="post">
                                 <input name="command" type="hidden" value="DELETE_SHIP">

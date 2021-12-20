@@ -26,16 +26,21 @@ public class ShowMainCaptainPageCommand implements ActionCommand {
 		StatementStatusDao statementStatusDao = (StatementStatusDao) request.getServletContext()
 				.getAttribute("statementStatusDao");
 		User user = (User) request.getSession().getAttribute("user");
+		
 		MainCaptainPageLogic logic = new MainCaptainPageLogic(statementDao, statementTypeDao,
 				statementStatusDao);
 		try {
-			for(Statement st: logic.getUserEnterTypeStatement(user.getId())){
-				System.out.println(st);
-			}
 			request.setAttribute("enterStatements", logic.getUserEnterTypeStatement(user.getId()));
 			request.setAttribute("exitStatements", logic.getUserExitTypeStatement(user.getId()));
 			Statement statement = logic.getCurrentStatement(user.getId());
 			if( statement != null) {
+				if(statement.getStatus().getTitle().equals("CREATED")) {
+					request.setAttribute("buttonTitle", "Cancel");
+					request.setAttribute("buttonCommand", "CANCEL_STATEMENT");
+				} else if(statement.getStatus().getTitle().equals("APPROVED")){
+					request.setAttribute("buttonTitle", "Finish2");
+					request.setAttribute("buttonCommand", "FINISH_STATEMENT");
+				}
 				page = Resourcer.getString("jsp.captain.main.process");
 				request.setAttribute("statement", statement);
 			} else {

@@ -110,14 +110,6 @@
                             <h4>Title:</h4>
                             <var>${shipData.title}</var>
                         </div>
-                        <%-- <div>
-                            <h4>Captain Id:</h4>
-                            <var>${shipData.captain}</var>
-                        </div> --%>
-                        <div>
-                            <h4>Capacity:</h4>
-                            <var>${shipData.capacity}</var>
-                        </div>
                     </div> 
                 </c:forEach>
             </section>

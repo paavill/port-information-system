@@ -17,10 +17,13 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.delete.DeleteShi
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.delete.DeleteUserCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.edit.EditUserCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.edit.ShowEditUserPageCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.CancelStatementCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.CreateStatementCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.FinishStatementCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.ShowMainCaptainPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.ShowUnloadPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.UnloadProductsCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.dispatcher.ProcessStatementCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.dispatcher.RejectStatementCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.dispatcher.ShowMainDispatcherPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.dispatcher.ShowProcessStatementPageCommand;
@@ -140,6 +143,11 @@ public enum CommandEnum {
 			this.command = new RejectStatementCommand();
 		}
 	},
+	PROCESS_STATEMENT {
+		{
+			this.command = new ProcessStatementCommand();
+		}
+	},
 
 	// captain show commands
 	SHOW_MAIN_CAPTAIN_PAGE {
@@ -158,6 +166,16 @@ public enum CommandEnum {
 	CREATE_STATEMENT {
 		{
 			this.command = new CreateStatementCommand();
+		}
+	},
+	CANCEL_STATEMENT {
+		{
+			this.command = new CancelStatementCommand();
+		}
+	},
+	FINISH_STATEMENT{
+		{
+			this.command = new FinishStatementCommand();
 		}
 	},
 	UNLOAD_PRODUCTS {

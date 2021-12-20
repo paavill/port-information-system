@@ -6,15 +6,15 @@
 <link rel="icon" href="images/icon.png" type="image/png">
 <title>Port</title>
 <!--pages are controled main classes-->
-<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="css/main.css">
 <!--head of sight styles-->
-<link rel="stylesheet" href="/css/header.css">
+<link rel="stylesheet" href="css/header.css">
 <!--control elements styles-->
-<link rel="stylesheet" href="/css/scrollbars.css">
-<link rel="stylesheet" href="/css/buttons.css">
-<link rel="stylesheet" href="/css/enterFieldsStyles.css">
+<link rel="stylesheet" href="css/scrollbars.css">
+<link rel="stylesheet" href="css/buttons.css">
+<link rel="stylesheet" href="css/enterFieldsStyles.css">
 
-<link rel="stylesheet" href="/css/createUserPage.css">
+<link rel="stylesheet" href="css/createUserPage.css">
 </head>
 <body>
 	<header>
@@ -45,7 +45,7 @@
 						<h4 class="title">Filing date:</h4>
 						<h4 class="title">Pier:</h4>
 					</div>
-					<form id="userDataForm" class="entersFields"
+					<form id="statementDataForm" class="entersFields"
 						action="FrontController" method="post">
 						<input type="hidden" name="command" value="PROCESS_STATEMENT">
 						<var class="title">${statement.user.id}</var>
@@ -53,6 +53,7 @@
 						<var class="title">${statement.type.title}</var>
 						<var class="title">${statement.doDate}</var>
 						<var class="title">${statement.user.id}</var>
+						<input name="statementId" type="hidden" value="${statement.id}">
 						<select class="enter" name="selectedPier">
 							<c:forEach var="pier" items="${piersData}">
 								<option>${pier.id}</option>
@@ -61,8 +62,8 @@
 					</form>
 				</div>
 				<section class="buttons">
-					<input class="button" type="submit" form="userDataForm"
-						value="Applay"> <a class="button"
+					<input class="button" type="submit" form="statementDataForm"
+						value="Apply"> <a class="button"
 						href="FrontController?command=SHOW_MAIN_DISPATCHER_PAGE">Cancel</a>
 				</section>
 			</div>

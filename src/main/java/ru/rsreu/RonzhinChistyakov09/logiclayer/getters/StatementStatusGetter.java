@@ -12,7 +12,9 @@ public class StatementStatusGetter {
 	private final String APPROVED_STATUS_TITLE = Resourcer.getString("database.statements.statuses.approved");;
 	private final String REJECTED_STATUS_TITLE = Resourcer.getString("database.statements.statuses.rejected");;
 	private final String FINISHED_STATUS_TITLE = Resourcer.getString("database.statements.statuses.finished");;
+	private final String CANCELED_STATUS_TITLE = Resourcer.getString("database.statements.statuses.canceled");;
 
+	
 	private final StatementStatusDao dao;
 
 	public StatementStatusGetter(StatementStatusDao dao) {
@@ -34,5 +36,8 @@ public class StatementStatusGetter {
 	public StatementStatus getFinishedStatus() throws DataRequestException {
 		return this.dao.getByTitle(FINISHED_STATUS_TITLE);
 	}
-
+	
+	public StatementStatus getCanseledStatus() throws DataRequestException {
+		return this.dao.getByTitle(CANCELED_STATUS_TITLE);
+	}
 }
