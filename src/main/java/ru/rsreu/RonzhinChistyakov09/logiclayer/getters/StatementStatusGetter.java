@@ -37,7 +37,7 @@ public class StatementStatusGetter {
 		return this.dao.getByTitle(FINISHED_STATUS_TITLE);
 	}
 	
-	public StatementStatus getCanseledStatus() throws DataRequestException {
+	public StatementStatus getCanceledStatus() throws DataRequestException {
 		return this.dao.getByTitle(CANCELED_STATUS_TITLE);
 	}
 }

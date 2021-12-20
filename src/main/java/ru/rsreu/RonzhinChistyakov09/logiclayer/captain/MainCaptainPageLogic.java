@@ -9,23 +9,20 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementStatusDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementTypeDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.getters.StatementStatusGetter;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.getters.StatementTypeGetter;
 
 public class MainCaptainPageLogic {
 
 	private final StatementDao statementDao;
-	private final StatementTypeDao statementTypeDao;
-	private final StatementStatusDao statementStatusDao;
-	private static final String ENTER_TYPE_TITLE = "ENTER";
-	private static final String EXIT_TYPE_TITLE = "EXIT";
-	private static final String FINISH_STATUS_TITLE = "FINISHED";
-	private static final String REJECT_STATUS_TITLE = "REJECTED";
+	private final StatementTypeGetter statementTypeGetter;
+	private final StatementStatusGetter statementStatusGetter;
 
 	public MainCaptainPageLogic(StatementDao statementDao, StatementTypeDao statementTypeDao,
 			StatementStatusDao statementStatusDao) {
 		this.statementDao = statementDao;
-		this.statementTypeDao = statementTypeDao;
-		this.statementStatusDao = statementStatusDao;
-
+		this.statementTypeGetter = new StatementTypeGetter(statementTypeDao);
+		this.statementStatusGetter = new StatementStatusGetter(statementStatusDao);
 	}
 
 	public Statement getCurrentStatement(int userId) throws DataRequestException {
@@ -33,34 +30,26 @@ public class MainCaptainPageLogic {
 		if (statement == null) {
 			return null;
 		}
-		StatementStatus finishStatus = this.statementStatusDao.getByTitle(FINISH_STATUS_TITLE);
-		StatementStatus rejectStatus = this.statementStatusDao.getByTitle(REJECT_STATUS_TITLE);
-		if (statement.getStatus().equals(finishStatus)) {
-			return null;
+		StatementStatus status = statement.getStatus();
+		StatementStatus createdStatus = this.statementStatusGetter.getCreatedStatus();
+		StatementStatus approvedStatus = this.statementStatusGetter.getApprovedStatus();
+		if (status.equals(createdStatus) || status.equals(approvedStatus)) {
+			return statement;
 		}
-		if (statement.getStatus().equals(rejectStatus)) {
-			return null;
-		}
-		
-		return statement;
+		return null;
 	}
 
 	public Collection<Statement> getUserEnterTypeStatement(int userId) throws DataRequestException {
-		StatementType type = this.statementTypeDao.getByTitle(ENTER_TYPE_TITLE);
+		StatementType type = this.statementTypeGetter.getEnterType();
 		return getUserStatementByType(userId, type);
 	}
 
 	public Collection<Statement> getUserExitTypeStatement(int userId) throws DataRequestException {
-		StatementType type = this.statementTypeDao.getByTitle(EXIT_TYPE_TITLE);
+		StatementType type = this.statementTypeGetter.getExitType();
 		return getUserStatementByType(userId, type);
 	}
 
 	private Collection<Statement> getUserStatementByType(int userId, StatementType type) throws DataRequestException {
-		StatementStatus finishStatus = this.statementStatusDao.getByTitle(FINISH_STATUS_TITLE);
-		StatementStatus rejectStatus = this.statementStatusDao.getByTitle(REJECT_STATUS_TITLE);
-		Collection<Statement> result = this.statementDao.getUserStatementsByType(userId, type, finishStatus);
-		Collection<Statement> rejectsStatement = this.statementDao.getUserStatementsByType(userId, type, rejectStatus);
-		result.addAll(rejectsStatement);
-		return result;
+		return this.statementDao.getUserStatementsByType(userId, type);
 	}
 }

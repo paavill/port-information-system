@@ -65,6 +65,8 @@ public class RoleRedirectFilter implements Filter {
 		dispatcherCommands.add(CommandEnum.SHOW_MAIN_DISPATCHER_PAGE);
 		dispatcherCommands.add(CommandEnum.SHOW_PROCESS_STATEMENT_PAGE);
 		dispatcherCommands.add(CommandEnum.REJECT_STATEMENT);
+		dispatcherCommands.add(CommandEnum.PROCESS_STATEMENT);
+		dispatcherCommands.add(CommandEnum.APPLY_STATEMENT);
 		dispatcherCommands.add(CommandEnum.LOGOUT);
 		dispatcherCommands.add(CommandEnum.ROUTING_USER);
 		roleWithCommandMap.put(dispatcherRoleTitle, dispatcherCommands);
@@ -81,6 +83,8 @@ public class RoleRedirectFilter implements Filter {
 		captainCommands.add(CommandEnum.SHOW_MAIN_CAPTAIN_PAGE);
 		captainCommands.add(CommandEnum.SHOW_PROCESS_STATEMENT_PAGE);
 		captainCommands.add(CommandEnum.CREATE_STATEMENT);
+		captainCommands.add(CommandEnum.CANCEL_STATEMENT);
+		captainCommands.add(CommandEnum.FINISH_STATEMENT);
 		captainCommands.add(CommandEnum.UNLOAD_PRODUCTS);
 		captainCommands.add(CommandEnum.LOGOUT);
 		captainCommands.add(CommandEnum.ROUTING_USER);

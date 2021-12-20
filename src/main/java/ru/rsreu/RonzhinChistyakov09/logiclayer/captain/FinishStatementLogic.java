@@ -6,18 +6,18 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementStatusDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.getters.StatementStatusGetter;
 
-public class CancelStatementLogic {
+public class FinishStatementLogic {
 
 	private final StatementDao statementDao;
 	private final StatementStatusGetter statementStatusGetter;
 
-	public CancelStatementLogic(StatementDao statementDao, StatementStatusDao statementStatusDao) {
+	public FinishStatementLogic(StatementDao statementDao, StatementStatusDao statementStatusDao) {
 		this.statementDao = statementDao;
 		this.statementStatusGetter = new StatementStatusGetter(statementStatusDao);
 	}
 
-	public void cancelStatement(int statementId) throws DataRequestException {
-		StatementStatus status = this.statementStatusGetter.getCanceledStatus();
+	public void finishStatement(int statementId) throws DataRequestException {
+		StatementStatus status = this.statementStatusGetter.getFinishedStatus();
 		this.statementDao.updateStatus(status, statementId);
 	}
 

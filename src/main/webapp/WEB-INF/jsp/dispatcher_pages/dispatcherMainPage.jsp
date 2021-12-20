@@ -70,7 +70,7 @@
                         </div>
                         <section class="buttons">
                             <form action="FrontController" method="post">
-                                <input name="command" type="hidden" value="SHOW_PROCESS_STATEMENT_PAGE">
+                                <input name="command" type="hidden" value="PROCESS_STATEMENT">
                                 <input name="statementIdToProcess" type="hidden" value="${statement.id}">
                                 <input class="button" type="submit" value="Process">
                             </form>

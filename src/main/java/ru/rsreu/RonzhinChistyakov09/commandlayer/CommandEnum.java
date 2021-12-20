@@ -23,6 +23,7 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.FinishStatemen
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.ShowMainCaptainPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.ShowUnloadPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.UnloadProductsCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.dispatcher.ApplyStatementCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.dispatcher.ProcessStatementCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.dispatcher.RejectStatementCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.dispatcher.ShowMainDispatcherPageCommand;
@@ -133,19 +134,24 @@ public enum CommandEnum {
 			this.command = new ShowMainDispatcherPageCommand();
 		}
 	},
+	PROCESS_STATEMENT {
+		{
+			this.command = new ProcessStatementCommand();
+		}
+	},
 	SHOW_PROCESS_STATEMENT_PAGE {
 		{
 			this.command = new ShowProcessStatementPageCommand();
 		}
 	},
+	APPLY_STATEMENT {
+		{
+			this.command = new ApplyStatementCommand();
+		}
+	},
 	REJECT_STATEMENT {
 		{
 			this.command = new RejectStatementCommand();
-		}
-	},
-	PROCESS_STATEMENT {
-		{
-			this.command = new ProcessStatementCommand();
 		}
 	},
 

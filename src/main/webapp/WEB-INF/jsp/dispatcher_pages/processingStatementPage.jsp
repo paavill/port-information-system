@@ -47,13 +47,13 @@
 					</div>
 					<form id="statementDataForm" class="entersFields"
 						action="FrontController" method="post">
-						<input type="hidden" name="command" value="PROCESS_STATEMENT">
+						<input type="hidden" name="command" value="APPLY_STATEMENT">
 						<var class="title">${statement.user.id}</var>
 						<var class="title">${statement.ship.id}</var>
 						<var class="title">${statement.type.title}</var>
 						<var class="title">${statement.doDate}</var>
 						<var class="title">${statement.user.id}</var>
-						<input name="statementId" type="hidden" value="${statement.id}">
+						<input name="statementIdToProcess" type="hidden" value="${statement.id}">
 						<select class="enter" name="selectedPier">
 							<c:forEach var="pier" items="${piersData}">
 								<option>${pier.id}</option>

@@ -16,7 +16,7 @@ public interface StatementDao {
 
 	abstract int getCount() throws DataRequestException;
 
-	abstract Collection<Statement> getUserStatementsByType(int userId, StatementType type, StatementStatus status)
+	abstract Collection<Statement> getUserStatementsByType(int userId, StatementType type)
 			throws DataRequestException;
 
 	abstract Collection<Statement> getStatementsByStatus(StatementStatus status) throws DataRequestException;

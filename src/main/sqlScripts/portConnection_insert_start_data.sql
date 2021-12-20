@@ -18,6 +18,7 @@ INSERT ALL
     
     INTO users VALUES (0, 'root', '0000', 'root', 3, 0)
     INTO users VALUES (1, 'aleksej', '123', 'Aleksej Vladimirovich Ronzhin', 3, 3)
+    INTO users VALUES (2, 'disp', '123', 'dips', 3, 2)
     
     INTO ships VALUES (0, 1, 'ship_title')
     
@@ -39,13 +40,17 @@ INSERT ALL
     INTO statements VALUES (4, 1, 0, 1, 0, 3, TO_DATE('2020/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'))
     INTO statements VALUES (5, 1, 0, 1, 1, 3, TO_DATE('2020/12/13 00:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 01:02:44', 'yyyy/mm/dd hh24:mi:ss'))
     INTO statements VALUES (6, 1, 0, 1, 0, 3, TO_DATE('2020/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 04:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+    INTO statements VALUES (7, 1, 0, 1, 1, 3, TO_DATE('2020/12/13 05:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 06:02:44', 'yyyy/mm/dd hh24:mi:ss'))
     
-    INTO statements VALUES (7, 1, 0, 2, 0, 3, TO_DATE('2020/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'))
-    INTO statements VALUES (8, 1, 0, 2, 1, 3, TO_DATE('2020/12/13 00:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 01:02:44', 'yyyy/mm/dd hh24:mi:ss'))
-    INTO statements VALUES (9, 1, 0, 2, 0, 3, TO_DATE('2020/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 03:02:44', 'yyyy/mm/dd hh24:mi:ss'))
-    INTO statements VALUES (10, 1, 0, 2, 1, 3, TO_DATE('2020/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 03:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+    
+    INTO statements VALUES (8, 1, 0, 2, 0, 3, TO_DATE('2020/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+    INTO statements VALUES (9, 1, 0, 2, 1, 3, TO_DATE('2020/12/13 00:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 01:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+    INTO statements VALUES (10, 1, 0, 2, 0, 3, TO_DATE('2020/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 03:02:44', 'yyyy/mm/dd hh24:mi:ss'))
+    INTO statements VALUES (11, 1, 0, 2, 1, 3, TO_DATE('2020/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 03:02:44', 'yyyy/mm/dd hh24:mi:ss'))
 SELECT * 
 FROM DUAL;
+
+INSERT INTO statements_statuses VALUES (4, 'CANCELED');
 
 SELECT goods.name AS product_title, pier_id, COUNT(pier_id) AS count, piers.capacity AS pier_capacity, start_date, end_date
 FROM goods LEFT JOIN piers ON piers.id = goods.pier_id

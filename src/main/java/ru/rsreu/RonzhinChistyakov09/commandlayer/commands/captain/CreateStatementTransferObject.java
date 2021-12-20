@@ -17,25 +17,22 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementStatusDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementTypeDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.getters.StatementStatusGetter;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.getters.StatementTypeGetter;
 
 public class CreateStatementTransferObject implements DataTransferObject<Statement> {
 
 	private ShipDao shipDao;
 	private StatementDao statementDao;
-	private StatementStatusDao statementStatusDao;
-	private StatementTypeDao statementTypeDao;
-	private static final String FINISH_STATUS_TITLE = "FINISHED";
-	private static final String CREATE_STATUS_TITLE = "CREATED";
-	private static final String REJECT_STATUS_TITLE = "REJECTED";
-	private static final String ENTER_TYPE_TITLE = "ENTER";
-	private static final String EXIT_TYPE_TITLE = "EXIT";
+	private final StatementTypeGetter statementTypeGetter;
+	private final StatementStatusGetter statementStatusGetter;
 
 	public CreateStatementTransferObject(ShipDao shipDao, StatementDao statementDao,
 			StatementStatusDao statementStatusDao, StatementTypeDao statementTypeDao) {
 		this.shipDao = shipDao;
 		this.statementDao = statementDao;
-		this.statementStatusDao = statementStatusDao;
-		this.statementTypeDao = statementTypeDao;
+		this.statementTypeGetter = new StatementTypeGetter(statementTypeDao);
+		this.statementStatusGetter = new StatementStatusGetter(statementStatusDao);
 	}
 
 	@Override
@@ -44,25 +41,26 @@ public class CreateStatementTransferObject implements DataTransferObject<Stateme
 		Ship ship = shipDao.getUserShip(user.getId());
 		int id = this.statementDao.getCount() + 1;
 		Date date = Date.valueOf(LocalDate.now());
-		StatementStatus createStatus = this.statementStatusDao.getByTitle(CREATE_STATUS_TITLE);
+		StatementStatus createdStatus = this.statementStatusGetter.getCreatedStatus();
 		StatementType type = getStatementTypeNewStatement(user);
-		Statement statement = new Statement(id, user, ship, null, type, createStatus, date, null);
+		Statement statement = new Statement(id, user, ship, null, type, createdStatus, date, null);
 		return statement;
 	}
 
 	private StatementType getStatementTypeNewStatement(User user) throws DataRequestException {
-		StatementType enterType = this.statementTypeDao.getByTitle(ENTER_TYPE_TITLE);
-		StatementType exitType = this.statementTypeDao.getByTitle(EXIT_TYPE_TITLE);
+		StatementType enterType = this.statementTypeGetter.getEnterType();
+		StatementType exitType = this.statementTypeGetter.getExitType();
 		Statement lastStatement = this.statementDao.getLastByUserId(user.getId());
-		if(lastStatement == null) {
+		if (lastStatement == null) {
 			return enterType;
 		}
-		StatementStatus rejectStatus = this.statementStatusDao.getByTitle(REJECT_STATUS_TITLE);
-		if(lastStatement.getStatus().equals(rejectStatus)) {
+		StatementStatus rejectedStatus = this.statementStatusGetter.getRejectedStatus();
+		StatementStatus canceledStatus = this.statementStatusGetter.getCanceledStatus();
+		if (lastStatement.getStatus().equals(rejectedStatus) || lastStatement.getStatus().equals(canceledStatus)) {
 			return lastStatement.getType();
 		}
-		StatementStatus finishStatus = this.statementStatusDao.getByTitle(FINISH_STATUS_TITLE);
-		if (!lastStatement.getStatus().equals(finishStatus)) {
+		StatementStatus finishedStatus = this.statementStatusGetter.getFinishedStatus();
+		if (!lastStatement.getStatus().equals(finishedStatus)) {
 			throw new DataRequestException("STATEMENT NOT FINISHED");
 		}
 		if (lastStatement.getType().equals(enterType)) {
@@ -73,5 +71,4 @@ public class CreateStatementTransferObject implements DataTransferObject<Stateme
 		}
 		throw new DataRequestException("bad type");
 	}
-
 }

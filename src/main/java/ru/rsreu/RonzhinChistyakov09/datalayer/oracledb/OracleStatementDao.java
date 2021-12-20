@@ -108,12 +108,12 @@ public class OracleStatementDao implements StatementDao {
 	}
 
 	@Override
-	public Collection<Statement> getUserStatementsByType(int userId, StatementType type, StatementStatus status)
+	public Collection<Statement> getUserStatementsByType(int userId, StatementType type)
 			throws DataRequestException {
 		Collection<Statement> result = new ArrayList<Statement>();
-		String query = Resourcer.getString("requests.sql.get.statements.user.byRoleAndStatus");
+		String query = Resourcer.getString("requests.sql.get.statements.user.byType");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-			PreparedStatementParametresSetter.set(preparedStatement, userId, type.getId(), status.getId());
+			PreparedStatementParametresSetter.set(preparedStatement, userId, type.getId());
 			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 				while (resultSet.next()) {
 					Statement statement = ResultSetConverter.getStatement(resultSet);

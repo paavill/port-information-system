@@ -8,6 +8,7 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedire
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.Statement;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.ShipDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementStatusDao;
@@ -19,6 +20,7 @@ public class CreateStatementCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
+		User user = (User) request.getSession().getAttribute(Resourcer.getString("servlet.session.attributes.user"));
 		ShipDao shipDao = (ShipDao) request.getServletContext().getAttribute("shipDao");
 		StatementDao statementDao = (StatementDao) request.getServletContext().getAttribute("statementDao");
 		StatementTypeDao statementTypeDao = (StatementTypeDao) request.getServletContext()
@@ -31,12 +33,11 @@ public class CreateStatementCommand implements ActionCommand {
 		try {
 			Statement statement = csto.getModel(request);
 			CreateStatementLogic logic = new CreateStatementLogic(statementDao);
-			logic.createStatement(statement);
+			logic.createStatement(statement, user);
 			System.out.println(statement);
 		} catch (DataRequestException e) {
 			e.printStackTrace();
 		}
 		return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.captain"));
 	}
-
 }

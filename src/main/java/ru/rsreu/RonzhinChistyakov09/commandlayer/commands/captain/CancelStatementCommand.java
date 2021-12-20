@@ -16,7 +16,6 @@ public class CancelStatementCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
-		System.out.println("CANCEL");
 		StatementDao statementDao = (StatementDao) request.getServletContext().getAttribute("statementDao");
 		StatementStatusDao statementStatusDao = (StatementStatusDao) request.getServletContext()
 				.getAttribute("statementStatusDao");
