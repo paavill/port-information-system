@@ -14,28 +14,25 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.data.product.Product;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.ProductDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
-public class OracleProductDao implements ProductDao{
+public class OracleProductDao implements ProductDao {
 
 	private Connection connection;
 
 	public OracleProductDao(Connection connection) {
 		this.connection = connection;
 	}
-	
-	//unloading from ship to pier
+
 	@Override
 	public void unloadProductsToPier(Collection<Product> products) throws DataRequestException {
 		String query = Resourcer.getString("requests.sql.create.product");
-		try{
-			for(Product product:products)
-			{
-				for(int i = 0; i < product.getCount(); i++) {
-					PreparedStatement preparedStatement = connection.prepareStatement(query);
-					PreparedStatementParametresSetter.set(preparedStatement, product.getTitle(), product.getPierId());
-					preparedStatement.executeUpdate();
-					preparedStatement.close();
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			for (Product product : products) {
+				PreparedStatementParametresSetter.set(preparedStatement, product.getTitle(), product.getPierId());
+				for (int i = 0; i < product.getCount(); i++) {
+					preparedStatement.addBatch();
 				}
-			};
+			}
+			preparedStatement.executeBatch();
 		} catch (SQLException e) {
 			throw new DataRequestException(
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
@@ -60,12 +57,19 @@ public class OracleProductDao implements ProductDao{
 		return result;
 	}
 
-
-
 	@Override
 	public void loadProductsFromPier(Collection<Product> products) throws DataRequestException {
-		// TODO Auto-generated method stub
-		
+		String query = Resourcer.getString("requests.sql.delete.product");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			for (Product product : products) {
+				PreparedStatementParametresSetter.set(preparedStatement, product.getPierId(), product.getTitle(), product.getCount());
+				preparedStatement.addBatch();
+			}
+			preparedStatement.executeBatch();
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
 	}
 
 	@Override

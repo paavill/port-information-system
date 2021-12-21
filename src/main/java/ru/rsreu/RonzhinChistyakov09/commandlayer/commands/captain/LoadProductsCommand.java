@@ -9,19 +9,34 @@ import com.prutzkow.resourcer.Resourcer;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedirect;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.ProductDao;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
+import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
+import ru.rsreu.RonzhinChistyakov09.logiclayer.captain.LoadProductsLogic;
 
 public class LoadProductsCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
+		ProductDao productDao = (ProductDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.products"));
+		StatementDao statementDao = (StatementDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.statements"));
+		User user = (User) request.getSession().getAttribute(Resourcer.getString("servlet.session.attributes.user"));
+
 		String productFormsAsJson = request.getParameter("jsonProducts");
-		System.out.println("json:" + productFormsAsJson);
+
 		List<ProductForm> productForms = JsonToProductFormsDeserializator
 				.deserializeJsonToProductForms(productFormsAsJson);
-		productForms.forEach(e -> {
-			System.out.println("Title:" + e.getTitle());
-			System.out.println("Number:" + e.getNumber());
-		});
+		
+		LoadProductsLogic logic = new LoadProductsLogic(productDao, statementDao);
+		try {
+			logic.loadProducts(productForms, user.getId());
+		} catch (DataRequestException e) {
+			e.printStackTrace();
+		}
+
 		return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.captain"));
 	}
 

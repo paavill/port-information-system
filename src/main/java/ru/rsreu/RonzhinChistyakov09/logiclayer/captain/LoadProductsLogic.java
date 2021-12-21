@@ -11,17 +11,17 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.ProductDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
-public class UnloadProductsLogic {
+public class LoadProductsLogic {
 
 	private final ProductDao productDao;
 	private final StatementDao statementDao;
 	
-	public UnloadProductsLogic(ProductDao productDao, StatementDao statementDao) {
+	public LoadProductsLogic(ProductDao productDao, StatementDao statementDao) {
 		this.productDao = productDao;
 		this.statementDao = statementDao;
 	}
 
-	public void unloadProducts(List<ProductForm> productForms, int userId) throws DataRequestException {
+	public void loadProducts(List<ProductForm> productForms, int userId) throws DataRequestException {
 		Statement lastStatement = this.statementDao.getLastFinishedStatement(userId);
 		int pierId = lastStatement.getPier().getId();
 		
@@ -30,7 +30,7 @@ public class UnloadProductsLogic {
 			products.add(new Product(it.getTitle(), pierId, it.getNumber()));
 		});
 		
-		System.out.println("Pier id = " + pierId);
-		this.productDao.unloadProductsToPier(products);
+		this.productDao.loadProductsFromPier(products);
 	}
+
 }

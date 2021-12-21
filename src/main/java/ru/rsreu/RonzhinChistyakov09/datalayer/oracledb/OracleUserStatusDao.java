@@ -7,15 +7,14 @@ import java.sql.SQLException;
 
 import com.prutzkow.resourcer.Resourcer;
 
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserRole;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserStatus;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserStatusDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
 public class OracleUserStatusDao implements UserStatusDao {
-	
+
 	private Connection connection;
-	
+
 	public OracleUserStatusDao(Connection connection) {
 		this.connection = connection;
 	}
