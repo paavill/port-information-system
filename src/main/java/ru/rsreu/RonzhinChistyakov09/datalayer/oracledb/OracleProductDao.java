@@ -22,6 +22,7 @@ public class OracleProductDao implements ProductDao{
 		this.connection = connection;
 	}
 	
+	//unloading from ship to pier
 	@Override
 	public void unloadProductsToPier(Collection<Product> products) throws DataRequestException {
 		String query = Resourcer.getString("requests.sql.create.product");
@@ -32,6 +33,7 @@ public class OracleProductDao implements ProductDao{
 					PreparedStatement preparedStatement = connection.prepareStatement(query);
 					PreparedStatementParametresSetter.set(preparedStatement, product.getTitle(), product.getPierId());
 					preparedStatement.executeUpdate();
+					preparedStatement.close();
 				}
 			};
 		} catch (SQLException e) {
@@ -46,6 +48,33 @@ public class OracleProductDao implements ProductDao{
 		String query = Resourcer.getString("requests.sql.get.products.allProducts");
 		try (Statement statement = this.connection.createStatement()) {
 			try (ResultSet resultSet = statement.executeQuery(query)) {
+				while (resultSet.next()) {
+					Product product = ResultSetConverter.getProduct(resultSet);
+					result.add(product);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+		return result;
+	}
+
+
+
+	@Override
+	public void loadProductsFromPier(Collection<Product> products) throws DataRequestException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Collection<Product> getProductsInPier(int pierId) throws DataRequestException {
+		Collection<Product> result = new ArrayList<Product>();
+		String query = Resourcer.getString("requests.sql.get.products.productsInPier");
+		try (PreparedStatement statement = this.connection.prepareStatement(query)) {
+			PreparedStatementParametresSetter.set(statement, pierId);
+			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
 					Product product = ResultSetConverter.getProduct(resultSet);
 					result.add(product);

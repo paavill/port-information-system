@@ -12,7 +12,6 @@ public class ShowUnloadPageCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
-		// TODO Auto-generated method stub
 		return new CommandResultResponseForward(Resourcer.getString("jsp.captain.unload"));
 	}
 

@@ -13,7 +13,7 @@
 .mainView{
     display: block;
     padding: 0;
-    max-height: calc(100% - 9px);
+    max-height: calc(100%);
     max-width: 420px;
 }
 

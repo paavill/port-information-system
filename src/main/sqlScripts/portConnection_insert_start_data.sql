@@ -42,37 +42,9 @@ INSERT ALL
     INTO statements VALUES (6, 1, 0, 1, 0, 3, TO_DATE('2020/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 04:02:44', 'yyyy/mm/dd hh24:mi:ss'))
     INTO statements VALUES (7, 1, 0, 1, 1, 3, TO_DATE('2020/12/13 05:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 06:02:44', 'yyyy/mm/dd hh24:mi:ss'))
     
-    
     INTO statements VALUES (8, 1, 0, 2, 0, 3, TO_DATE('2020/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/12 23:02:44', 'yyyy/mm/dd hh24:mi:ss'))
     INTO statements VALUES (9, 1, 0, 2, 1, 3, TO_DATE('2020/12/13 00:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 01:02:44', 'yyyy/mm/dd hh24:mi:ss'))
     INTO statements VALUES (10, 1, 0, 2, 0, 3, TO_DATE('2020/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 03:02:44', 'yyyy/mm/dd hh24:mi:ss'))
     INTO statements VALUES (11, 1, 0, 2, 1, 3, TO_DATE('2020/12/13 02:02:44', 'yyyy/mm/dd hh24:mi:ss'), TO_DATE('2021/12/13 03:02:44', 'yyyy/mm/dd hh24:mi:ss'))
 SELECT * 
 FROM DUAL;
-
-INSERT INTO statements_statuses VALUES (4, 'CANCELED');
-
-SELECT goods.name AS product_title, pier_id, COUNT(pier_id) AS count, piers.capacity AS pier_capacity, start_date, end_date
-FROM goods LEFT JOIN piers ON piers.id = goods.pier_id
-GROUP BY goods.name, pier_id, piers.capacity, start_date, end_date;
-
-SELECT pier_ids, pier_capacity, (pier_capacity - COUNT(goods.id)) AS r_c, pier_status
-FROM goods RIGHT JOIN (
-
-SELECT DISTINCT piers.id AS pier_ids, piers.capacity AS pier_capacity, 'FREE' AS pier_status
-FROM piers LEFT JOIN statements ON statements.pier_id = piers.id
-WHERE piers.end_date IS null AND ((SELECT COUNT(statements.id)
-        FROM statements
-        WHERE statements.status_id = 3 AND statements.type_id = 1 AND statements.pier_id = piers.id) = (SELECT COUNT(statements.id)
-                                                                                                    FROM statements
-                                                                                                    WHERE statements.status_id = 3 AND statements.type_id = 0 AND statements.pier_id = piers.id))
-UNION ALL
-SELECT piers.id AS pier_ids, piers.capacity AS pier_capacity, 'BUSY' AS pier_status
-FROM piers
-WHERE piers.end_date IS null AND ((SELECT COUNT(statements.id)
-        FROM statements
-        WHERE statements.status_id = 3 AND statements.type_id = 1 AND statements.pier_id = piers.id) != (SELECT COUNT(statements.id)
-                                                                                                    FROM statements
-                                                                                                    WHERE statements.status_id = 3 AND statements.type_id = 0 AND statements.pier_id = piers.id)))
-ON pier_ids = goods.pier_id
-GROUP BY pier_ids, pier_capacity, pier_status

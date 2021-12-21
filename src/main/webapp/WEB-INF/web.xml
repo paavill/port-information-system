@@ -36,8 +36,12 @@
   </filter-mapping>
 
   <session-config>
-    <session-timeout>30</session-timeout>
+    <session-timeout>1</session-timeout>
   </session-config>
+  
+  <listener>
+        <listener-class>ru.rsreu.RonzhinChistyakov09.listeners.SessionTimeoutListener</listener-class>
+  </listener>
 
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

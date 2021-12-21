@@ -20,6 +20,8 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.edit.ShowEditUse
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.CancelStatementCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.CreateStatementCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.FinishStatementCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.LoadProductsCommand;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.ShowLoadPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.ShowMainCaptainPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.ShowUnloadPageCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.UnloadProductsCommand;
@@ -166,6 +168,11 @@ public enum CommandEnum {
 			this.command = new ShowUnloadPageCommand();
 		}
 	},
+	SHOW_LOAD_PAGE {
+		{
+			this.command = new ShowLoadPageCommand();
+		}
+	},
 	// end captain show commands
 
 	// captain action commands
@@ -187,6 +194,11 @@ public enum CommandEnum {
 	UNLOAD_PRODUCTS {
 		{
 			this.command = new UnloadProductsCommand();
+		}
+	},
+	LOAD_PRODUCTS {
+		{
+			this.command = new LoadProductsCommand();
 		}
 	},
 	// end captain action commands

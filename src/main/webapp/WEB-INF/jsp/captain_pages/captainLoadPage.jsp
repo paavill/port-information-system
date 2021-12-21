@@ -7,20 +7,20 @@
     <title>Port</title>
 
     <!--pages are controled main classes-->
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="css/main.css">
     <!--head of sight styles-->
-    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="css/header.css">
     <!--data table styles-->
-    <link rel="stylesheet" href="/css/table.css">
-    <link rel="stylesheet" href="/css/tableHead.css">
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/tableHead.css">
     <!--control elements styles-->
-    <link rel="stylesheet" href="/css/scrollbars.css">
-    <link rel="stylesheet" href="/css/buttons.css">
-    <link rel="stylesheet" href="/css/enterFieldsStyles.css">
+    <link rel="stylesheet" href="css/scrollbars.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/enterFieldsStyles.css">
 
-    <link rel="stylesheet" href="/css/captainLoadPage.css">
+    <link rel="stylesheet" href="css/captainLoadPage.css">
 
-    <script src="/js/captainLoad.js"></script>
+    <script src="js/captainLoad.js"></script>
 </head>
 <body>
     <header>
@@ -60,7 +60,7 @@
                                 </div>
 
                                 <div class="entersFields">
-                                    <var class="title">${product.number}</var>
+                                    <var class="title">${product.count}</var>
                                     <var class="title">${product.title}</var>
                                     <input class="enter" required type="number" placeholder="Enter number">
                                     <input type="hidden" value="${product.title}">
@@ -71,7 +71,7 @@
                 </div>
                 
                 <div class="buttons">
-                    <input class="button" type="button" onclick="handleLoadClick()" form="loadForm" value="Load products">
+                    <input class="button" type="submit" onclick="handleLoadClick()" form="loadForm" value="Load products">
                 </div>
             </section>   
         </div>

@@ -82,10 +82,13 @@ public class RoleRedirectFilter implements Filter {
 		List<CommandEnum> captainCommands = new ArrayList<>();
 		captainCommands.add(CommandEnum.SHOW_MAIN_CAPTAIN_PAGE);
 		captainCommands.add(CommandEnum.SHOW_PROCESS_STATEMENT_PAGE);
+		captainCommands.add(CommandEnum.SHOW_UNLOAD_PAGE);
+		captainCommands.add(CommandEnum.SHOW_LOAD_PAGE);
 		captainCommands.add(CommandEnum.CREATE_STATEMENT);
 		captainCommands.add(CommandEnum.CANCEL_STATEMENT);
 		captainCommands.add(CommandEnum.FINISH_STATEMENT);
 		captainCommands.add(CommandEnum.UNLOAD_PRODUCTS);
+		captainCommands.add(CommandEnum.LOAD_PRODUCTS);
 		captainCommands.add(CommandEnum.LOGOUT);
 		captainCommands.add(CommandEnum.ROUTING_USER);
 		roleWithCommandMap.put(captainRoleTitle, captainCommands);
@@ -123,6 +126,7 @@ public class RoleRedirectFilter implements Filter {
 			((HttpServletResponse) response).sendRedirect(Resourcer.getString("uri.show.mainPage.noLogin"));
 		} else {
 			((HttpServletResponse) response).sendRedirect(Resourcer.getString("uri.routing"));
+			System.err.println("Command not avalible for user!");
 		}
 	}
 
