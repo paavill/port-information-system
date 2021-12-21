@@ -12,9 +12,7 @@ public class ShowCreatePierPageCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
-		String page = Resourcer.getString("jsp.admin.createPier");;
-
-		return new CommandResultResponseForward(page);
+		return new CommandResultResponseForward(Resourcer.getString("jsp.admin.createPier"));
 	}
 
 }

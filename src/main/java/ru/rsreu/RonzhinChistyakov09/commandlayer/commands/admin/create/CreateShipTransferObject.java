@@ -2,6 +2,8 @@ package ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.create;
 
 import javax.servlet.ServletRequest;
 
+import com.prutzkow.resourcer.Resourcer;
+
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.DataTransferObject;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.Ship;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.ShipDao;
@@ -10,7 +12,7 @@ import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 public class CreateShipTransferObject implements DataTransferObject<Ship> {
 
 	private ShipDao shipDao;
-	
+
 	public CreateShipTransferObject(ShipDao shipDao) {
 		this.shipDao = shipDao;
 	}
@@ -18,7 +20,7 @@ public class CreateShipTransferObject implements DataTransferObject<Ship> {
 	@Override
 	public Ship getModel(ServletRequest request) throws DataRequestException {
 		int id = shipDao.getLastId() + 1;
-		String title = request.getParameter("shipTitle");
+		String title = request.getParameter(Resourcer.getString("servlet.requests.patametres.ship.title"));
 		Ship ship = new Ship(id, title);
 		return ship;
 	}

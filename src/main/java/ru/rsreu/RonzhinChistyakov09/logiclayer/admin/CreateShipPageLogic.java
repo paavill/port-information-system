@@ -7,14 +7,13 @@ import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
 public class CreateShipPageLogic {
 
-	UserDao userDao;
-	
+	private final UserDao userDao;
+
 	public CreateShipPageLogic(UserDao userDao) {
 		this.userDao = userDao;
 	}
-	
-	public Collection<Integer> getCaptainsId() throws DataRequestException{
+
+	public Collection<Integer> getCaptainsWithoutShipId() throws DataRequestException {
 		return this.userDao.getCaptainsId();
 	}
-
 }

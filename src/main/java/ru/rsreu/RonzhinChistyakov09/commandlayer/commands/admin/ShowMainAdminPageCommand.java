@@ -1,7 +1,5 @@
 package ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin;
 
-import java.util.Collection;
-
 import javax.servlet.http.HttpServletRequest;
 
 import com.prutzkow.resourcer.Resourcer;
@@ -9,9 +7,6 @@ import com.prutzkow.resourcer.Resourcer;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseForward;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.Ship;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.pier.Pier;
-import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.ShipDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
@@ -22,28 +17,23 @@ public class ShowMainAdminPageCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
-		User user = (User) request.getSession().getAttribute("user");
-		request.setAttribute("user", user);
-		
-		UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
-		PierDao pierDao = (PierDao) request.getServletContext().getAttribute("pierDao");
-		ShipDao shipDao = (ShipDao) request.getServletContext().getAttribute("shipDao");
-		
+		UserDao userDao = (UserDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.users"));
+		PierDao pierDao = (PierDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.piers"));
+		ShipDao shipDao = (ShipDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.ships"));
+
 		try {
 			MainAdminPageLogic logic = new MainAdminPageLogic(pierDao, userDao, shipDao);
-			Collection<User> users = logic.getUsers();
-			Collection<Pier> piers = logic.getPiers();
-			Collection<Ship> ships = logic.getShips();
-			
-			request.setAttribute("usersData", users);
-			request.setAttribute("piersData", piers);
-			request.setAttribute("shipsData", ships);
+			request.setAttribute(Resourcer.getString("servlet.requests.attributes.users"), logic.getUsers());
+			request.setAttribute(Resourcer.getString("servlet.requests.attributes.piers"), logic.getPiers());
+			request.setAttribute(Resourcer.getString("servlet.requests.attributes.ships"), logic.getShips());
 		} catch (DataRequestException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		String page = Resourcer.getString("jsp.admin.main");
-		
 		return new CommandResultResponseForward(page);
 	}
 

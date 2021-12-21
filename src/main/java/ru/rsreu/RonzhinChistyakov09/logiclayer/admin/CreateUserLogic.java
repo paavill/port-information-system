@@ -14,7 +14,7 @@ public class CreateUserLogic {
 	}
 
 	public void createUser(User user) throws DataRequestException, LoginBusyException {
-		if(userDao.getUserByLogin(user.getLogin()) != null) {
+		if (userDao.getUserByLogin(user.getLogin()) != null) {
 			throw new LoginBusyException();
 		}
 		this.userDao.createUser(user);

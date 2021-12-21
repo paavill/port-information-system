@@ -2,6 +2,8 @@ package ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.create;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.prutzkow.resourcer.Resourcer;
+
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedirect;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
@@ -14,17 +16,19 @@ public class CreateShipCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
+		ShipDao shipDao = (ShipDao) request.getServletContext().getAttribute("shipDao");
+
+		CreateShipTransferObject shipDto = new CreateShipTransferObject(shipDao);
+		CreateShipLogic logic = new CreateShipLogic(shipDao);
 		try {
-			ShipDao shipDao = (ShipDao) request.getServletContext().getAttribute("shipDao");
-			CreateShipTransferObject shipDto = new CreateShipTransferObject(shipDao);
 			Ship ship = shipDto.getModel(request);
-			CreateShipLogic logic = new CreateShipLogic(shipDao);
-			int userId = Integer.parseInt(request.getParameter("captainId"));
+			int userId = Integer
+					.parseInt(request.getParameter(Resourcer.getString("servlet.requests.parametres.captainId")));
 			logic.createShip(userId, ship);
 		} catch (DataRequestException e) {
 			e.printStackTrace();
 		}
-		return new CommandResultResponseSendRedirect("FrontController?command=SHOW_MAIN_ADMIN_PAGE");
+		return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.admin"));
 	}
 
 }

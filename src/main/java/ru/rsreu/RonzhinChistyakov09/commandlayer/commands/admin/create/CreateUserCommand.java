@@ -2,6 +2,8 @@ package ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.create;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.prutzkow.resourcer.Resourcer;
+
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedirect;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
@@ -17,22 +19,24 @@ public class CreateUserCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
+		UserDao userDao = (UserDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.users"));
+		UserRoleDao userRoleDao = (UserRoleDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.usersRoles"));
+		UserStatusDao userStatusDao = (UserStatusDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.usersStatuses"));
+
+		CreateUserLogic logic = new CreateUserLogic(userDao);
+		CreateUserTransferObject userDto = new CreateUserTransferObject(userDao, userRoleDao, userStatusDao);
 		try {
-			UserDao userDao = (UserDao) request.getServletContext().getAttribute("userDao");
-			UserRoleDao userRoleDao = (UserRoleDao) request.getServletContext().getAttribute("userRoleDao");
-			UserStatusDao userStatusDao = (UserStatusDao) request.getServletContext().getAttribute("userStatusDao");
-			
-			CreateUserLogic logic = new CreateUserLogic(userDao);
-			CreateUserTransferObject userDto = new CreateUserTransferObject(userDao, userRoleDao, userStatusDao);
 			User user = userDto.getModel(request);
 			logic.createUser(user);
 		} catch (DataRequestException e) {
 			e.printStackTrace();
 		} catch (LoginBusyException e) {
-			System.out.println("Login is busy");
 			e.printStackTrace();
 		}
-		return new CommandResultResponseSendRedirect("FrontController?command=SHOW_MAIN_ADMIN_PAGE");
+		return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.admin"));
 	}
 
 }

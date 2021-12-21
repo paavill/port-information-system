@@ -169,6 +169,23 @@ public class OracleStatementDao implements StatementDao {
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
 	}
+
+	@Override
+	public Statement getLastFinishedStatement(int userId) throws DataRequestException {
+		String query = Resourcer.getString("requests.sql.get.statement.finished.last");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			PreparedStatementParametresSetter.set(preparedStatement, userId);
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
+					return ResultSetConverter.getStatement(resultSet);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+		return null;
+	}
 	
 	
 }

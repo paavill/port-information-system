@@ -2,6 +2,8 @@ package ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.delete;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.prutzkow.resourcer.Resourcer;
+
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedirect;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
@@ -13,11 +15,13 @@ public class DeletePierCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
+		PierDao pierDao = (PierDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.piers"));
+		DeletePierLogic logic = new DeletePierLogic(pierDao);
+		int pierId = Integer
+				.parseInt(request.getParameter(Resourcer.getString("servlet.requests.parametres.pierIdToDelete")));
 
 		try {
-			PierDao pierDao = (PierDao) request.getServletContext().getAttribute("pierDao");
-			DeletePierLogic logic = new DeletePierLogic(pierDao);
-			int pierId = Integer.parseInt(request.getParameter("pierIdToDelete"));
 			logic.deletePier(pierId);
 		} catch (DataRequestException e) {
 			e.printStackTrace();

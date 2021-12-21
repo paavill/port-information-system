@@ -26,4 +26,6 @@ public interface StatementDao {
 	abstract void updateStatus(StatementStatus status, int id) throws DataRequestException;
 
 	abstract void updatePier(int statementId, int pierId) throws DataRequestException;
+
+	abstract Statement getLastFinishedStatement(int userId) throws DataRequestException;
 }

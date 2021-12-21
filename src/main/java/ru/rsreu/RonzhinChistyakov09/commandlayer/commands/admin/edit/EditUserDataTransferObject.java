@@ -2,6 +2,8 @@ package ru.rsreu.RonzhinChistyakov09.commandlayer.commands.admin.edit;
 
 import javax.servlet.ServletRequest;
 
+import com.prutzkow.resourcer.Resourcer;
+
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.DataTransferObject;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserRole;
@@ -22,15 +24,20 @@ public class EditUserDataTransferObject implements DataTransferObject<User> {
 
 	@Override
 	public User getModel(ServletRequest request) throws DataRequestException {
-		Integer id = Integer.parseInt(request.getParameter("currentUserId"));
-		String login = (String) request.getParameter("currentUserLogin");
-		String password = (String) request.getParameter("currentUserPassword");
-		String fullName = (String) request.getParameter("currentUserFullName");
-		String roleTitle = (String) request.getParameter("currentUserRole");
+		Integer id = Integer
+				.parseInt(request.getParameter(Resourcer.getString("servlet.requests.patametres.user.current.id")));
+		String login = (String) request
+				.getParameter(Resourcer.getString("servlet.requests.patametres.user.current.login"));
+		String password = (String) request
+				.getParameter(Resourcer.getString("servlet.requests.patametres.user.current.password"));
+		String fullName = (String) request
+				.getParameter(Resourcer.getString("servlet.requests.patametres.user.current.fullName"));
+		String roleTitle = (String) request
+				.getParameter(Resourcer.getString("servlet.requests.patametres.user.current.role"));
+
 		UserRole role = this.userRoleDao.getUserRoleByTitle(roleTitle);
 		UserStatus status = this.userDao.getUserById(id).getStatus();
-		User user = new User(id, login, password, fullName, status, role);
-		return user;
+		return new User(id, login, password, fullName, status, role);
 	}
 
 }

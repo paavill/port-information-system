@@ -54,12 +54,16 @@ public class ShowMainCaptainPageCommand implements ActionCommand {
 				request.setAttribute("typeOfUnloadingButton", "hidden");
 				request.setAttribute("typeOfLoadingButton", "hidden");
 			} else {
-//				Statement lastStatement = logic.getLastStatement(user.getId());
-//				if(lastStatement == null || lastStatement.getType().getTitle().equals("EXIT")) {
-//					request.setAttribute("statementType", "exit");
-//				} else {
-//					request.setAttribute("statementType", "enter");
-//				}
+				Statement lastStatement = logic.getLastFinishedStatement(user.getId());
+				if(lastStatement == null || lastStatement.getType().getTitle().equals("EXIT")) {
+					request.setAttribute("statementType", "enter");
+					request.setAttribute("typeOfUnloadingButton", "hidden");
+					request.setAttribute("typeOfLoadingButton", "hidden");
+				} else {
+					request.setAttribute("statementType", "exit");
+					request.setAttribute("typeOfUnloadingButton", "submit");
+					request.setAttribute("typeOfLoadingButton", "submit");
+				}
 			}
 		} catch (DataRequestException e) {
 			e.printStackTrace();

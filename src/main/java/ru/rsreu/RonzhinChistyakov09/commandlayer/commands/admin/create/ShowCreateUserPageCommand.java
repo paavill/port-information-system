@@ -19,16 +19,17 @@ public class ShowCreateUserPageCommand implements ActionCommand {
 
 	@Override
 	public ActionCommandResult execute(HttpServletRequest request) {
+		UserRoleDao userRoleDao = (UserRoleDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.usersRoles"));
+		CreateUserPageLogic logic = new CreateUserPageLogic(userRoleDao);
 		try {
-			UserRoleDao userRoleDao = (UserRoleDao) request.getServletContext().getAttribute("userRoleDao");
-			CreateUserPageLogic logic = new CreateUserPageLogic(userRoleDao);
 			Collection<UserRole> roles = logic.getUserRoles();
-			request.setAttribute("userRoles", roles);
+			request.setAttribute(Resourcer.getString("servlet.requests.attributes.users.roles"), roles);
 			String page = Resourcer.getString("jsp.admin.createUser");
 			return new CommandResultResponseForward(page);
 		} catch (DataRequestException e) {
 			e.printStackTrace();
-			return new CommandResultResponseSendRedirect("FrontController?command=SHOW_MAIN_ADMIN_PAGE");
+			return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.admin"));
 		}
 	}
 }

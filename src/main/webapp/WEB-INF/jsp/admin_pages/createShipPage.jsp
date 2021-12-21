@@ -41,17 +41,15 @@
                         <div class="entersTitles">
                             <h4 class="title">Captain:</h4>
                             <h4 class="title">Title:</h4>
-                            <h4 class="title">Capacity:</h4>
                         </div>
                         <form id="userDataForm" class="entersFields" action="FrontController" method="post">
                             <input type="hidden" name="command" value="CREATE_SHIP">
                             <select class="enter" name="captainId">
-                                <c:forEach var="id" items="${captainsId}">
+                                <c:forEach var="id" items="${captainsIds}">
                                     <option>${id}</option>
                                 </c:forEach>
                             </select>
-                            <input class="enter" required name="shipTitle" type="text">  
-                            <input class="enter" required name="shipCapacity" type="text">
+                            <input class="enter" required name="shipTitle" type="text">
                         </form>
                     </div>
                     <section class="buttons">

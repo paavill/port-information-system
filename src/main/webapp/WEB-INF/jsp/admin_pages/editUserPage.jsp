@@ -36,7 +36,7 @@
         <div class="main">
             <section class="container mainView"> 
                 <div class="info">
-                    <h3>Creating user #${user.id}</h3>
+                    <h3>Edit user #${userToEdit.id}</h3>
                     <div class="enters">
                         <div class="entersTitles">
                             <h4 class="title">Role:</h4>

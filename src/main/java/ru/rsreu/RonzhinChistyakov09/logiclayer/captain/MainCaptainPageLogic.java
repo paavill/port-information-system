@@ -60,4 +60,8 @@ public class MainCaptainPageLogic {
 	public StatementStatus getCreatedStatement() throws DataRequestException {
 		return this.statementStatusGetter.getCreatedStatus();
 	}
+
+	public Statement getLastFinishedStatement(int id) throws DataRequestException {
+		return this.statementDao.getLastFinishedStatement(id);
+	}
 }
