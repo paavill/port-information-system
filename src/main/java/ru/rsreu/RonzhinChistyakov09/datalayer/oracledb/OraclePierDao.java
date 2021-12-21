@@ -147,4 +147,21 @@ public class OraclePierDao implements PierDao {
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
 	}
+
+	@Override
+	public int getResidualCapacity(int id) throws DataRequestException {
+		String query = Resourcer.getString("requests.sql.get.piers.capacity.residual");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			PreparedStatementParametresSetter.set(preparedStatement, id);
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
+					return resultSet.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+		return 0;
+	}
 }

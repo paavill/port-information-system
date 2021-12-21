@@ -10,9 +10,11 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedire
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
+import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.PierDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.ProductDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
+import ru.rsreu.RonzhinChistyakov09.exceptions.captain.NotEnoughPierCapacityException;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.captain.UnloadProductsLogic;
 
 public class UnloadProductsCommand implements ActionCommand {
@@ -23,16 +25,20 @@ public class UnloadProductsCommand implements ActionCommand {
 				.getAttribute(Resourcer.getString("serlvet.context.dao.products"));
 		StatementDao statementDao = (StatementDao) request.getServletContext()
 				.getAttribute(Resourcer.getString("serlvet.context.dao.statements"));
+		PierDao pierDao = (PierDao) request.getServletContext()
+				.getAttribute(Resourcer.getString("serlvet.context.dao.piers"));
 		User user = (User) request.getSession().getAttribute(Resourcer.getString("servlet.session.attributes.user"));
 
 		String productFormsAsJson = request.getParameter("jsonProducts");
 		List<ProductForm> productForms = JsonToProductFormsDeserializator
 				.deserializeJsonToProductForms(productFormsAsJson);
 
-		UnloadProductsLogic logic = new UnloadProductsLogic(productDao, statementDao);
+		UnloadProductsLogic logic = new UnloadProductsLogic(productDao, statementDao, pierDao);
 		try {
 			logic.unloadProducts(productForms, user.getId());
 		} catch (DataRequestException e) {
+			e.printStackTrace();
+		} catch (NotEnoughPierCapacityException e) {
 			e.printStackTrace();
 		}
 

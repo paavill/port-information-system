@@ -21,5 +21,7 @@ public interface PierDao {
 	abstract void updatePier(int pierId, Pier pier) throws DataRequestException;
 
 	abstract void deletePier(int id) throws DataRequestException;
+	
+	abstract int getResidualCapacity(int id) throws DataRequestException;
 
 }

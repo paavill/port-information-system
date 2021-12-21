@@ -13,6 +13,7 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.ProductDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
+import ru.rsreu.RonzhinChistyakov09.exceptions.captain.NotEnoughCountProductsOnPierException;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.captain.LoadProductsLogic;
 
 public class LoadProductsCommand implements ActionCommand {
@@ -29,12 +30,14 @@ public class LoadProductsCommand implements ActionCommand {
 
 		List<ProductForm> productForms = JsonToProductFormsDeserializator
 				.deserializeJsonToProductForms(productFormsAsJson);
-		
+
 		LoadProductsLogic logic = new LoadProductsLogic(productDao, statementDao);
 		try {
 			logic.loadProducts(productForms, user.getId());
 		} catch (DataRequestException e) {
 			e.printStackTrace();
+		} catch (NotEnoughCountProductsOnPierException e) {
+			request.getServletContext().log(e.getMessage());
 		}
 
 		return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.captain"));

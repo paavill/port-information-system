@@ -62,7 +62,8 @@ public class OracleProductDao implements ProductDao {
 		String query = Resourcer.getString("requests.sql.delete.product");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 			for (Product product : products) {
-				PreparedStatementParametresSetter.set(preparedStatement, product.getPierId(), product.getTitle(), product.getCount());
+				PreparedStatementParametresSetter.set(preparedStatement, product.getPierId(), product.getTitle(),
+						product.getCount());
 				preparedStatement.addBatch();
 			}
 			preparedStatement.executeBatch();
@@ -89,6 +90,24 @@ public class OracleProductDao implements ProductDao {
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
 		return result;
+	}
+
+	@Override
+	public int getCountProduct(String title, int pierId) throws DataRequestException {
+		String query = Resourcer.getString("requests.sql.get.products.count");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			PreparedStatementParametresSetter.set(preparedStatement, pierId, title);
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
+					return resultSet.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+		return 0;
+
 	}
 
 }
