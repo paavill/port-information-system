@@ -15,7 +15,7 @@ import ru.rsreu.RonzhinChistyakov09.logiclayer.dispatcher.RejectStatementLogic;
 public class RejectStatementCommand implements ActionCommand {
 
 	@Override
-	public ActionCommandResult execute(HttpServletRequest request) {
+	public ActionCommandResult execute(HttpServletRequest request) throws DataRequestException {
 		StatementDao statementDao = (StatementDao) request.getServletContext()
 				.getAttribute(Resourcer.getString("serlvet.context.dao.statements"));
 		StatementStatusDao statementStatusDao = (StatementStatusDao) request.getServletContext()
@@ -23,11 +23,9 @@ public class RejectStatementCommand implements ActionCommand {
 		int statementId = Integer
 				.parseInt(request.getParameter(Resourcer.getString("servlet.requests.parametres.statementIdToReject")));
 		RejectStatementLogic logic = new RejectStatementLogic(statementDao, statementStatusDao);
-		try {
-			logic.rejectStatement(statementId);
-		} catch (DataRequestException e) {
-			e.printStackTrace();
-		}
+
+		logic.rejectStatement(statementId);
+
 		String page = Resourcer.getString("uri.show.mainPage.dispatcher");
 		return new CommandResultResponseSendRedirect(page);
 	}

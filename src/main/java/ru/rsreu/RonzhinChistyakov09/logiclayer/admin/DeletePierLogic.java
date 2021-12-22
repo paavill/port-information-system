@@ -1,5 +1,7 @@
 package ru.rsreu.RonzhinChistyakov09.logiclayer.admin;
 
+import com.prutzkow.resourcer.Resourcer;
+
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.Statement;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.StatementStatus;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.StatementType;
@@ -35,7 +37,7 @@ public class DeletePierLogic {
 				|| lastStatement.getType().equals(exitType) && lastStatement.getStatus().equals(finishedStatus)) {
 			this.pierDao.deletePier(id);
 		} else {
-			throw new TryDeleteBusyPierException();
+			throw new TryDeleteBusyPierException(Resourcer.getString("exceptions.captain.delete.busyPier"));
 		}
 	}
 

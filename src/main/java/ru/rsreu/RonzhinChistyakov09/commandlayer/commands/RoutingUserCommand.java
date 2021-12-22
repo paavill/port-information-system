@@ -15,7 +15,7 @@ public class RoutingUserCommand implements ActionCommand {
 	public ActionCommandResult execute(HttpServletRequest request) {
 		User user = (User) request.getSession().getAttribute(Resourcer.getString("servlet.session.attributes.user"));
 		String roleTitle = user.getRole().getTitle().toUpperCase();
-		ActionCommandResult resultCommand = null;// there will be command with redirect to error page
+		ActionCommandResult resultCommand = null;
 		if (roleTitle.equals(Resourcer.getString("database.users.roles.administrator"))) {
 			resultCommand = new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.admin"));
 		} else if (roleTitle.equals(Resourcer.getString("database.users.roles.dispatcher"))) {
@@ -26,7 +26,6 @@ public class RoutingUserCommand implements ActionCommand {
 			resultCommand = new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.moderator"));
 		} else {
 			resultCommand = new CommandResultResponseSendRedirect(Resourcer.getString("uri.empty"));
-			System.out.println("########USER ROLE UNDEF#########");
 		}
 		return resultCommand;
 	}

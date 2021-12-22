@@ -33,13 +33,13 @@ public class BlockUserCommand implements ActionCommand {
 		try {
 			logic.blockUserById(userId);
 		} catch (DataRequestException e) {
-			e.printStackTrace();
+			request.getServletContext().setAttribute(Resourcer.getString("servlet.requests.attributes.errorMessage"), e.getMessage());
 		} catch (TryBlockAdministratorException e) {
-			e.printStackTrace();
+			request.getServletContext().setAttribute(Resourcer.getString("servlet.requests.attributes.errorMessage"), e.getMessage());
 		} catch (TryBlockModeratorException e) {
-			e.printStackTrace();
+			request.getServletContext().setAttribute(Resourcer.getString("servlet.requests.attributes.errorMessage"), e.getMessage());
 		} catch (UserDeletedException e) {
-			e.printStackTrace();
+			request.getServletContext().setAttribute(Resourcer.getString("servlet.requests.attributes.errorMessage"), e.getMessage());
 		}
 		String page = Resourcer.getString("uri.show.mainPage.moderator");
 		return new CommandResultResponseSendRedirect(page);

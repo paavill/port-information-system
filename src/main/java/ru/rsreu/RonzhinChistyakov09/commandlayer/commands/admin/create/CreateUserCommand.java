@@ -18,7 +18,7 @@ import ru.rsreu.RonzhinChistyakov09.logiclayer.admin.CreateUserLogic;
 public class CreateUserCommand implements ActionCommand {
 
 	@Override
-	public ActionCommandResult execute(HttpServletRequest request) {
+	public ActionCommandResult execute(HttpServletRequest request) throws DataRequestException {
 		UserDao userDao = (UserDao) request.getServletContext()
 				.getAttribute(Resourcer.getString("serlvet.context.dao.users"));
 		UserRoleDao userRoleDao = (UserRoleDao) request.getServletContext()
@@ -31,10 +31,9 @@ public class CreateUserCommand implements ActionCommand {
 		try {
 			User user = userDto.getModel(request);
 			logic.createUser(user);
-		} catch (DataRequestException e) {
-			e.printStackTrace();
 		} catch (LoginBusyException e) {
-			e.printStackTrace();
+			request.getServletContext().setAttribute(Resourcer.getString("servlet.requests.attributes.errorMessage"), e.getMessage());
+			return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.createUserPage"));
 		}
 		return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.admin"));
 	}

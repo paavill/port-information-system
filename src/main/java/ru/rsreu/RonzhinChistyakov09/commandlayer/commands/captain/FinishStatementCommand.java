@@ -15,7 +15,7 @@ import ru.rsreu.RonzhinChistyakov09.logiclayer.captain.FinishStatementLogic;
 public class FinishStatementCommand implements ActionCommand {
 
 	@Override
-	public ActionCommandResult execute(HttpServletRequest request) {
+	public ActionCommandResult execute(HttpServletRequest request) throws DataRequestException {
 		StatementDao statementDao = (StatementDao) request.getServletContext()
 				.getAttribute(Resourcer.getString("serlvet.context.dao.statements"));
 		StatementStatusDao statementStatusDao = (StatementStatusDao) request.getServletContext()
@@ -23,11 +23,7 @@ public class FinishStatementCommand implements ActionCommand {
 		int statementId = Integer
 				.parseInt(request.getParameter(Resourcer.getString("servlet.requests.parametres.statementId")));
 		FinishStatementLogic logic = new FinishStatementLogic(statementDao, statementStatusDao);
-		try {
-			logic.finishStatement(statementId);
-		} catch (DataRequestException e) {
-			e.printStackTrace();
-		}
+		logic.finishStatement(statementId);
 		return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.captain"));
 	}
 

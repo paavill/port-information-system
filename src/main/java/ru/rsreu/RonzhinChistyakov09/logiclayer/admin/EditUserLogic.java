@@ -1,5 +1,7 @@
 package ru.rsreu.RonzhinChistyakov09.logiclayer.admin;
 
+import com.prutzkow.resourcer.Resourcer;
+
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
@@ -17,7 +19,8 @@ public class EditUserLogic {
 		String oldLogin = userDao.getUserById(user.getId()).getLogin();
 		String newLogin = user.getLogin();
 		if (checkLogin(oldLogin, newLogin)) {
-			throw new LoginBusyException();
+			throw new LoginBusyException(
+					String.format(Resourcer.getString("exceptions.captain.create.user"), user.getLogin()));
 		}
 		this.userDao.updateUser(user);
 	}

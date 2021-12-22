@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.prutzkow.resourcer.Resourcer;
+
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.ProductForm;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.product.Product;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.Statement;
@@ -34,7 +36,7 @@ public class LoadProductsLogic {
 		
 		for (Product product : products) {
 			if (product.getCount() > this.productDao.getCountProduct(product.getTitle(), pierId)) {
-				throw new NotEnoughCountProductsOnPierException();
+				throw new NotEnoughCountProductsOnPierException(Resourcer.getString("exceptions.captain.load.notEnough"));
 			}
 		}
 

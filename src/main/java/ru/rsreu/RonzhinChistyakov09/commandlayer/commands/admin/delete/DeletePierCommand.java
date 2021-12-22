@@ -35,10 +35,8 @@ public class DeletePierCommand implements ActionCommand {
 
 		try {
 			logic.deletePier(pierId);
-		} catch (DataRequestException e) {
-			throw e;
 		} catch (TryDeleteBusyPierException e) {
-			e.printStackTrace();
+			request.getServletContext().setAttribute(Resourcer.getString("servlet.requests.attributes.errorMessage"), e.getMessage());
 		}
 
 		return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.admin"));

@@ -4,7 +4,8 @@ public class UserDeletedException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
-	public UserDeletedException() {
+	public UserDeletedException(String message) {
+		super(message);
 	}
 
 }

@@ -15,7 +15,7 @@ import ru.rsreu.RonzhinChistyakov09.logiclayer.moderator.UnblockUserLogic;
 public class UnblockUserCommand implements ActionCommand {
 
 	@Override
-	public ActionCommandResult execute(HttpServletRequest request) {
+	public ActionCommandResult execute(HttpServletRequest request) throws DataRequestException {
 		UserDao userDao = (UserDao) request.getServletContext()
 				.getAttribute(Resourcer.getString("serlvet.context.dao.users"));
 		UserStatusDao userStatusDao = (UserStatusDao) request.getServletContext()
@@ -25,11 +25,9 @@ public class UnblockUserCommand implements ActionCommand {
 				.parseInt(request.getParameter(Resourcer.getString("servlet.requests.parametres.userIdToUnblock")));
 
 		UnblockUserLogic logic = new UnblockUserLogic(userDao, userStatusDao);
-		try {
-			logic.unblockUserById(userId);
-		} catch (DataRequestException e) {
-			e.printStackTrace();
-		}
+
+		logic.unblockUserById(userId);
+
 		String page = Resourcer.getString("uri.show.mainPage.moderator");
 		return new CommandResultResponseSendRedirect(page);
 	}

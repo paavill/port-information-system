@@ -17,7 +17,7 @@ import ru.rsreu.RonzhinChistyakov09.logiclayer.admin.EditUserLogic;
 public class EditUserCommand implements ActionCommand {
 
 	@Override
-	public ActionCommandResult execute(HttpServletRequest request) {
+	public ActionCommandResult execute(HttpServletRequest request) throws DataRequestException {
 		UserDao userDao = (UserDao) request.getServletContext()
 				.getAttribute(Resourcer.getString("serlvet.context.dao.users"));
 		UserRoleDao userRoleDao = (UserRoleDao) request.getServletContext()
@@ -28,13 +28,12 @@ public class EditUserCommand implements ActionCommand {
 		try {
 			User user = dto.getModel(request);
 			logic.editUser(user);
-		} catch (DataRequestException e) {
-			e.printStackTrace();
 		} catch (LoginBusyException e) {
-			e.printStackTrace();
+			request.getServletContext().setAttribute(Resourcer.getString("servlet.requests.attributes.errorMessage"), e.getMessage());
+			return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.editUserPage"));
 		}
 
-		return new CommandResultResponseSendRedirect("FrontController?command=SHOW_MAIN_ADMIN_PAGE");
+		return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.admin"));
 	}
 
 }

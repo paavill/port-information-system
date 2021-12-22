@@ -15,7 +15,7 @@ import ru.rsreu.RonzhinChistyakov09.logiclayer.dispatcher.ProcessStatementPageLo
 public class ShowProcessStatementPageCommand implements ActionCommand {
 
 	@Override
-	public ActionCommandResult execute(HttpServletRequest request) {
+	public ActionCommandResult execute(HttpServletRequest request) throws DataRequestException {
 		StatementDao statementDao = (StatementDao) request.getServletContext()
 				.getAttribute(Resourcer.getString("serlvet.context.dao.statements"));
 		PierDao pierDao = (PierDao) request.getServletContext()
@@ -24,13 +24,9 @@ public class ShowProcessStatementPageCommand implements ActionCommand {
 				request.getParameter(Resourcer.getString("servlet.requests.parametres.statementIdToProcess")));
 
 		ProcessStatementPageLogic logic = new ProcessStatementPageLogic(statementDao, pierDao);
-		try {
-			request.setAttribute(Resourcer.getString("servlet.requests.attributes.piers"), logic.getFreePiers());
-			request.setAttribute(Resourcer.getString("servlet.requests.attributes.statement"),
-					logic.getStatementById(statementId));
-		} catch (DataRequestException e) {
-			e.printStackTrace();
-		}
+		request.setAttribute(Resourcer.getString("servlet.requests.attributes.piers"), logic.getFreePiers());
+		request.setAttribute(Resourcer.getString("servlet.requests.attributes.statement"),
+				logic.getStatementById(statementId));
 
 		String page = Resourcer.getString("jsp.dispatcher.processStatement");
 		return new CommandResultResponseForward(page);

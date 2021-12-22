@@ -26,12 +26,9 @@ public class DeleteShipCommand implements ActionCommand {
 		DeleteShipLogic logic = new DeleteShipLogic(statementDao, shipDao);
 		try {
 			logic.deleteShip(shipId);
-		} catch (DataRequestException e) {
-			throw e;
 		} catch (TryDeleteUseShipException e) {
-			e.printStackTrace();
+			request.getServletContext().setAttribute(Resourcer.getString("servlet.requests.attributes.errorMessage"), e.getMessage());
 		}
-
 		return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.admin"));
 	}
 

@@ -1,5 +1,7 @@
 package ru.rsreu.RonzhinChistyakov09.logiclayer.admin;
 
+import com.prutzkow.resourcer.Resourcer;
+
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserRole;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserStatus;
@@ -27,7 +29,7 @@ public class DeleteUserLogic {
 		User user = this.userDao.getUserById(id);
 		UserRole administratorRole = this.userRoleGetter.getAdministratorRole();
 		if (user.getRole().equals(administratorRole)) {
-			throw new TryDeleteAdministatorException();
+			throw new TryDeleteAdministatorException(Resourcer.getString("exceptions.captain.delete"));
 		}
 		UserStatus deletedStatus = this.userStatusGetter.getDeleteStatus();
 		user.setStatus(deletedStatus);

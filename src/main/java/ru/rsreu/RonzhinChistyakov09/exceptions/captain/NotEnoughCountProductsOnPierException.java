@@ -4,7 +4,8 @@ public class NotEnoughCountProductsOnPierException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
-	public NotEnoughCountProductsOnPierException() {
+	public NotEnoughCountProductsOnPierException(String message) {
+		super(message);
 	}
 
 }

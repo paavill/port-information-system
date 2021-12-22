@@ -1,4 +1,4 @@
-package ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain;
+package ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.unload;
 
 import java.util.List;
 
@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import com.prutzkow.resourcer.Resourcer;
 
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedirect;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.JsonToProductFormsDeserializator;
+import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.ProductForm;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
@@ -20,7 +22,7 @@ import ru.rsreu.RonzhinChistyakov09.logiclayer.captain.UnloadProductsLogic;
 public class UnloadProductsCommand implements ActionCommand {
 
 	@Override
-	public ActionCommandResult execute(HttpServletRequest request) {
+	public ActionCommandResult execute(HttpServletRequest request) throws DataRequestException {
 		ProductDao productDao = (ProductDao) request.getServletContext()
 				.getAttribute(Resourcer.getString("serlvet.context.dao.products"));
 		StatementDao statementDao = (StatementDao) request.getServletContext()
@@ -36,10 +38,8 @@ public class UnloadProductsCommand implements ActionCommand {
 		UnloadProductsLogic logic = new UnloadProductsLogic(productDao, statementDao, pierDao);
 		try {
 			logic.unloadProducts(productForms, user.getId());
-		} catch (DataRequestException e) {
-			e.printStackTrace();
 		} catch (NotEnoughPierCapacityException e) {
-			e.printStackTrace();
+			request.getServletContext().setAttribute(Resourcer.getString("servlet.requests.attributes.errorMessage"), e.getMessage());
 		}
 
 		return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.captain"));

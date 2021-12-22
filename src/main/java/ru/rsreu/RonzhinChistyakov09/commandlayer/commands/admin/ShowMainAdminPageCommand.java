@@ -16,7 +16,7 @@ import ru.rsreu.RonzhinChistyakov09.logiclayer.admin.MainAdminPageLogic;
 public class ShowMainAdminPageCommand implements ActionCommand {
 
 	@Override
-	public ActionCommandResult execute(HttpServletRequest request) {
+	public ActionCommandResult execute(HttpServletRequest request) throws DataRequestException {
 		UserDao userDao = (UserDao) request.getServletContext()
 				.getAttribute(Resourcer.getString("serlvet.context.dao.users"));
 		PierDao pierDao = (PierDao) request.getServletContext()
@@ -24,14 +24,10 @@ public class ShowMainAdminPageCommand implements ActionCommand {
 		ShipDao shipDao = (ShipDao) request.getServletContext()
 				.getAttribute(Resourcer.getString("serlvet.context.dao.ships"));
 
-		try {
-			MainAdminPageLogic logic = new MainAdminPageLogic(pierDao, userDao, shipDao);
-			request.setAttribute(Resourcer.getString("servlet.requests.attributes.users"), logic.getUsers());
-			request.setAttribute(Resourcer.getString("servlet.requests.attributes.piers"), logic.getPiers());
-			request.setAttribute(Resourcer.getString("servlet.requests.attributes.ships"), logic.getShips());
-		} catch (DataRequestException e) {
-			e.printStackTrace();
-		}
+		MainAdminPageLogic logic = new MainAdminPageLogic(pierDao, userDao, shipDao);
+		request.setAttribute(Resourcer.getString("servlet.requests.attributes.users"), logic.getUsers());
+		request.setAttribute(Resourcer.getString("servlet.requests.attributes.piers"), logic.getPiers());
+		request.setAttribute(Resourcer.getString("servlet.requests.attributes.ships"), logic.getShips());
 
 		String page = Resourcer.getString("jsp.admin.main");
 		return new CommandResultResponseForward(page);

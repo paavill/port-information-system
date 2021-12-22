@@ -1,4 +1,4 @@
-package ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain;
+package ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.create;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,7 +19,7 @@ import ru.rsreu.RonzhinChistyakov09.logiclayer.captain.CreateStatementLogic;
 public class CreateStatementCommand implements ActionCommand {
 
 	@Override
-	public ActionCommandResult execute(HttpServletRequest request) {
+	public ActionCommandResult execute(HttpServletRequest request) throws DataRequestException {
 		User user = (User) request.getSession().getAttribute(Resourcer.getString("servlet.session.attributes.user"));
 		ShipDao shipDao = (ShipDao) request.getServletContext()
 				.getAttribute(Resourcer.getString("serlvet.context.dao.ships"));
@@ -32,13 +32,11 @@ public class CreateStatementCommand implements ActionCommand {
 
 		CreateStatementTransferObject csto = new CreateStatementTransferObject(shipDao, statementDao,
 				statementStatusDao, statementTypeDao);
-		try {
-			Statement statement = csto.getModel(request);
-			CreateStatementLogic logic = new CreateStatementLogic(statementDao, statementTypeDao);
-			logic.createStatement(statement, user);
-		} catch (DataRequestException e) {
-			e.printStackTrace();
-		}
+
+		Statement statement = csto.getModel(request);
+		CreateStatementLogic logic = new CreateStatementLogic(statementDao, statementTypeDao);
+		logic.createStatement(statement, user);
+
 		return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.captain"));
 	}
 }

@@ -4,7 +4,8 @@ public class TryBlockAdministratorException extends Exception {
 
 	private static final long serialVersionUID = 5923504979612602790L;
 
-	public TryBlockAdministratorException() {
+	public TryBlockAdministratorException(String message) {
+		super(message);
 	}
 
 }

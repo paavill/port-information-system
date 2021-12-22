@@ -18,7 +18,7 @@
 <body>
     <header>
         <div class="container">
-            <a href="index.html" class="logo">Port</a>
+            <a href="FrontController?command=SHOW_MAIN_NO_LOGIN_PAGE" class="logo">Port</a>
         </div>
     </header>
 

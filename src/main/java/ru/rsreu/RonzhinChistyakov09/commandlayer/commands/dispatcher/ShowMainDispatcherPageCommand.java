@@ -19,7 +19,7 @@ import ru.rsreu.RonzhinChistyakov09.logiclayer.dispatcher.MainDispatcherPageLogi
 public class ShowMainDispatcherPageCommand implements ActionCommand {
 
 	@Override
-	public ActionCommandResult execute(HttpServletRequest request) {
+	public ActionCommandResult execute(HttpServletRequest request) throws DataRequestException {
 		StatementDao statementDao = (StatementDao) request.getServletContext()
 				.getAttribute(Resourcer.getString("serlvet.context.dao.statements"));
 		StatementStatusDao statementStatusDao = (StatementStatusDao) request.getServletContext()
@@ -34,17 +34,12 @@ public class ShowMainDispatcherPageCommand implements ActionCommand {
 				.getAttribute(Resourcer.getString("serlvet.context.dao.ships"));
 		MainDispatcherPageLogic logic = new MainDispatcherPageLogic(pierDao, userDao, shipDao, statementDao,
 				userRoleDao, statementStatusDao);
-		try {
 
-			request.setAttribute(Resourcer.getString("servlet.requests.attributes.statementsToProcess"),
-					logic.getStatements());
-			request.setAttribute(Resourcer.getString("servlet.requests.attributes.captains"), logic.getCaptains());
-			request.setAttribute(Resourcer.getString("servlet.requests.attributes.piers"), logic.getPiers());
-			request.setAttribute(Resourcer.getString("servlet.requests.attributes.ships"), logic.getShips());
-
-		} catch (DataRequestException e) {
-			e.printStackTrace();
-		}
+		request.setAttribute(Resourcer.getString("servlet.requests.attributes.statementsToProcess"),
+				logic.getStatements());
+		request.setAttribute(Resourcer.getString("servlet.requests.attributes.captains"), logic.getCaptains());
+		request.setAttribute(Resourcer.getString("servlet.requests.attributes.piers"), logic.getPiers());
+		request.setAttribute(Resourcer.getString("servlet.requests.attributes.ships"), logic.getShips());
 
 		String page = Resourcer.getString("jsp.dispatcher.main");
 		return new CommandResultResponseForward(page);

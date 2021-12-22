@@ -4,6 +4,7 @@ public class TryDeleteAdministatorException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
-	public TryDeleteAdministatorException() {
+	public TryDeleteAdministatorException(String message) {
+		super(message);
 	}
 }

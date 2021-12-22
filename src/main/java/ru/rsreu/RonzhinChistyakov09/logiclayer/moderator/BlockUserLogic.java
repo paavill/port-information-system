@@ -1,5 +1,7 @@
 package ru.rsreu.RonzhinChistyakov09.logiclayer.moderator;
 
+import com.prutzkow.resourcer.Resourcer;
+
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserRole;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.UserStatus;
@@ -32,17 +34,17 @@ public class BlockUserLogic {
 		UserStatus status = user.getStatus();
 		UserStatus deletedStatus = this.userStatusGetter.getDeleteStatus();
 		if (status.equals(deletedStatus)) {
-			throw new UserDeletedException();
+			throw new UserDeletedException(Resourcer.getString("exceptions.moderator.userDeleted"));
 		}
 
 		UserRole role = user.getRole();
 		UserRole administratorRole = this.userRoleGetter.getAdministratorRole();
 		if (role.equals(administratorRole)) {
-			throw new TryBlockAdministratorException();
+			throw new TryBlockAdministratorException(Resourcer.getString("exceptions.moderator.adminBlock"));
 		}
 		UserRole moderatorRole = this.userRoleGetter.getModeratorRole();
 		if (role.equals(moderatorRole)) {
-			throw new TryBlockModeratorException();
+			throw new TryBlockModeratorException(Resourcer.getString("exceptions.moderator.mdoerBlock"));
 		}
 
 		UserStatus blockStatus = this.userStatusGetter.getBlockStatus();

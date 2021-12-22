@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.prutzkow.resourcer.Resourcer;
+
 import ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.ProductForm;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.product.Product;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.Statement;
@@ -36,7 +38,7 @@ public class UnloadProductsLogic {
 		});
 
 		if (getProductsNumberSum(products) > this.pierDao.getResidualCapacity(pierId)) {
-			throw new NotEnoughPierCapacityException();
+			throw new NotEnoughPierCapacityException(Resourcer.getString("exceptions.captain.unload.notEnough"));
 		}
 		this.productDao.unloadProductsToPier(products);
 	}

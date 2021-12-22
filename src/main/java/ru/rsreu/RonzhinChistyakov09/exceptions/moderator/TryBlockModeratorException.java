@@ -4,7 +4,8 @@ public class TryBlockModeratorException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
-	public TryBlockModeratorException() {
+	public TryBlockModeratorException(String message) {
+		super(message);
 	}
 
 }

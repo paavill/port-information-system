@@ -16,7 +16,7 @@ import ru.rsreu.RonzhinChistyakov09.logiclayer.admin.DeleteUserLogic;
 
 public class DeleteUserCommand implements ActionCommand {
 	@Override
-	public ActionCommandResult execute(HttpServletRequest request) {
+	public ActionCommandResult execute(HttpServletRequest request) throws DataRequestException {
 		UserDao userDao = (UserDao) request.getServletContext()
 				.getAttribute(Resourcer.getString("serlvet.context.dao.users"));
 		UserRoleDao userRoleDao = (UserRoleDao) request.getServletContext()
@@ -30,12 +30,10 @@ public class DeleteUserCommand implements ActionCommand {
 
 		try {
 			logic.deleteUser(userId);
-		} catch (DataRequestException e) {
-			e.printStackTrace();
 		} catch (TryDeleteAdministatorException e) {
-			e.printStackTrace();
+			request.getServletContext().setAttribute(Resourcer.getString("servlet.requests.attributes.errorMessage"), e.getMessage());
 		}
-
+		
 		return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.admin"));
 	}
 

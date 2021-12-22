@@ -23,7 +23,7 @@
 <body onload="setFirstActive()">
     <header>
         <div class="container">
-            <a href="index.html" class="logo">Port</a>
+             <a href="FrontController?command=SHOW_MAIN_NO_LOGIN_PAGE" class="logo">Port</a>
             <form id="logOutForm" action="FrontController" method="post">
                 <input type="hidden" name="command" value="LOGOUT">
             </form>
@@ -32,7 +32,6 @@
                     <li><a>Your role: moderator</a></li>
                     <li><a>Your user id: ${user.id}</a></li>
                     <li><input type="submit" form="logOutForm" value="Logout"></li>
-                    <li><a href="">About system</a></li>
                 </ul>
             </nav>
         </div>
@@ -43,6 +42,8 @@
                 <button class="tablinks" onclick="openTab(event, 'Blocked user')">Blocked user</button>
             </div>
             <section id="Unblocked users" class="container mainView"> 
+            	<h4>${errorMessage}</h4>
+                <c:remove var="errorMessage" scope="application"/>
                 <c:forEach var="userData" items="${unblockedUsers}">
                     <div class="info">
                         <h3>User #${userData.id}</h3>

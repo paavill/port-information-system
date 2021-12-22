@@ -1,5 +1,7 @@
 package ru.rsreu.RonzhinChistyakov09.logiclayer.admin;
 
+import com.prutzkow.resourcer.Resourcer;
+
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.ShipDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
@@ -17,7 +19,7 @@ public class DeleteShipLogic {
 
 	public void deleteShip(int shipId) throws DataRequestException, TryDeleteUseShipException {
 		if (!this.statementDao.getStatementsByShip(shipId).isEmpty()) {
-			throw new TryDeleteUseShipException();
+			throw new TryDeleteUseShipException(Resourcer.getString("exceptions.captain.delete.busyShip"));
 		}
 		this.shipDao.deleteShip(shipId);
 	}

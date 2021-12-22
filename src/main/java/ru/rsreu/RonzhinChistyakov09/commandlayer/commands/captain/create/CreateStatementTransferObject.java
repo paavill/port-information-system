@@ -1,4 +1,4 @@
-package ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain;
+package ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.create;
 
 import java.sql.Date;
 import java.time.LocalDate;

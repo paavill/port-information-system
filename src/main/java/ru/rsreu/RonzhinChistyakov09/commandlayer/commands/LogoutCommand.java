@@ -17,7 +17,7 @@ import ru.rsreu.RonzhinChistyakov09.logiclayer.LogoutLogic;
 public class LogoutCommand implements ActionCommand {
 
 	@Override
-	public ActionCommandResult execute(HttpServletRequest request) {
+	public ActionCommandResult execute(HttpServletRequest request) throws DataRequestException {
 		UserDao userDao = (UserDao) request.getServletContext()
 				.getAttribute(Resourcer.getString("serlvet.context.dao.users"));
 		UserStatusDao userStatusDao = (UserStatusDao) request.getServletContext()
@@ -25,12 +25,10 @@ public class LogoutCommand implements ActionCommand {
 		LogoutLogic logoutLogic = new LogoutLogic(userDao, userStatusDao);
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute(Resourcer.getString("servlet.session.attributes.user"));
-		try {
-			logoutLogic.logout(user);
-			session.invalidate();
-		} catch (DataRequestException e) {
-			System.out.println(e.getMessage());
-		}
+
+		logoutLogic.logout(user);
+		session.invalidate();
+
 		String page = Resourcer.getString("uri.show.mainPage.noLogin");
 		return new CommandResultResponseSendRedirect(page);
 	}

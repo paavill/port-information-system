@@ -4,7 +4,8 @@ public class NotEnoughPierCapacityException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
-	public NotEnoughPierCapacityException() {
+	public NotEnoughPierCapacityException(String message) {
+		super(message);
 	}
 
 }

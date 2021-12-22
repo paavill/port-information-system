@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.prutzkow.resourcer.Resourcer;
 
-import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseForward;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedirect;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
@@ -17,8 +16,7 @@ import ru.rsreu.RonzhinChistyakov09.logiclayer.dispatcher.ProcessStatementLogic;
 public class ProcessStatementCommand implements ActionCommand {
 
 	@Override
-	public ActionCommandResult execute(HttpServletRequest request) {
-		String page = Resourcer.getString("uri.show.mainPage.dispatcher");
+	public ActionCommandResult execute(HttpServletRequest request) throws DataRequestException {
 		StatementDao statementDao = (StatementDao) request.getServletContext()
 				.getAttribute(Resourcer.getString("serlvet.context.dao.statements"));
 		StatementTypeDao statementTypeDao = (StatementTypeDao) request.getServletContext()
@@ -26,17 +24,13 @@ public class ProcessStatementCommand implements ActionCommand {
 		int statementId = Integer.parseInt(
 				request.getParameter(Resourcer.getString("servlet.requests.parametres.statementIdToProcess")));
 		ProcessStatementLogic logic = new ProcessStatementLogic(statementDao, statementTypeDao);
-		try {
-			StatementType type = logic.getStatementType(statementId);
-			StatementType enterType = logic.getEnterStatementType();
-			if (type.equals(enterType)) {
-				return new CommandResultResponseForward(Resourcer.getString("uri.show.processStatementPage"));
-			} else {
-				return new CommandResultResponseForward(Resourcer.getString("uri.applyStatement"));
-			}
-		} catch (DataRequestException e) {
-			e.printStackTrace();
+
+		StatementType type = logic.getStatementType(statementId);
+		StatementType enterType = logic.getEnterStatementType();
+		if (type.equals(enterType)) {
+			return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.processStatementPage"));
+		} else {
+			return new CommandResultResponseSendRedirect(Resourcer.getString("uri.applyStatement"));
 		}
-		return new CommandResultResponseSendRedirect(page);
 	}
 }

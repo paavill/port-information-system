@@ -18,7 +18,7 @@ import ru.rsreu.RonzhinChistyakov09.logiclayer.getters.StatementTypeGetter;
 public class ApplyStatementCommand implements ActionCommand {
 
 	@Override
-	public ActionCommandResult execute(HttpServletRequest request) {
+	public ActionCommandResult execute(HttpServletRequest request) throws DataRequestException {
 		StatementDao statementDao = (StatementDao) request.getServletContext()
 				.getAttribute(Resourcer.getString("serlvet.context.dao.statements"));
 		StatementStatusDao statementStatusDao = (StatementStatusDao) request.getServletContext()
@@ -29,18 +29,15 @@ public class ApplyStatementCommand implements ActionCommand {
 				request.getParameter(Resourcer.getString("servlet.requests.parametres.statementIdToProcess")));
 		StatementTypeGetter statementTypeGetter = new StatementTypeGetter(statementTypeDao);
 		ApplyStatementLogic logic = new ApplyStatementLogic(statementDao, statementStatusDao);
-		try {
-			StatementType type = logic.getStatementType(statementId);
-			StatementType enterType = statementTypeGetter.getEnterType();
-			if (type.equals(enterType)) {
-				int pierId = Integer.parseInt(
-						request.getParameter(Resourcer.getString("servlet.requests.parametres.selectedPier")));
-				logic.applyStatement(statementId, pierId);
-			} else {
-				logic.applyStatement(statementId);
-			}
-		} catch (DataRequestException e) {
-			e.printStackTrace();
+
+		StatementType type = logic.getStatementType(statementId);
+		StatementType enterType = statementTypeGetter.getEnterType();
+		if (type.equals(enterType)) {
+			int pierId = Integer
+					.parseInt(request.getParameter(Resourcer.getString("servlet.requests.parametres.selectedPier")));
+			logic.applyStatement(statementId, pierId);
+		} else {
+			logic.applyStatement(statementId);
 		}
 
 		String page = Resourcer.getString("uri.show.mainPage.dispatcher");

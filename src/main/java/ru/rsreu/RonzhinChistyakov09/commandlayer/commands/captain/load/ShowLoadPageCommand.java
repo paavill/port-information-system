@@ -1,4 +1,4 @@
-package ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain;
+package ru.rsreu.RonzhinChistyakov09.commandlayer.commands.captain.load;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,7 +16,7 @@ import ru.rsreu.RonzhinChistyakov09.logiclayer.captain.LoadProductsPageLogic;
 public class ShowLoadPageCommand implements ActionCommand {
 
 	@Override
-	public ActionCommandResult execute(HttpServletRequest request) {
+	public ActionCommandResult execute(HttpServletRequest request) throws DataRequestException {
 		ProductDao productDao = (ProductDao) request.getServletContext()
 				.getAttribute(Resourcer.getString("serlvet.context.dao.products"));
 		StatementDao statementDao = (StatementDao) request.getServletContext()
@@ -24,12 +24,8 @@ public class ShowLoadPageCommand implements ActionCommand {
 		User user = (User) request.getSession().getAttribute(Resourcer.getString("servlet.session.attributes.user"));
 
 		LoadProductsPageLogic logic = new LoadProductsPageLogic(statementDao, productDao);
-		try {
-			request.setAttribute(Resourcer.getString("servlet.requests.attributes.productsData"),
-					logic.getProducts(user.getId()));
-		} catch (DataRequestException e) {
-			e.printStackTrace();
-		}
+		request.setAttribute(Resourcer.getString("servlet.requests.attributes.productsData"),
+				logic.getProducts(user.getId()));
 		return new CommandResultResponseForward(Resourcer.getString("jsp.captain.load"));
 	}
 

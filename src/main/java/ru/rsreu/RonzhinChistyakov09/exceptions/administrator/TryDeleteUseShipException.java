@@ -4,6 +4,7 @@ public class TryDeleteUseShipException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
-	public TryDeleteUseShipException() {
+	public TryDeleteUseShipException(String message) {
+		super(message);
 	}
 }

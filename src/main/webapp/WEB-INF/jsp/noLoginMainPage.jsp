@@ -15,11 +15,10 @@
 <body onload="setFirstActive()">
     <header>
         <div class="container">
-            <a href="index.html" class="logo">Port</a>
+            <a href="FrontController?command=SHOW_MAIN_NO_LOGIN_PAGE" class="logo">Port</a>
             <nav>
                 <ul>
                     <li><a href="FrontController?command=SHOW_LOGIN_PAGE">Authorization</a></li>
-                    <li><a href="">About system</a></li>
                 </ul>
             </nav>
         </div>
