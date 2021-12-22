@@ -1,8 +1,24 @@
 package ru.rsreu.RonzhinChistyakov09.datalayer.data.product;
 
+/***
+ * Data class representing product.
+ * @author pavel
+ *
+ */
 public class Product {
+	/**
+	 * Product title.
+	 */
 	private String title;
+	
+	/**
+	 * Pier id in which the product is located
+	 */
 	private int pierId;
+	
+	/**
+	 * Product count
+	 */
 	private int count;
 	
 	public Product(String title, int pierId, int count) {

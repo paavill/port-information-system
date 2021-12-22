@@ -1,9 +1,29 @@
 package ru.rsreu.RonzhinChistyakov09.datalayer.data.pier;
 
+/***
+ * Data class representing pier.
+ * @author pavel
+ *
+ */
 public class Pier {
+	/***
+	 * Unique pier identifier
+	 */
 	private int id;
+	
+	/***
+	 * The amount of goods the pier can hold.
+	 */
 	private int capacity;
-	private int residual—apacity; 
+	
+	/**
+	 * The residual quantity of goods that the pier can accommodate.
+	 */
+	private int residual—apacity;
+	
+	/**
+	 * Pier status.
+	 */
 	private String status;
 	
 	public Pier(int id, int capacity) {

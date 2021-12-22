@@ -1,8 +1,25 @@
 package ru.rsreu.RonzhinChistyakov09.datalayer.data.user;
 
+/***
+ * Data class representing user.
+ * @author pavel
+ *
+ */
 public class User {
+	
+	/**
+	 * Unique user identifier.
+	 */
 	private int id;
+	
+	/**
+	 * User login
+	 */
 	private String login;
+	
+	/**
+	 * User passwqord
+	 */
 	private String password;
 	private String fullName;
 	private UserStatus status;

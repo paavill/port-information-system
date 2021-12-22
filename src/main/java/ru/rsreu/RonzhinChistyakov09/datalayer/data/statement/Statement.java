@@ -6,14 +6,42 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.data.Ship;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.pier.Pier;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 
+/***
+ * Data class representing statement.
+ * @author pavel
+ *
+ */
 public class Statement {
+	/**
+	 * Unique application identifier.
+	 */
 	private int id;
+	
+	/**
+	 * Captain who created the request.
+	 */
 	private User user;
-	private Ship ship; 
+	
+	/**
+	 * Ship of the user who submitted the application.
+	 */
+	private Ship ship;
+	
+	/**
+	 * The pris in which the captain is, after the approval of the application.
+	 */
 	private Pier pier;
 	private StatementType type;
 	private StatementStatus status;
-	private Date doDate; 
+	
+	/**
+	 * Application date.
+	 */
+	private Date doDate;
+	
+	/**
+	 * Finish date.
+	 */
 	private Date finishDate;
 	
 	public Statement(int id, User user, Ship ship, Pier pier, StatementType type, StatementStatus state, Date doDate,
