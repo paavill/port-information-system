@@ -1,6 +1,7 @@
 package ru.rsreu.RonzhinChistyakov09.datalayer.oracledb;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -220,6 +221,18 @@ public class OracleStatementDao implements StatementDao {
 					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
 		}
 		return null;
+	}
+
+	@Override
+	public void updateFinishDate(Date date, int pierId) throws DataRequestException {
+		String query = Resourcer.getString("requests.sql.update.statement.date");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			PreparedStatementParametresSetter.set(preparedStatement, date, pierId);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
 	}
 
 }

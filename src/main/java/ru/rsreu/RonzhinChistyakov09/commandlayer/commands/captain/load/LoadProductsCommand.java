@@ -33,11 +33,16 @@ public class LoadProductsCommand implements ActionCommand {
 		List<ProductForm> productForms = JsonToProductFormsDeserializator
 				.deserializeJsonToProductForms(productFormsAsJson);
 
+		if (productForms == null) {
+			return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.captain"));
+		}
+		
 		LoadProductsLogic logic = new LoadProductsLogic(productDao, statementDao);
 		try {
 			logic.loadProducts(productForms, user.getId());
 		} catch (NotEnoughCountProductsOnPierException e) {
-			request.getServletContext().setAttribute(Resourcer.getString("servlet.requests.attributes.errorMessage"), e.getMessage());			
+			request.getServletContext().setAttribute(Resourcer.getString("servlet.requests.attributes.errorMessage"),
+					e.getMessage());
 		}
 
 		return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.captain"));

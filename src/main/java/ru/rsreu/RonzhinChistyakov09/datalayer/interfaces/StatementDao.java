@@ -1,5 +1,6 @@
 package ru.rsreu.RonzhinChistyakov09.datalayer.interfaces;
 
+import java.sql.Date;
 import java.util.Collection;
 
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.Statement;
@@ -31,4 +32,6 @@ public interface StatementDao {
 	Collection<Statement> getStatementsByShip(int shipId) throws DataRequestException;
 
 	Statement getLastByPier(int id) throws DataRequestException;
+
+	void updateFinishDate(Date date, int pierId) throws DataRequestException;
 }

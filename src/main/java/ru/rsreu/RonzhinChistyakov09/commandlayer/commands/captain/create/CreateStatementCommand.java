@@ -14,6 +14,7 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementStatusDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementTypeDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
+import ru.rsreu.RonzhinChistyakov09.exceptions.captain.TryCreateStatementWithoutShipException;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.captain.CreateStatementLogic;
 
 public class CreateStatementCommand implements ActionCommand {
@@ -35,7 +36,11 @@ public class CreateStatementCommand implements ActionCommand {
 
 		Statement statement = csto.getModel(request);
 		CreateStatementLogic logic = new CreateStatementLogic(statementDao, statementTypeDao);
-		logic.createStatement(statement, user);
+		try {
+			logic.createStatement(statement, user);
+		} catch (TryCreateStatementWithoutShipException e) {
+			request.setAttribute("errorMessage", "You don't have a ship");
+		}
 
 		return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.captain"));
 	}
