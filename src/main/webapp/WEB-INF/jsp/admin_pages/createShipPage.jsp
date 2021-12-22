@@ -56,6 +56,8 @@
                         <input class="button" type="submit" form="userDataForm" value="Create">
                         <a class="button" href="FrontController?command=SHOW_MAIN_ADMIN_PAGE">Cancel</a>
                     </section>
+                    <h4>${errorMessage}</h4>
+                    <c:remove var="errorMessage" scope="application"/>
                 </div> 
             </section>
         </div>

@@ -8,7 +8,6 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedire
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserDao;
-import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserRoleDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.UserStatusDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.moderator.UnblockUserLogic;
@@ -21,13 +20,11 @@ public class UnblockUserCommand implements ActionCommand {
 				.getAttribute(Resourcer.getString("serlvet.context.dao.users"));
 		UserStatusDao userStatusDao = (UserStatusDao) request.getServletContext()
 				.getAttribute(Resourcer.getString("serlvet.context.dao.usersStatuses"));
-		UserRoleDao userRoleDao = (UserRoleDao) request.getServletContext()
-				.getAttribute(Resourcer.getString("serlvet.context.dao.usersRoles"));
 
 		int userId = Integer
 				.parseInt(request.getParameter(Resourcer.getString("servlet.requests.parametres.userIdToUnblock")));
 
-		UnblockUserLogic logic = new UnblockUserLogic(userDao, userStatusDao, userRoleDao);
+		UnblockUserLogic logic = new UnblockUserLogic(userDao, userStatusDao);
 		try {
 			logic.unblockUserById(userId);
 		} catch (DataRequestException e) {

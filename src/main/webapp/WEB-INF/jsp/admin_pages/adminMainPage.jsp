@@ -45,6 +45,7 @@
                 <div class="buttons">
                     <a class="button" href="FrontController?command=SHOW_CREATE_USER_PAGE">Create</a>
                 </div>
+                <h4>${errorMessage}</h4>
                 <c:forEach var="userData" items="${usersData}">
                     <div class="info">
                         <h3>User #${userData.id}</h3>

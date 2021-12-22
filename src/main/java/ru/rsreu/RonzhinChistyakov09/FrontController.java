@@ -16,6 +16,7 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DBType;
 import ru.rsreu.RonzhinChistyakov09.datalayer.DaoFactory;
+import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
 public class FrontController extends HttpServlet {
 
@@ -40,7 +41,7 @@ public class FrontController extends HttpServlet {
 			context.setAttribute(Resourcer.getString("serlvet.context.dao.statementsTypes"), factory.getStatementTypeDao());
 			context.setAttribute(Resourcer.getString("serlvet.context.dao.products"), factory.getProductDao());
 		} catch (Exception e) {
-			e.printStackTrace();
+			this.log(String.format(Resourcer.getString("exceptions.daoInit"), e.getMessage()));
 		}
 	}
 
@@ -58,10 +59,13 @@ public class FrontController extends HttpServlet {
 			throws ServletException, IOException {
 
 		ActionCommand command = CommandFactory.getCommand(request);
-
-		ActionCommandResult commandExecutionResult = command.execute(request);
-
-		commandExecutionResult.toResponse(getServletContext(), request, response);
+		this.log(String.format(Resourcer.getString("log.command.received"), command.getClass().getSimpleName()));
+		try {
+			ActionCommandResult commandExecutionResult = command.execute(request);
+			commandExecutionResult.toResponse(getServletContext(), request, response);
+		} catch (DataRequestException e) {
+			this.log(e.getMessage());
+		}
 	}
 
 	public void destroy() {

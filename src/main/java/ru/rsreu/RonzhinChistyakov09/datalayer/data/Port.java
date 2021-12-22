@@ -1,4 +1,4 @@
-package ru.rsreu.RonzhinChistyakov09;
+package ru.rsreu.RonzhinChistyakov09.datalayer.data;
 
 public class Port {
 	

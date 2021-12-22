@@ -126,7 +126,7 @@ public class RoleRedirectFilter implements Filter {
 			((HttpServletResponse) response).sendRedirect(Resourcer.getString("uri.show.mainPage.noLogin"));
 		} else {
 			((HttpServletResponse) response).sendRedirect(Resourcer.getString("uri.routing"));
-			System.err.println("Command not avalible for user!");
+			System.err.println("Command not avalible for user!" + action);
 		}
 	}
 

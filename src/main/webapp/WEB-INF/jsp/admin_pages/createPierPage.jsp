@@ -43,13 +43,14 @@
                         </div>
                         <form id="pierDataForm" class="entersFields" action="FrontController" method="post">
                             <input type="hidden" name="command" value="CREATE_PIER">
-                            <input class="enter" required name="pierCapacity" type="text">  
+                            <input class="enter" required name="pierCapacity" type="number" min="1" max="1e21 - 1">  
                         </form>
                     </div>
                     <section class="buttons">
                         <input class="button" type="submit" form="pierDataForm" value="Create">
                         <a class="button" href="FrontController?command=SHOW_MAIN_ADMIN_PAGE">Cancel</a>
                     </section>
+                    <h4>${errorMessage}</h4>
                 </div> 
             </section>
         </div>
