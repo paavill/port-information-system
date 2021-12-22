@@ -6,6 +6,7 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementTypeDao;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
+import ru.rsreu.RonzhinChistyakov09.exceptions.captain.TryCreateStatementWithoutShipException;
 import ru.rsreu.RonzhinChistyakov09.logiclayer.getters.StatementTypeGetter;
 
 public class CreateStatementLogic {
@@ -18,7 +19,11 @@ public class CreateStatementLogic {
 		this.statementTypeGetter = new StatementTypeGetter(statementTypeDao);
 	}
 
-	public void createStatement(Statement statement, User user) throws DataRequestException {
+	public void createStatement(Statement statement, User user)
+			throws DataRequestException, TryCreateStatementWithoutShipException {
+		if (statement.getShip() == null) {
+			throw new TryCreateStatementWithoutShipException();
+		}
 		Statement lastStatement = this.statementDao.getLastByUserId(user.getId());
 		this.statementDao.createStatement(statement);
 		StatementType exitType = this.statementTypeGetter.getExitType();

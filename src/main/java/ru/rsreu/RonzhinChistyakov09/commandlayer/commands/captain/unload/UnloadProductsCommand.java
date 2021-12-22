@@ -32,6 +32,9 @@ public class UnloadProductsCommand implements ActionCommand {
 		User user = (User) request.getSession().getAttribute(Resourcer.getString("servlet.session.attributes.user"));
 
 		String productFormsAsJson = request.getParameter("jsonProducts");
+		if (productFormsAsJson == null) {
+			return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.captain"));
+		}
 		List<ProductForm> productForms = JsonToProductFormsDeserializator
 				.deserializeJsonToProductForms(productFormsAsJson);
 
@@ -39,7 +42,8 @@ public class UnloadProductsCommand implements ActionCommand {
 		try {
 			logic.unloadProducts(productForms, user.getId());
 		} catch (NotEnoughPierCapacityException e) {
-			request.getServletContext().setAttribute(Resourcer.getString("servlet.requests.attributes.errorMessage"), e.getMessage());
+			request.getServletContext().setAttribute(Resourcer.getString("servlet.requests.attributes.errorMessage"),
+					e.getMessage());
 		}
 
 		return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.mainPage.captain"));

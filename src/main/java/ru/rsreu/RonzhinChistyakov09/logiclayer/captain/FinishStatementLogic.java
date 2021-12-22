@@ -1,5 +1,8 @@
 package ru.rsreu.RonzhinChistyakov09.logiclayer.captain;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.StatementStatus;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementStatusDao;
@@ -19,6 +22,8 @@ public class FinishStatementLogic {
 	public void finishStatement(int statementId) throws DataRequestException {
 		StatementStatus status = this.statementStatusGetter.getFinishedStatus();
 		this.statementDao.updateStatus(status, statementId);
+		Date date = Date.valueOf(LocalDate.now());
+		this.statementDao.updateFinishDate(date, statementId);
 	}
 
 }

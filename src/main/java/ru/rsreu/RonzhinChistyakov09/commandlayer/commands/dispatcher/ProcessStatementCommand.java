@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.prutzkow.resourcer.Resourcer;
 
+import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseForward;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.CommandResultResponseSendRedirect;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
@@ -28,9 +29,9 @@ public class ProcessStatementCommand implements ActionCommand {
 		StatementType type = logic.getStatementType(statementId);
 		StatementType enterType = logic.getEnterStatementType();
 		if (type.equals(enterType)) {
-			return new CommandResultResponseSendRedirect(Resourcer.getString("uri.show.processStatementPage"));
+			return new CommandResultResponseForward(Resourcer.getString("uri.show.processStatementPage"));
 		} else {
-			return new CommandResultResponseSendRedirect(Resourcer.getString("uri.applyStatement"));
+			return new CommandResultResponseForward(Resourcer.getString("uri.applyStatement"));
 		}
 	}
 }
