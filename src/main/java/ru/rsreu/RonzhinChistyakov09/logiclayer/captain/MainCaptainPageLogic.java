@@ -64,4 +64,8 @@ public class MainCaptainPageLogic {
 	public Statement getLastFinishedStatement(int id) throws DataRequestException {
 		return this.statementDao.getLastFinishedStatement(id);
 	}
+
+	public StatementType getExitType() throws DataRequestException {
+		return this.statementTypeGetter.getExitType();
+	}
 }

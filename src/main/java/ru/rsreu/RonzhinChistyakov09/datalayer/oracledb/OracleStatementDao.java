@@ -108,8 +108,7 @@ public class OracleStatementDao implements StatementDao {
 	}
 
 	@Override
-	public Collection<Statement> getUserStatementsByType(int userId, StatementType type)
-			throws DataRequestException {
+	public Collection<Statement> getUserStatementsByType(int userId, StatementType type) throws DataRequestException {
 		Collection<Statement> result = new ArrayList<Statement>();
 		String query = Resourcer.getString("requests.sql.get.statements.user.byType");
 		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -186,6 +185,41 @@ public class OracleStatementDao implements StatementDao {
 		}
 		return null;
 	}
-	
-	
+
+	@Override
+	public Collection<Statement> getStatementsByShip(int shipId) throws DataRequestException {
+		Collection<Statement> result = new ArrayList<Statement>();
+		String query = Resourcer.getString("requests.sql.get.statement.byShip");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			PreparedStatementParametresSetter.set(preparedStatement, shipId);
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				while (resultSet.next()) {
+					Statement statement = ResultSetConverter.getStatement(resultSet);
+					result.add(statement);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+		return result;
+	}
+
+	@Override
+	public Statement getLastByPier(int id) throws DataRequestException {
+		String query = Resourcer.getString("requests.sql.get.statement.last.byPier");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			PreparedStatementParametresSetter.set(preparedStatement, id);
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
+					return ResultSetConverter.getStatement(resultSet);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+		return null;
+	}
+
 }

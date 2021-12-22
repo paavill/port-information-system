@@ -8,24 +8,27 @@ import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.StatementType;
 import ru.rsreu.RonzhinChistyakov09.exceptions.DataRequestException;
 
 public interface StatementDao {
-	abstract Collection<Statement> getAllStatements() throws DataRequestException;
+	Collection<Statement> getAllStatements() throws DataRequestException;
 
-	abstract void createStatement(Statement statement) throws DataRequestException;
+	void createStatement(Statement statement) throws DataRequestException;
 
-	abstract Statement getLastByUserId(int userId) throws DataRequestException;
+	Statement getLastByUserId(int userId) throws DataRequestException;
 
-	abstract int getCount() throws DataRequestException;
+	int getCount() throws DataRequestException;
 
-	abstract Collection<Statement> getUserStatementsByType(int userId, StatementType type)
-			throws DataRequestException;
+	Collection<Statement> getUserStatementsByType(int userId, StatementType type) throws DataRequestException;
 
-	abstract Collection<Statement> getStatementsByStatus(StatementStatus status) throws DataRequestException;
+	Collection<Statement> getStatementsByStatus(StatementStatus status) throws DataRequestException;
 
-	abstract Statement getById(int statementId) throws DataRequestException;
+	Statement getById(int statementId) throws DataRequestException;
 
-	abstract void updateStatus(StatementStatus status, int id) throws DataRequestException;
+	void updateStatus(StatementStatus status, int id) throws DataRequestException;
 
-	abstract void updatePier(int statementId, int pierId) throws DataRequestException;
+	void updatePier(int statementId, int pierId) throws DataRequestException;
 
-	abstract Statement getLastFinishedStatement(int userId) throws DataRequestException;
+	Statement getLastFinishedStatement(int userId) throws DataRequestException;
+
+	Collection<Statement> getStatementsByShip(int shipId) throws DataRequestException;
+
+	Statement getLastByPier(int id) throws DataRequestException;
 }

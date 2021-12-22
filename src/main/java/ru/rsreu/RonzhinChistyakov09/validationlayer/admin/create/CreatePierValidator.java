@@ -4,7 +4,7 @@ public class CreatePierValidator {
 
 	private int maxCapacity;
 	private int minCapacity;
-	
+
 	public CreatePierValidator(int maxCapacity, int minCapacity) {
 		super();
 		this.maxCapacity = maxCapacity;
@@ -12,11 +12,11 @@ public class CreatePierValidator {
 	}
 
 	public boolean validate(Integer value) {
-		if(value != null) {
+		if (value != null) {
 			return !(value > this.maxCapacity || value < this.minCapacity);
 		} else {
 			return false;
 		}
 	}
-	
+
 }

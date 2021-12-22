@@ -9,6 +9,7 @@ import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommand;
 import ru.rsreu.RonzhinChistyakov09.commandlayer.interfaces.ActionCommandResult;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.Statement;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.StatementStatus;
+import ru.rsreu.RonzhinChistyakov09.datalayer.data.statement.StatementType;
 import ru.rsreu.RonzhinChistyakov09.datalayer.data.user.User;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementDao;
 import ru.rsreu.RonzhinChistyakov09.datalayer.interfaces.StatementStatusDao;
@@ -28,7 +29,7 @@ public class ShowMainCaptainPageCommand implements ActionCommand {
 		StatementTypeDao statementTypeDao = (StatementTypeDao) request.getServletContext()
 				.getAttribute(Resourcer.getString("serlvet.context.dao.statementsTypes"));
 		User user = (User) request.getSession().getAttribute(Resourcer.getString("servlet.session.attributes.user"));
-		
+
 		MainCaptainPageLogic logic = new MainCaptainPageLogic(statementDao, statementTypeDao, statementStatusDao);
 		try {
 			request.setAttribute(Resourcer.getString("servlet.requests.attributes.enterStatements"),
@@ -55,7 +56,8 @@ public class ShowMainCaptainPageCommand implements ActionCommand {
 				request.setAttribute("typeOfLoadingButton", "hidden");
 			} else {
 				Statement lastStatement = logic.getLastFinishedStatement(user.getId());
-				if(lastStatement == null || lastStatement.getType().getTitle().equals("EXIT")) {
+				StatementType exitType = logic.getExitType();
+				if (lastStatement == null || lastStatement.getType().equals(exitType)) {
 					request.setAttribute("statementType", "enter");
 					request.setAttribute("typeOfUnloadingButton", "hidden");
 					request.setAttribute("typeOfLoadingButton", "hidden");

@@ -86,4 +86,16 @@ public class OracleShipDao implements ShipDao {
 		}
 		return lastShipId;
 	}
+
+	@Override
+	public void deleteShip(int shipId) throws DataRequestException {
+		String query = Resourcer.getString("requests.sql.delete.ship");
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			PreparedStatementParametresSetter.set(preparedStatement, shipId);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			throw new DataRequestException(
+					String.format(Resourcer.getString("exceptions.sql.request"), e.getMessage()));
+		}
+	}
 }

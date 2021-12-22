@@ -9,7 +9,7 @@ import ru.rsreu.RonzhinChistyakov09.validationlayer.admin.create.CreatePierValid
 import ru.rsreu.RonzhinChistyakov09.exceptions.InvalidValue;
 
 public class CreatePierLogic {
-	
+
 	private final int MIN_PIER_CAPACITY = 1;
 	private final int MAX_PIER_CAPACITY = (int) 1e21 - 1;
 	private final PierDao pierDao;
@@ -17,7 +17,7 @@ public class CreatePierLogic {
 
 	public CreatePierLogic(PierDao pierDao) {
 		this.pierDao = pierDao;
-		this.validator =  new CreatePierValidator(MIN_PIER_CAPACITY, MAX_PIER_CAPACITY);;
+		this.validator = new CreatePierValidator(MAX_PIER_CAPACITY, MIN_PIER_CAPACITY);
 	}
 
 	public void createPier(int capacity) throws DataRequestException, InvalidValue {
