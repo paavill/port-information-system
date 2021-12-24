@@ -64,14 +64,15 @@ public interface StatementDao {
 	/**
 	 * The method allows you to get statements with a certain status.
 	 * 
-	 * @param status - an object of the application status, on the basis of which the
-	 *               selection of applications is performed
+	 * @param status - an object of the application status, on the basis of which
+	 *               the selection of applications is performed
 	 * @return
 	 * @throws DataRequestException
 	 */
 	Collection<Statement> getStatementsByStatus(StatementStatus status) throws DataRequestException;
 
 	/**
+	 * The method allows you to get statement by id
 	 * 
 	 * @param statementId
 	 * @return
@@ -80,6 +81,7 @@ public interface StatementDao {
 	Statement getById(int statementId) throws DataRequestException;
 
 	/**
+	 * The method allows you to update statement's status
 	 * 
 	 * @param status
 	 * @param id
@@ -88,6 +90,7 @@ public interface StatementDao {
 	void updateStatus(StatementStatus status, int id) throws DataRequestException;
 
 	/**
+	 * The method allows you to update statement's pier
 	 * 
 	 * @param statementId
 	 * @param pierId
@@ -96,6 +99,7 @@ public interface StatementDao {
 	void updatePier(int statementId, int pierId) throws DataRequestException;
 
 	/**
+	 * The method allows you to get last finished user's statement
 	 * 
 	 * @param userId
 	 * @return
@@ -104,6 +108,7 @@ public interface StatementDao {
 	Statement getLastFinishedStatement(int userId) throws DataRequestException;
 
 	/**
+	 * The methods allows you to get statements for ship
 	 * 
 	 * @param shipId
 	 * @return
@@ -112,6 +117,7 @@ public interface StatementDao {
 	Collection<Statement> getStatementsByShip(int shipId) throws DataRequestException;
 
 	/**
+	 * The method allows you to get last statement for pier
 	 * 
 	 * @param id
 	 * @return
@@ -120,6 +126,7 @@ public interface StatementDao {
 	Statement getLastByPier(int id) throws DataRequestException;
 
 	/**
+	 * The method allows you to update statement's finish date 
 	 * 
 	 * @param date
 	 * @param pierId

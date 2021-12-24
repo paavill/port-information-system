@@ -19,7 +19,7 @@ public interface PierDao {
 	 * @return All piers objects in system
 	 * @throws DataRequestException
 	 */
-	abstract Collection<Pier> getAllPiers() throws DataRequestException;
+	Collection<Pier> getAllPiers() throws DataRequestException;
 
 	/**
 	 * Returns the total number of piers in the system
@@ -27,7 +27,7 @@ public interface PierDao {
 	 * @return Number of piers
 	 * @throws DataRequestException
 	 */
-	abstract int getPiersCount() throws DataRequestException;
+	int getPiersCount() throws DataRequestException;
 
 	/**
 	 * Returns piers that may be occupied by captains
@@ -35,7 +35,7 @@ public interface PierDao {
 	 * @return Piers
 	 * @throws DataRequestException
 	 */
-	abstract Collection<Pier> getFreePiers() throws DataRequestException;
+	Collection<Pier> getFreePiers() throws DataRequestException;
 
 	/**
 	 * Returns the number of piers that can be occupied by captains
@@ -43,7 +43,7 @@ public interface PierDao {
 	 * @return Piers count
 	 * @throws DataRequestException
 	 */
-	abstract int getFreePiersCount() throws DataRequestException;
+	int getFreePiersCount() throws DataRequestException;
 
 	/**
 	 * Returns the id of the last created pier
@@ -51,7 +51,7 @@ public interface PierDao {
 	 * @return pier id
 	 * @throws DataRequestException
 	 */
-	abstract int getLastPierId() throws DataRequestException;
+	int getLastPierId() throws DataRequestException;
 
 	/**
 	 * Creates a new pier based on an object in storage
@@ -59,7 +59,7 @@ public interface PierDao {
 	 * @param pier
 	 * @throws DataRequestException
 	 */
-	abstract void createPier(Pier pier) throws DataRequestException;
+	void createPier(Pier pier) throws DataRequestException;
 
 	/**
 	 * Updates pier based on object in storage
@@ -68,7 +68,7 @@ public interface PierDao {
 	 * @param pier
 	 * @throws DataRequestException
 	 */
-	abstract void updatePier(int pierId, Pier pier) throws DataRequestException;
+	void updatePier(int pierId, Pier pier) throws DataRequestException;
 
 	/**
 	 * Delete pier based on object in storage
@@ -76,8 +76,15 @@ public interface PierDao {
 	 * @param id
 	 * @throws DataRequestException
 	 */
-	abstract void deletePier(int id) throws DataRequestException;
+	void deletePier(int id) throws DataRequestException;
 
-	abstract int getResidualCapacity(int id) throws DataRequestException;
+	/**
+	 * Returns residual capacity on pier by pier's id
+	 * 
+	 * @param id
+	 * @return
+	 * @throws DataRequestException
+	 */
+	int getResidualCapacity(int id) throws DataRequestException;
 
 }

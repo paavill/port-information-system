@@ -14,6 +14,6 @@ public class CreateShipPageLogic {
 	}
 
 	public Collection<Integer> getCaptainsWithoutShipId() throws DataRequestException {
-		return this.userDao.getCaptainsId();
+		return this.userDao.getCaptainsWithoutShipIds();
 	}
 }

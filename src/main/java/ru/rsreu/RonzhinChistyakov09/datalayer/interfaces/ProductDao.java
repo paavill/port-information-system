@@ -20,7 +20,7 @@ public interface ProductDao {
 	 *                 that is specified in the product object.
 	 * @throws DataRequestException
 	 */
-	abstract void unloadProductsToPier(Collection<Product> products) throws DataRequestException;
+	void unloadProductsToPier(Collection<Product> products) throws DataRequestException;
 
 	/**
 	 * The method allows you to load products from the pier that is specified in the
@@ -30,7 +30,7 @@ public interface ProductDao {
 	 *                 that is specified in the product object.
 	 * @throws DataRequestException
 	 */
-	abstract void loadProductsFromPier(Collection<Product> products) throws DataRequestException;
+	void loadProductsFromPier(Collection<Product> products) throws DataRequestException;
 
 	/**
 	 * The method allows you to get a list of all products.
@@ -38,7 +38,7 @@ public interface ProductDao {
 	 * @return collection of products
 	 * @throws DataRequestException
 	 */
-	abstract Collection<Product> getAllProducts() throws DataRequestException;
+	Collection<Product> getAllProducts() throws DataRequestException;
 
 	/**
 	 * Allows you to get food objects located in a specific pier
@@ -47,7 +47,7 @@ public interface ProductDao {
 	 * @return collection of products
 	 * @throws DataRequestException
 	 */
-	abstract Collection<Product> getProductsInPier(int pierId) throws DataRequestException;
+	Collection<Product> getProductsInPier(int pierId) throws DataRequestException;
 
 	/**
 	 * The method allows you to get the number of products that have a specific name
@@ -58,6 +58,6 @@ public interface ProductDao {
 	 * @return Number of products in the pier
 	 * @throws DataRequestException
 	 */
-	abstract int getCountProduct(String title, int pierId) throws DataRequestException;
+	int getCountProduct(String title, int pierId) throws DataRequestException;
 
 }

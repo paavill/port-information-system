@@ -27,7 +27,7 @@ public class CreateShipValidator{
 	
 	public boolean validateCaptainId(Integer id) throws DataRequestException {
 		if(id != null) {
-			ArrayList<Integer> captainsIds = new ArrayList<Integer>(this.userDao.getCaptainsId());
+			ArrayList<Integer> captainsIds = new ArrayList<Integer>(this.userDao.getCaptainsWithoutShipIds());
 			return captainsIds.indexOf(id) != -1;
 		} else {
 			return false;

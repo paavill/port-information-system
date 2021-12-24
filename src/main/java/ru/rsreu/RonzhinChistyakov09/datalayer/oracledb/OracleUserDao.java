@@ -168,7 +168,7 @@ public class OracleUserDao implements UserDao {
 	}
 	
 	@Override
-	public Collection<Integer> getCaptainsId() throws DataRequestException{
+	public Collection<Integer> getCaptainsWithoutShipIds() throws DataRequestException{
 		Collection<Integer> result = new ArrayList<Integer>();
 		String query = Resourcer.getString("requests.sql.get.users.captains.id");
 		try (Statement statement = this.connection.createStatement()) {
